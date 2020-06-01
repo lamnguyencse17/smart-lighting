@@ -12,18 +12,24 @@ export const userSchema = new Users({
   schedules: [{ type: ObjectId, ref: "Schedules" }],
 });
 
-userSchema.statics.readUser = async function (
-  userDetails = { id: "5ed4b3e198024810593e6961", email: "test" }
-) {
-  let { id, email } = userDetails;
+userSchema.statics.readUserById = async function (id) {
+  //findOne needs objectId type
+  //remember the field is _id not id !!
+  //convert id to ObjectId
   let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  //remove the useless __v
   delete result.__v;
   return result;
 };
 
-userSchema.statics.createUser = async function (
-  userDetails = { name: "test", email: "test" }
-) {
+userSchema.statics.readUserByEmail = async function (email = "test") {
+  let result = await this.findOne({ email }).lean();
+  //remove the useless __v
+  delete result.__v;
+  return result;
+};
+
+userSchema.statics.createUser = async function (userDetails) {
   let { name, email } = userDetails;
   let result = await this.create({ name, email });
   result = result.toObject();
@@ -33,6 +39,14 @@ userSchema.statics.createUser = async function (
   delete result.schedules;
   delete result.__v;
   return result;
+};
+
+userSchema.statics.deleteUser = async function (id) {
+  // findByIdAndDelete does not use objectId !!!!
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
+  //Collateral damage: delete in others will be implemented here later
 };
 
 const userModel = mongoose.model("Users", userSchema);
