@@ -12,3 +12,6 @@ export const deviceSchema = new Devices({
     },
   ],
 });
+
+const deviceModel = mongoose.model("Devices", deviceSchema);
+export default deviceModel;

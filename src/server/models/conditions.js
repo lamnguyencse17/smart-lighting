@@ -9,3 +9,6 @@ export const conditionSchema = new Conditions({
   areas: [{ type: ObjectId, ref: "Areas" }],
   devices: [{ type: ObjectId, ref: "Devices" }],
 });
+
+const conditionModel = mongoose.model("Conditions", conditionSchema);
+export default conditionModel;

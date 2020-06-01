@@ -8,3 +8,6 @@ export const areaSchema = new Areas({
   sensors: [{ type: ObjectId, ref: "Sensors" }],
   devices: [{ type: ObjectId, ref: "Devices" }],
 });
+
+const areaModel = mongoose.model("Areas", areaSchema);
+export default areaModel;

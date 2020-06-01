@@ -14,3 +14,6 @@ export const sensorSchema = new Sensors({
   ],
   conditions: [{ type: ObjectId, ref: "Conditions" }],
 });
+
+const sensorModel = mongoose.model("Sensors", sensorSchema);
+export default sensorModel;

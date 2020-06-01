@@ -11,3 +11,6 @@ export const userSchema = new Users({
   sensors: [{ type: ObjectId, ref: "Sensors" }],
   schedules: [{ type: ObjectId, ref: "Schedules" }],
 });
+
+const userModel = mongoose.model("Users", userSchema);
+export default userModel;

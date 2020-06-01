@@ -24,4 +24,6 @@ app.get("/", (req, res) => {
   res.send("YES");
 });
 
+app.use("/api/", require("./routes/routes"));
+
 app.listen(3000, () => console.info(`Running on 3000`));

@@ -9,3 +9,6 @@ export const scheduleSchema = new Schedules({
   done: { type: Boolean, required: true },
   target_devices: [{ type: ObjectId, ref: "Devices" }],
 });
+
+const scheduleModel = mongoose.model("Areas", scheduleSchema);
+export default scheduleModel;
