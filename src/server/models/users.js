@@ -24,7 +24,6 @@ userSchema.statics.readUserById = async function (id) {
 
 userSchema.statics.readUserByEmail = async function (email = "test") {
   let result = await this.findOne({ email }).lean();
-  //remove the useless __v
   delete result.__v;
   return result;
 };

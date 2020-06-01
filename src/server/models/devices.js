@@ -14,22 +14,24 @@ export const deviceSchema = new Devices({
 });
 
 deviceSchema.statics.readDeviceById = async function (id) {
-  //TODO
-  //findOne needs objectId type
-  //remember the field is _id not id !!
-  //convert id to ObjectId
-  //remove the useless __v
-  // delete result.__v;
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
 };
 
 deviceSchema.statics.createDevice = async function (deviceDetails) {
   let { name, device_id } = deviceDetails;
   //TODO
+  let result = await this.create({ name, device_id });
+  result = result.toObject();
+  delete result.__v;
+  return result;
 };
 
 deviceSchema.statics.deleteDevice = async function (id) {
-  //TODO
-  //Collateral damage: delete in others will be implemented here later
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
 };
 
 const deviceModel = mongoose.model("Devices", deviceSchema);

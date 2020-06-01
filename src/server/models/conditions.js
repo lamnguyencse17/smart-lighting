@@ -11,24 +11,23 @@ export const conditionSchema = new Conditions({
 });
 
 conditionSchema.statics.readConditionById = async function (id) {
-  //TODO
-  //findOne needs objectId type
-  //remember the field is _id not id !!
-  //convert id to ObjectId
-  //remove the useless __v
-  // delete result.__v;
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
 };
 
 conditionSchema.statics.createCondition = async function (conditionDetails) {
   let { comparison, on, areas, devices } = conditionDetails;
-  //TODO
-  //implement only what is destructured
-  //convert elements of areas and devices to objectId by using this mongoose.Types.ObjectId(element)
+  let result = await this.create({ comparison, on, areas, devices });
+  result = result.toObject();
+  delete result.__v;
+  return result;
 };
 
 conditionSchema.statics.deleteCondition = async function (id) {
-  //TODO
-  //Collateral damage: delete in others will be implemented here later
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
 };
 
 const conditionModel = mongoose.model("Conditions", conditionSchema);
