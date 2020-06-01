@@ -16,23 +16,23 @@ export const sensorSchema = new Sensors({
 });
 
 sensorSchema.statics.readSensorById = async function (id) {
-  //TODO
-  //findOne needs objectId type
-  //remember the field is _id not id !!
-  //convert id to ObjectId
-  //remove the useless __v
-  // delete result.__v;
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
 };
 
 sensorSchema.statics.createSensor = async function (sensorDetails) {
   let { name, device_id } = sensorDetails;
-  //TODO
-  //implement only what is destructured
+  let result = await this.create({ name, device_id });
+  result = result.toObject();
+  delete result.__v;
+  return result;
 };
 
 sensorSchema.statics.deleteSensor = async function (id) {
-  //TODO
-  //Collateral damage: delete in others will be implemented here later
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
 };
 
 const sensorModel = mongoose.model("Sensors", sensorSchema);

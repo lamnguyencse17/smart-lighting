@@ -10,24 +10,23 @@ export const areaSchema = new Areas({
 });
 
 areaSchema.statics.readAreaById = async function (id) {
-  //TODO
-  //findOne needs objectId type
-  //remember the field is _id not id !!
-  //convert id to ObjectId
-  //remove the useless __v
-  // delete result.__v;
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
 };
 
 areaSchema.statics.createArea = async function (areaDetails) {
   let { name, sensors, devices } = areaDetails;
-  //TODO
-  //implement only what is destructured
-  //convert elements of sensors and devices to objectId by using this mongoose.Types.ObjectId(element)
+  let result = await this.create({ name, sensors, devices });
+  result = result.toObject();
+  delete result.__v;
+  return result;
 };
 
 areaSchema.statics.deleteArea = async function (id) {
-  //TODO
-  //Collateral damage: delete in others will be implemented here later
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
 };
 
 const areaModel = mongoose.model("Areas", areaSchema);

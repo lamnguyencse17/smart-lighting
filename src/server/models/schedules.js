@@ -11,24 +11,23 @@ export const scheduleSchema = new Schedules({
 });
 
 scheduleSchema.statics.readScheduleById = async function (id) {
-  //TODO
-  //findOne needs objectId type
-  //remember the field is _id not id !!
-  //convert id to ObjectId
-  //remove the useless __v
-  // delete result.__v;
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
 };
 
 scheduleSchema.statics.createSchedule = async function (scheduleDetails) {
   let { date, on, target_devices } = sensorDetails;
-  //TODO
-  //implement only what is destructured
-  //convert elements of target_devices to objectId by using this mongoose.Types.ObjectId(element)
+  let result = await this.create({ date,on, target_devices });
+  result = result.toObject();
+  delete result.__v;
+  return result;
 };
 
 scheduleSchema.statics.deleteSchedule = async function (id) {
-  //TODO
-  //No Collateral Damage (Maybe Cron Job Queue)
+  let result = await this.findByIdAndDelete(id);
+  delete result.__v;
+  return result;
 };
 
 const scheduleModel = mongoose.model("Areas", scheduleSchema);
