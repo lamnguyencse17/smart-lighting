@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
 
 router.delete("/", async (req, res) => {
   let { id } = req.body;
-  let result = await userModel.deleteUser();
+  let result = await userModel.deleteUser(id);
   res.status(200).json(result);
 });
 
