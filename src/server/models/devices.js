@@ -8,7 +8,7 @@ export const deviceSchema = new Devices({
   history: [
     {
       date: { type: Date, required: true },
-      on: { type: Boolean, required: true },
+      isOn: { type: Boolean, required: true },
     },
   ],
 });

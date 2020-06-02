@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
-import mqtt from "mqtt";
+import { setClient, subscribeTo } from "./helpers/mqtt";
 // import path from "path";
 // import dotenv from "dotenv";
 
@@ -15,18 +15,8 @@ mongoose.connect(data_uri, {
   useUnifiedTopology: true,
 });
 
-const client = mqtt.connect("mqtt://23.97.56.49");
-
-client.on("connect", function () {
-  client.subscribe("presence", function (err) {
-    if (err) {
-      console.log(err);
-    } else {
-      client.subscribe("test");
-      client.publish("test", "Testing");
-    }
-  });
-});
+const client = setClient("mqtt://23.97.56.49");
+subscribeTo("T7");
 
 client.on("message", function (topic, message) {
   // message is Buffer
