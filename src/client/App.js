@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import Home from "./Home";
+import Dashboard from "./Dashboard/Dashboard";
+import Navbar from "./Common/Navbar";
 
 export default class App extends Component {
   constructor() {
@@ -7,9 +11,17 @@ export default class App extends Component {
   componentWillUnmount() {}
   render() {
     return (
-      <div>
-        <p>TEST</p>
-      </div>
+      <>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" render={(props) => <Home {...props} />} />
+          <Route path="/about" render={(props) => <About {...props} />} />
+          <Route
+            path="/dashboard"
+            render={(props) => <Dashboard {...props} />}
+          />
+        </Switch>
+      </>
     );
   }
 }
