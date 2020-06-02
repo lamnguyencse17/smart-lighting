@@ -29,6 +29,27 @@ sensorSchema.statics.createSensor = async function (sensorDetails) {
   return result;
 };
 
+sensorSchema.statics.updateSensor = async function (sensorDetails) {
+  let { device_id, value } = sensorDetails;
+  let result = await this.findOneAndUpdate(
+    { device_id },
+    {
+      $push: {
+        readings: {
+          date: Date.now(),
+          value: value,
+        },
+      },
+    },
+    {
+      new: true,
+    }
+  );
+  result = result.toObject();
+  delete result.__v;
+  return result;
+};
+
 sensorSchema.statics.deleteSensor = async function (id) {
   let result = await this.findByIdAndDelete(id);
   delete result.__v;

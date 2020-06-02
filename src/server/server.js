@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import morgan from "morgan";
 import { setClient, subscribeTo } from "./helpers/mqtt";
+import messageHandler from "./helpers/messageHandler";
+import sensorSchema from "./models/sensors";
 // import path from "path";
 // import dotenv from "dotenv";
 
@@ -18,10 +20,9 @@ mongoose.connect(data_uri, {
 const client = setClient("mqtt://23.97.56.49");
 subscribeTo("T7");
 
-client.on("message", function (topic, message) {
+client.on("message", (topic, message) => {
   // message is Buffer
-  console.log(topic.toString());
-  console.log(message.toString());
+  messageHandler(message);
   client.end();
 });
 
