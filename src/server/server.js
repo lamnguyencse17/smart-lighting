@@ -22,8 +22,10 @@ subscribeTo("T7");
 
 client.on("message", (topic, message) => {
   // message is Buffer
+  // message = JSON.parse(message);
+  // let { device_id, value } = message;
+  // sensorSchema.updateSensor({ device_id, value });
   messageHandler(message);
-  client.end();
 });
 
 const app = express();

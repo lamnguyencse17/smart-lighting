@@ -30,23 +30,28 @@ deviceSchema.statics.createDevice = async function (deviceDetails) {
 
 deviceSchema.statics.updateDevice = async function (deviceDetails) {
   let { device_id, value } = deviceDetails;
-  let result = await this.findOneAndUpdate(
+  let result = this.findOneAndUpdate(
     { device_id },
     {
       $push: {
-        readings: {
+        history: {
           date: Date.now(),
           value: value,
         },
       },
     },
-    {
-      new: true,
-    }
-  );
-  result = result.toObject();
-  delete result.__v;
-  return result;
+    { new: true }
+  )
+    .exec()
+    .then((err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(doc);
+        return doc;
+      }
+    });
+  console.log(result);
 };
 
 deviceSchema.statics.deleteDevice = async function (id) {
