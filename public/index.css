@@ -243,6 +243,17 @@ ul li a {
   padding-bottom: 1rem;
 }
 
+.dashboard .areaview .sensor-box .newest {
+  font-size: 1.5rem;
+  background-color: white;
+  color: #373737;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+
 .dashboard .areaview .sensor-box .history {
   font-size: 2rem;
   background-color: white;

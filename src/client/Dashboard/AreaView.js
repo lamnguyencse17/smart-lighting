@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getArea } from "../actions/area";
+import Device from "./AreaView/Device";
 
 class AreaView extends Component {
   componentDidMount() {
@@ -16,22 +17,18 @@ class AreaView extends Component {
           <div className="title">{areaName}</div>
           {Object.keys(sensors).map((index) => {
             let sensorName = sensors[index].name;
-            let readings = sensors[index].readings;
+            let latestReadings = sensors[index].readings[0];
+            latestReadings.date = new Date(latestReadings.date);
+            let readings = sensors[index].readings.slice(
+              1,
+              sensors[index].length
+            );
             return (
-              <div className="sensor-box" key={index}>
-                <div className="title">{sensorName}</div>
-                <div className="history">
-                  {readings.map((reading) => {
-                    let newDate = new Date(reading.date);
-                    return (
-                      <div key={reading._id}>
-                        {`${newDate.getHours()}:${newDate.getMinutes()}`}:{" "}
-                        {reading.value}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+              <Device
+                sensorName={sensorName}
+                latestReadings={latestReadings}
+                readings={readings}
+              />
             );
           })}
         </div>
