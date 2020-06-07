@@ -214,7 +214,6 @@ ul li a {
   height: 7rem;
 }
 
-<<<<<<< HEAD
 .device-view{
   height: 100%;
 }
@@ -536,43 +535,3 @@ input:checked + .slider:before {
   margin: auto;
   border-radius: 18px;
 }
-=======
-.dashboard .areaview {
-  padding-top: 1rem;
-  padding-left: 2rem;
-  overflow-x: auto;
-  white-space: nowrap;
-}
-
-.dashboard .areaview .title {
-  font-size: 2.5rem;
-  color: #7beced;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-}
-
-.dashboard .areaview .sensor-box {
-  display: inline-block;
-  margin-right: 1.5rem;
-  width: 18rem;
-  height: 30rem;
-  background-color: #f3bb72;
-}
-
-.dashboard .areaview .sensor-box .title {
-  font-size: 2.5rem;
-  color: #373737;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
-}
-
-.dashboard .areaview .sensor-box .history {
-  font-size: 2rem;
-  background-color: white;
-  color: #373737;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
->>>>>>> master
