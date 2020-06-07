@@ -16,7 +16,9 @@ class DeviceView extends Component {
               EDIT
             </a>
           </div>
-          <DevicePanel history={this.history} deviceState={this.deviceState} />
+          <div class="device-panel-container">
+            <DevicePanel history={this.history} deviceState={this.deviceState} />
+          </div>
         </div>
       </div>
     );

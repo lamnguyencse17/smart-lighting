@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getArea } from "../actions/area";
 import Sensor from "./AreaView/Sensor";
+import Device from "./AreaView/Device";
 
 class AreaView extends Component {
   componentDidMount() {
@@ -28,7 +29,19 @@ class AreaView extends Component {
                 sensorName={sensorName}
                 latestReadings={latestReadings}
                 readings={readings}
-              />
+              /> 
+            );
+          })}
+          {Object.keys(devices).map((index) => {
+            let deviceName = devices[index].name;
+            let history = devices[index].history;
+            let deviceStatus = devices[index].status;
+            return (
+              <Device
+                deviceName={"Bedroom Light 1"}
+                history={[]}
+                deviceStatus={false}
+              />  
             );
           })}
         </div>

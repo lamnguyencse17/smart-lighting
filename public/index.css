@@ -244,9 +244,13 @@ ul li a {
   text-decoration: none;
 }
 
+.device-panel-container{
+  width:100%;
+}
+
 .device-content {
   background-color: #ff85a7;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   height: 80%;
 }
@@ -346,10 +350,9 @@ input:checked + .slider:before {
   margin: auto;
   margin-top: 10px;
   background-color: white;
-  width: 500px;
+  width: 90%;
+  height:400px;
   font-size: x-large;
-  height: 400px;
-  overflow: auto;
 }
 
 .device-history-content > ul {
@@ -357,6 +360,7 @@ input:checked + .slider:before {
 }
 
 .device-history-content > ul > li {
+  width: 100%;
   padding: 0;
   margin-top: 20px;
 }
@@ -558,6 +562,7 @@ input:checked + .slider:before {
   padding-left: 2rem;
   overflow-x: auto;
   white-space: nowrap;
+  height: 90%;
 }
 
 .dashboard .areaview .title {
@@ -569,10 +574,20 @@ input:checked + .slider:before {
 
 .dashboard .areaview .sensor-box {
   display: inline-block;
+  vertical-align:top;
   margin-right: 1.5rem;
   width: 18rem;
-  height: 30rem;
+  height: 90%;
   background-color: #f3bb72;
+}
+
+.dashboard .areaview .device-box {
+  display: inline-block;
+  vertical-align:top;
+  margin-right: 1.5rem;
+  width: 18rem;
+  height: 90%;
+  background-color: #ff85a7;
 }
 
 .dashboard .areaview .sensor-box .title {
@@ -601,4 +616,21 @@ input:checked + .slider:before {
   padding-bottom: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.dashboard .areaview .device-box .title {
+  font-size: 2.5rem;
+  color: #373737;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+}
+
+.dashboard .areaview .device-box .device-content .device-history-content{
+  height: 50%;
+  width:100%;
+}
+
+.dashboard .areaview .device-box .device-content .device-history-content .device-history-item{
+  width: 100%;
+  display:block;
 }
