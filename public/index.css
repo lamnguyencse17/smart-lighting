@@ -213,3 +213,20 @@ ul li a {
   width: 15rem;
   height: 7rem;
 }
+
+.dashboard .areaview {
+  padding-top: 1rem;
+  padding-left: 2rem;
+}
+
+.dashboard .areaview .title {
+  font-size: 2.5rem;
+  color: #7beced;
+  padding-top: 2rem;
+}
+
+.dashboard .areaview .sensor-box {
+  width: 18rem;
+  height: 30rem;
+  background-color: #f3bb72;
+}

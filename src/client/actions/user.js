@@ -9,7 +9,6 @@ export const getUser = (email) => (dispatch) => {
         if (err) {
           console.log(err);
         } else {
-          console.log(result.data);
           dispatch({ type: GET_USER, payload: result.data });
         }
       });

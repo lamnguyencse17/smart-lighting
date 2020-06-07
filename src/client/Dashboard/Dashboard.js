@@ -23,8 +23,8 @@ class Dashboard extends Component {
               <div className="title">YOUR AREAS</div>
               {Object.keys(areas).map((index) => {
                 return (
-                  <Link to={`/dashboard/area/${index}`}>
-                    <button key={index}>{areas[index]}</button>
+                  <Link key={index} to={`/dashboard/area/${index}`}>
+                    <button>{areas[index]}</button>
                   </Link>
                 );
               })}
@@ -33,8 +33,8 @@ class Dashboard extends Component {
               <div className="title">YOUR DEVICES</div>
               {Object.keys(devices).map((index) => {
                 return (
-                  <Link to={`/dashboard/device/${index}`}>
-                    <button key={index}>{devices[index]}</button>
+                  <Link key={index} to={`/dashboard/device/${index}`}>
+                    <button>{devices[index]}</button>
                   </Link>
                 );
               })}
@@ -43,8 +43,8 @@ class Dashboard extends Component {
               <div className="title">YOUR SENSORS</div>
               {Object.keys(sensors).map((index) => {
                 return (
-                  <Link to={`/dashboard/sensor/${index}`}>
-                    <button key={index}>{sensors[index]}</button>
+                  <Link key={index} to={`/dashboard/sensor/${index}`}>
+                    <button>{sensors[index]}</button>
                   </Link>
                 );
               })}

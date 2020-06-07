@@ -10,7 +10,17 @@ export const areaSchema = new Areas({
 });
 
 areaSchema.statics.readAreaById = async function (id) {
-  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) })
+    .populate({
+      path: "sensors",
+      select: "name device_id readings",
+      option: { lean: true, limit: 5 },
+    })
+    .populate({
+      path: "devices",
+      select: "name device_id history",
+    })
+    .lean();
   delete result.__v;
   return result;
 };
