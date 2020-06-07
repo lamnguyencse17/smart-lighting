@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getArea } from "../actions/area";
-import Device from "./AreaView/Device";
+import Sensor from "./AreaView/Sensor";
 
 class AreaView extends Component {
   componentDidMount() {
@@ -24,7 +24,7 @@ class AreaView extends Component {
               sensors[index].length
             );
             return (
-              <Device
+              <Sensor
                 sensorName={sensorName}
                 latestReadings={latestReadings}
                 readings={readings}

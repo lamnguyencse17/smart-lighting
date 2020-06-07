@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Device extends Component {
+class Sensor extends Component {
   render() {
     let { index, sensorName, latestReadings, readings } = this.props;
     return (
@@ -30,4 +30,4 @@ class Device extends Component {
   }
 }
 
-export default Device;
+export default Sensor;
