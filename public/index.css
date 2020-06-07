@@ -369,8 +369,169 @@ input:checked + .slider:before {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  margin-top:5px;
+  font-size: large;
+  font-weight: bold;
   border-radius: 18px;
 }
 
+.sensor-view{
+  height: 100%;
+}
+
+.sensor-view-content{
+  height: 100%;
+  padding:20px;
+  background-color: #373737;
+}
+
+.sensor-content{
+  background-color: #f3bb72;
+  padding:20px;
+  text-align: center;
+  height: 80%;
+  }
+
+.sensor-row{
+  height:90%;
+}
+
+.sensor-row:after{
+  content: "";
+  display: table;
+  clear: both;
+  height: 100%;
+}
+
+.sensor-column{
+  float: left;
+  height: 300px;
+  text-align: center;
+}
+  
+.sensor-column-1{
+  width: 15%;
+  height:100%;
+  display: flex;
+  flex-flow: column;
+}
+
+.sensor-column-2{
+  width: 60%;
+  height:100%;
+  flex-flow: column;
+  display: flex;
+}
+
+.sensor-column-3{
+  width: 25%;
+  height:100%;
+  flex-flow: column;
+  display: flex;
+}
+
+.newest-readings{
+  width: 80%;
+  background-color: white;
+  padding:10px;
+  margin:auto;
+  margin-bottom:20px;
+  border: 1px solid black;
+}
+
+.newest-readings-title{
+  font-size: large;
+}
+
+.newest-readings-content{
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.newest-readings-date{
+  font-weight: bold;
+}
+
+.sensor-history-title{
+  font-size: x-large;
+}
+
+.sensor-history-content{
+  margin:auto;
+  margin-top:20px;
+  width:80%;
+  height:50%;
+  padding:10px;
+  background-color: white;
+  border: 1px solid black;
+  flex-grow : 1;
+}
+
+.sensor-history-content>ul{
+  padding:0;
+}
+
+.sensor-history-content>ul>li{
+  width:100%;
+  padding:0;
+  margin-top:20px;
+}
+
+.sensor-history-item-date{
+  font-style: italic;
+  font-size: large;
+}
+
+.sensor-history-item-reading{
+  font-size: x-large;
+}
+
+.sensor-graph{
+  background-color: white;
+  margin:auto;
+  width:90%;
+  border: 1px solid black;
+  flex-grow: 1;
+}
+
+.sensor-trigger-title{
+  font-size: xx-large;
+}
+
+.sensor-trigger-content{
+  width:85%;
+  margin-top:20px;
+  background-color: white;
+  flex-grow: 1;
+  border: 1px solid black;
+  display:flex;
+  flex-direction: column;
+  padding:20px;
+}
+
+.sensor-trigger-content>ul{
+  padding:0;
+}
+
+.sensor-trigger-item{
+  width: 100%;
+  text-align: left;
+  float:left;
+  font-size: xx-large;
+  padding: 0;
+  margin-top:25px;
+}
+
+.add-sensor-trigger{
+  background-color: #373737;
+  width:200px;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: x-large;
+  font-weight: bold;
+  margin: auto;
+  border-radius: 18px;
+}
