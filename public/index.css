@@ -213,3 +213,164 @@ ul li a {
   width: 15rem;
   height: 7rem;
 }
+
+.device-view{
+  height: 100%;
+}
+
+.device-view-content{
+  height: 100%;
+  padding:20px;
+  background-color: #373737;
+}
+
+.row1{
+ width: 100%;
+ display:block;
+ overflow: auto;
+ margin-bottom: 20px;
+}
+
+.bedroom-light{
+  color: #7beced;
+  float: left;
+  font-size: x-large;
+}
+
+.edit{
+  color: #7beced;
+  float:right;
+  font-size: x-large;
+}
+
+.device-content{
+background-color: #FF85A7;
+padding:20px;
+text-align: center;
+height: 80%;
+}
+
+.device-status-container{
+  background-color: white;
+  margin:auto;
+  border: 1px solid black;
+  margin-top: 2px;
+  width:150px;
+  height:70px;
+  text-align:  center;
+}
+
+.device-status-title{
+  width:100%;
+  font-size: x-large;
+}
+
+.device-status{
+  width:100%;
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.device-toggle{
+  margin:20px
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: white;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px white;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+  background-color: #FF85A7;
+}
+
+.device-history-title{
+  font-size: x-large;
+}
+
+.device-history-content{
+  margin:auto;
+  margin-top: 10px;
+  background-color: white;
+  width:500px;
+  font-size: x-large;
+  height: 400px;
+  overflow: auto;
+}
+
+.device-history-content>ul{
+  padding:0;
+}
+
+.device-history-content>ul>li{
+  padding:0;
+  margin-top:20px;
+}
+
+.add-device-schedule{
+  background-color: #373737;
+  width:200px;
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 18px;
+}
+
