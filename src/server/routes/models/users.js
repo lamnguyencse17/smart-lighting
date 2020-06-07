@@ -3,16 +3,23 @@ import userModel from "../../models/users";
 
 const router = express.Router();
 
+const arrayToObject = (arr) => {
+  let result = {};
+  arr.forEach((element) => {
+    result[element._id] = element.name;
+  });
+  return result;
+};
+
 router.get("/", async (req, res) => {
-  let { id, email } = req.body;
-  let result;
-  if (id) {
-    result = await userModel.readUserById(id);
-  } else if (email) {
-    result = await userModel.readUserByEmail(email);
-  } else {
-    console.log(req.body);
-  }
+  let email = req.query.email;
+  let result = await userModel.readUserByEmail(email);
+  result = {
+    ...result,
+    areas: arrayToObject(result.areas),
+    devices: arrayToObject(result.devices),
+    sensors: arrayToObject(result.sensors),
+  };
   res.status(200).json(result);
 });
 

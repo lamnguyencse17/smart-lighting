@@ -4,7 +4,6 @@ const router = express.Router();
 router.use(
   "/models",
   (req, res, next) => {
-    console.log("check");
     next();
   },
   require("./models")
