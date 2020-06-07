@@ -33,6 +33,7 @@ router.use(
 router.use(
   "/sensors",
   (req, res, next) => {
+    console.log("CHECK");
     next();
   },
   require("./models/sensors")
