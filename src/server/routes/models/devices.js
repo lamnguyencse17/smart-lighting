@@ -3,9 +3,22 @@ import deviceModel from "../../models/devices";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  let { id } = req.body;
+const arrayToObject = (arr) => {
+  let result = {};
+  arr.forEach((element) => {
+    let { _id, ...newItem } = element;
+    result[element._id] = newItem;
+  });
+  return result;
+};
+
+router.get("/:id", async (req, res) => {
+  let id = req.params.id;
   let result = await deviceModel.readDeviceById(id);
+  result = {
+    ...result,
+    history: arrayToObject(result.history),
+  };
   res.status(200).json(result);
 });
 

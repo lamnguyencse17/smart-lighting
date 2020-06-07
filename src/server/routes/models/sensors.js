@@ -3,9 +3,22 @@ import sensorModel from "../../models/sensors";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  let { id } = req.body;
+const arrayToObject = (arr) => {
+  let result = {};
+  arr.forEach((element) => {
+    let { _id, ...newItem } = element;
+    result[element._id] = newItem;
+  });
+  return result;
+};
+
+router.get("/:id", async (req, res) => {
+  let id = req.params.id;
   let result = await sensorModel.readSensorById(id);
+  result = {
+    ...result,
+    readings: arrayToObject(result.readings),
+  };
   res.status(200).json(result);
 });
 
