@@ -1,13 +1,26 @@
 import React, { Component } from "react";
+import { element } from "prop-types";
+import DevicePanel from "./DevicePanel"
 
 class DeviceView extends Component {
+  state={
+    history: [],
+    deviceState: false
+  }
   render() {
     return (
-      <div>
-        <h1>Device {this.props.match.params.name}</h1>
+      <div className="device-view">
+        <div className="device-view-content">
+          <div className="row1">      
+            <div className="bedroom-light">BEDROOM LIGHT 1</div>
+            <a href="#" className="edit">EDIT</a>
+          </div>
+          <DevicePanel history={this.history} deviceState={this.deviceState} />
+        </div>
       </div>
     );
   }
 }
+
 
 export default DeviceView;
