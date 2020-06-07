@@ -418,7 +418,7 @@ input:checked + .slider:before {
 
 .dashboard .areaview .sensor-box .history {
   font-size: 2rem;
-=======
+}
 .sensor-column{
   float: left;
   height: 300px;
