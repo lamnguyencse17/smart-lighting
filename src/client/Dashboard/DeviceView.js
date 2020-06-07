@@ -1,42 +1,26 @@
 import React, { Component } from "react";
+import { element } from "prop-types";
+import DevicePanel from "./DevicePanel"
 
 class DeviceView extends Component {
+  state={
+    history: [],
+    deviceState: false
+  }
   render() {
     return (
-      <div class="device-view">
-        <div class="device-view-content">
-          <div class="row1">      
-            <div class="bedroom-light">BEDROOM LIGHT 1</div>
-            <div class="edit">EDIT</div>
+      <div className="device-view">
+        <div className="device-view-content">
+          <div className="row1">      
+            <div className="bedroom-light">BEDROOM LIGHT 1</div>
+            <a href="#" className="edit">EDIT</a>
           </div>
-          <div class="device-content">
-            <div class="device-status-container">
-              <span class="device-status-title"> status</span><br></br>
-              <span class="device-status">ON</span>
-            </div>
-            <div class="device-toggle">
-              <label class="switch">
-                <input type="checkbox"></input>
-                <span class="slider round"></span>
-              </label>
-            </div>
-            <span class="device-history-title">HISTORIES</span>
-            <div class="device-history-content">
-              <ul>
-                <li>
-                  9AM - 21/05/2020: Turned on - Manual
-                </li>
-                <li>
-                  12AM - 21/05/2020: Turned off - Automated
-                </li>
-              </ul>
-            </div>
-            <button class="add-device-schedule">New Schedule</button>
-          </div>
+          <DevicePanel history={this.history} deviceState={this.deviceState} />
         </div>
       </div>
     );
   }
 }
+
 
 export default DeviceView;

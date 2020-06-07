@@ -241,6 +241,7 @@ ul li a {
   color: #7beced;
   float:right;
   font-size: x-large;
+  text-decoration: none;
 }
 
 .device-content{
