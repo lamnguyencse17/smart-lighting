@@ -25,10 +25,10 @@ class DevicePanel extends Component {
                 <div className="device-history-content">
                   <ul>
                     <li>
-                      <span class="device-history-time">9AM - 21/05/2020:</span><span class="device-history-status">Turned on - Manual</span>
+                      <span className="device-history-time">9AM - 21/05/2020:</span><span className="device-history-status">Turned on - Manual</span>
                     </li>
                     <li>
-                    <span class="device-history-time">12AM - 21/05/2020:</span><span class="device-history-status"> Turned off - Automated</span>
+                    <span className="device-history-time">12AM - 21/05/2020:</span><span className="device-history-status"> Turned off - Automated</span>
                     </li>
                   </ul>
                 </div>
