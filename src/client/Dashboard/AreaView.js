@@ -7,8 +7,15 @@ import Sensor from "./AreaView/Sensor";
 import Device from "./AreaView/Device";
 
 class AreaView extends Component {
+  update = null;
   componentDidMount() {
     this.props.getArea(this.props.match.params.id);
+    this.update = setTimeout(() => {
+      this.props.getArea(this.props.match.params.id);
+    }, 60000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.update);
   }
   render() {
     let { areaName, devices, sensors } = this.props;
@@ -26,24 +33,30 @@ class AreaView extends Component {
             );
             return (
               <Sensor
+                key={index}
                 sensorName={sensorName}
                 latestReadings={latestReadings}
                 readings={readings}
-              /> 
+              />
             );
           })}
-          {Object.keys(devices).map((index) => {
-            let deviceName = devices[index].name;
-            let history = devices[index].history;
-            let deviceStatus = devices[index].status;
-            return (
-              <Device
-                deviceName={"Bedroom Light 1"}
-                history={[]}
-                deviceStatus={false}
-              />  
-            );
-          })}
+          {this.props.areaName != "" ? (
+            Object.keys(devices).map((index) => {
+              let deviceName = devices[index].name;
+              let deviceHistory = devices[index].history;
+              let _id = devices[index]._id;
+              return (
+                <Device
+                  key={index}
+                  deviceName={deviceName}
+                  deviceHistory={deviceHistory}
+                  _id={_id}
+                />
+              );
+            })
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

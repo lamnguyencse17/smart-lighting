@@ -1,21 +1,25 @@
 import React, { Component } from "react";
 import DevicePanel from "./DeviceView/DevicePanel";
 import { getDevice } from "../actions/device";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+var update;
 class DeviceView extends Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     this.props.getDevice(this.props.match.params.id);
+    update = setTimeout(() => {
+      this.props.getDevice(this.props.match.params.id);
+    }, 60000);
+  }
+  componentWillUnmount() {
+    clearTimeout(update);
   }
   state = {
     history: [],
     deviceState: false,
   };
   render() {
-    let { _id, name, device_id, devicehistory } = this.props;
     return (
       <div className="device-view">
         <div className="device-view-content">
@@ -25,7 +29,15 @@ class DeviceView extends Component {
               EDIT
             </a>
           </div>
-          <DevicePanel history={devicehistory} _id={_id} />
+          {this.props._id != "" ? (
+            <DevicePanel
+              name={this.props.name}
+              deviceHistory={this.props.deviceHistory}
+              _id={this.props._id}
+            />
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );
@@ -37,7 +49,7 @@ function mapStateToProps(state) {
     _id: state.device._id,
     name: state.device.name,
     device_id: state.device.device_id,
-    devicehistory: state.device.history,
+    deviceHistory: state.device.history,
   };
 }
 
@@ -45,6 +57,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getDevice }, dispatch);
 }
 
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(DeviceView)
-);
+export default connect(mapStateToProps, mapDispatchToProps)(DeviceView);

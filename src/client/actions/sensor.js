@@ -1,7 +1,7 @@
 import { GET_SENSOR } from "./types";
 import axios from "axios";
 
-export const getArea = (sensorId) => (dispatch) => {
+export const getSensor = (sensorId) => (dispatch) => {
   axios
     .get(`http://localhost:3000/api/models/sensors/${sensorId}`)
     .then((result, err) => {

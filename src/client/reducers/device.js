@@ -1,4 +1,4 @@
-import { GET_DEVICE } from "../actions/types";
+import { GET_DEVICE, SET_DEVICE } from "../actions/types";
 
 const initialState = {
   _id: "",
@@ -12,6 +12,12 @@ export default function (state = initialState, action) {
     case GET_DEVICE:
       return {
         ...action.payload,
+      };
+    case SET_DEVICE:
+      let newHistory = Object.assign(action.payload, state.history);
+      return {
+        ...state,
+        history: newHistory,
       };
     default:
       return state;

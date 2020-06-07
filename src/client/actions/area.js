@@ -8,7 +8,6 @@ export const getArea = (areaId) => (dispatch) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result.data);
         dispatch({ type: GET_AREA, payload: result.data });
       }
     });

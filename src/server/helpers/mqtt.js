@@ -18,7 +18,7 @@ export const subscribeTo = (topic) => {
   });
 };
 
-export const publishTo = (topic, data) => {
+export const publishTo = (data) => {
   data = JSON.stringify(data);
-  client.publish(topic, data);
+  client.publish("T8", data);
 };
