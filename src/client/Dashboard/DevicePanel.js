@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class DevicePanel extends Component {
     state = {
-        history=[],
+        history:[],
         deviceStatus: false
       }
       toggleDevice = (e) => this.setState({
