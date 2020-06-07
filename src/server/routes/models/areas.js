@@ -3,9 +3,23 @@ import areaModel from "../../models/areas";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  let { id } = req.body;
+const arrayToObject = (arr) => {
+  let result = {};
+  arr.forEach((element) => {
+    let { _id, ...newItem } = element;
+    result[element._id] = newItem;
+  });
+  return result;
+};
+
+router.get("/:id", async (req, res) => {
+  let id = req.params.id;
   let result = await areaModel.readAreaById(id);
+  result = {
+    ...result,
+    devices: arrayToObject(result.devices),
+    sensors: arrayToObject(result.sensors),
+  };
   res.status(200).json(result);
 });
 
