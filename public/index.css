@@ -214,66 +214,66 @@ ul li a {
   height: 7rem;
 }
 
-.device-view{
+.device-view {
   height: 100%;
 }
 
-.device-view-content{
+.device-view-content {
   height: 100%;
-  padding:20px;
+  padding: 20px;
   background-color: #373737;
 }
 
-.row1{
- width: 100%;
- display:block;
- overflow: auto;
- margin-bottom: 20px;
+.row1 {
+  width: 100%;
+  display: block;
+  overflow: auto;
+  margin-bottom: 20px;
 }
 
-.bedroom-light{
+.bedroom-light {
   color: #7beced;
   float: left;
   font-size: x-large;
 }
 
-.edit{
+.edit {
   color: #7beced;
-  float:right;
+  float: right;
   font-size: x-large;
   text-decoration: none;
 }
 
-.device-content{
-background-color: #FF85A7;
-padding:20px;
-text-align: center;
-height: 80%;
+.device-content {
+  background-color: #ff85a7;
+  padding: 20px;
+  text-align: center;
+  height: 80%;
 }
 
-.device-status-container{
+.device-status-container {
   background-color: white;
-  margin:auto;
+  margin: auto;
   border: 1px solid black;
   margin-top: 2px;
-  width:150px;
-  height:70px;
-  text-align:  center;
+  width: 150px;
+  height: 70px;
+  text-align: center;
 }
 
-.device-status-title{
-  width:100%;
+.device-status-title {
+  width: 100%;
   font-size: x-large;
 }
 
-.device-status{
-  width:100%;
+.device-status {
+  width: 100%;
   font-size: xx-large;
   font-weight: bold;
 }
 
-.device-toggle{
-  margin:20px
+.device-toggle {
+  margin: 20px;
 }
 
 .switch {
@@ -298,8 +298,8 @@ height: 80%;
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -310,8 +310,8 @@ height: 80%;
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -335,75 +335,74 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-  background-color: #FF85A7;
+  background-color: #ff85a7;
 }
 
-.device-history-title{
+.device-history-title {
   font-size: x-large;
 }
 
-.device-history-content{
-  margin:auto;
+.device-history-content {
+  margin: auto;
   margin-top: 10px;
   background-color: white;
-  width:500px;
+  width: 500px;
   font-size: x-large;
   height: 400px;
   overflow: auto;
 }
 
-.device-history-content>ul{
-  padding:0;
+.device-history-content > ul {
+  padding: 0;
 }
 
-.device-history-content>ul>li{
-  padding:0;
-  margin-top:20px;
+.device-history-content > ul > li {
+  padding: 0;
+  margin-top: 20px;
 }
 
-.add-device-schedule{
+.add-device-schedule {
   background-color: #373737;
-  width:200px;
+  width: 200px;
   border: none;
   color: white;
   padding: 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  margin-top:5px;
+  margin-top: 5px;
   font-size: large;
   font-weight: bold;
   border-radius: 18px;
 }
 
-.sensor-view{
+.sensor-view {
   height: 100%;
 }
 
-.sensor-view-content{
+.sensor-view-content {
   height: 100%;
-  padding:20px;
+  padding: 20px;
   background-color: #373737;
 }
 
-.sensor-content{
+.sensor-content {
   background-color: #f3bb72;
-  padding:20px;
+  padding: 20px;
   text-align: center;
   height: 80%;
-  }
-
-.sensor-row{
-  height:90%;
 }
 
-.sensor-row:after{
+.sensor-row {
+  height: 90%;
+}
+
+.sensor-row:after {
   content: "";
   display: table;
   clear: both;
   height: 100%;
 }
-
 
 .dashboard .areaview .sensor-box .newest {
   font-size: 1.5rem;
@@ -419,129 +418,130 @@ input:checked + .slider:before {
 .dashboard .areaview .sensor-box .history {
   font-size: 2rem;
 }
-.sensor-column{
+
+.sensor-column {
   float: left;
   height: 300px;
   text-align: center;
 }
-  
-.sensor-column-1{
+
+.sensor-column-1 {
   width: 15%;
-  height:100%;
+  height: 100%;
   display: flex;
   flex-flow: column;
 }
 
-.sensor-column-2{
+.sensor-column-2 {
   width: 60%;
-  height:100%;
+  height: 100%;
   flex-flow: column;
   display: flex;
 }
 
-.sensor-column-3{
+.sensor-column-3 {
   width: 25%;
-  height:100%;
+  height: 100%;
   flex-flow: column;
   display: flex;
 }
 
-.newest-readings{
+.newest-readings {
   width: 80%;
 
   background-color: white;
-  padding:10px;
-  margin:auto;
-  margin-bottom:20px;
+  padding: 10px;
+  margin: auto;
+  margin-bottom: 20px;
   border: 1px solid black;
 }
 
-.newest-readings-title{
+.newest-readings-title {
   font-size: large;
 }
 
-.newest-readings-content{
+.newest-readings-content {
   font-size: x-large;
   font-weight: bold;
 }
 
-.newest-readings-date{
+.newest-readings-date {
   font-weight: bold;
 }
 
-.sensor-history-title{
+.sensor-history-title {
   font-size: x-large;
 }
 
-.sensor-history-content{
-  margin:auto;
-  margin-top:20px;
-  width:80%;
-  height:50%;
-  padding:10px;
+.sensor-history-content {
+  margin: auto;
+  margin-top: 20px;
+  width: 80%;
+  height: 50%;
+  padding: 10px;
   background-color: white;
   border: 1px solid black;
-  flex-grow : 1;
+  flex-grow: 1;
 }
 
-.sensor-history-content>ul{
-  padding:0;
+.sensor-history-content > ul {
+  padding: 0;
 }
 
-.sensor-history-content>ul>li{
-  width:100%;
-  padding:0;
-  margin-top:20px;
+.sensor-history-content > ul > li {
+  width: 100%;
+  padding: 0;
+  margin-top: 20px;
 }
 
-.sensor-history-item-date{
+.sensor-history-item-date {
   font-style: italic;
   font-size: large;
 }
 
-.sensor-history-item-reading{
+.sensor-history-item-reading {
   font-size: x-large;
 }
 
-.sensor-graph{
+.sensor-graph {
   background-color: white;
-  margin:auto;
-  width:90%;
+  margin: auto;
+  width: 90%;
   border: 1px solid black;
   flex-grow: 1;
 }
 
-.sensor-trigger-title{
+.sensor-trigger-title {
   font-size: xx-large;
 }
 
-.sensor-trigger-content{
-  width:85%;
-  margin-top:20px;
+.sensor-trigger-content {
+  width: 85%;
+  margin-top: 20px;
   background-color: white;
   flex-grow: 1;
   border: 1px solid black;
-  display:flex;
+  display: flex;
   flex-direction: column;
-  padding:20px;
+  padding: 20px;
 }
 
-.sensor-trigger-content>ul{
-  padding:0;
+.sensor-trigger-content > ul {
+  padding: 0;
 }
 
-.sensor-trigger-item{
+.sensor-trigger-item {
   width: 100%;
   text-align: left;
-  float:left;
+  float: left;
   font-size: xx-large;
   padding: 0;
-  margin-top:25px;
+  margin-top: 25px;
 }
 
-.add-sensor-trigger{
+.add-sensor-trigger {
   background-color: #373737;
-  width:200px;
+  width: 200px;
   border: none;
   color: white;
   padding: 20px;
