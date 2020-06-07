@@ -22,8 +22,24 @@ userSchema.statics.readUserById = async function (id) {
   return result;
 };
 
-userSchema.statics.readUserByEmail = async function (email = "test") {
-  let result = await this.findOne({ email }).lean();
+userSchema.statics.readUserByEmail = async function (email = "test@gmail.com") {
+  let result = await this.findOne({ email })
+    .populate({
+      path: "areas",
+      select: "name",
+      option: { lean: true },
+    })
+    .populate({
+      path: "devices",
+      select: "name",
+      option: { lean: true },
+    })
+    .populate({
+      path: "sensors",
+      select: "name",
+      option: { lean: true },
+    })
+    .lean();
   delete result.__v;
   return result;
 };
