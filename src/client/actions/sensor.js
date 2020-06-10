@@ -8,7 +8,6 @@ export const getSensor = (sensorId) => (dispatch) => {
       if (err) {
         console.log(err);
       } else {
-        console.log(result.data);
         dispatch({ type: GET_SENSOR, payload: result.data });
       }
     });

@@ -14,7 +14,7 @@ export default function (state = initialState, action) {
         ...action.payload,
       };
     case SET_DEVICE:
-      let newHistory = Object.assign(action.payload, state.history);
+      let newHistory = Object.assign(action.payload.history, state.history);
       return {
         ...state,
         history: newHistory,

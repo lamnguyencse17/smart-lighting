@@ -10,12 +10,12 @@ class AreaView extends Component {
   update = null;
   componentDidMount() {
     this.props.getArea(this.props.match.params.id);
-    this.update = setTimeout(() => {
+    this.update = setInterval(() => {
       this.props.getArea(this.props.match.params.id);
     }, 60000);
   }
   componentWillUnmount() {
-    clearTimeout(this.update);
+    clearInterval(this.update);
   }
   render() {
     let { areaName, devices, sensors } = this.props;
@@ -23,34 +23,43 @@ class AreaView extends Component {
       <div className="dashboard">
         <div className="areaview">
           <div className="title">{areaName}</div>
-          {Object.keys(sensors).map((index) => {
-            let sensorName = sensors[index].name;
-            let latestReadings = sensors[index].readings[0];
-            latestReadings.date = new Date(latestReadings.date);
-            let readings = sensors[index].readings.slice(
-              1,
-              sensors[index].length
-            );
-            return (
-              <Sensor
-                key={index}
-                sensorName={sensorName}
-                latestReadings={latestReadings}
-                readings={readings}
-              />
-            );
-          })}
+          {this.props.areaName != "" ? (
+            Object.keys(sensors).map((index) => {
+              let sensorName = sensors[index].name;
+              let latestReadings = sensors[index].readings[0];
+              latestReadings.date = new Date(latestReadings.date);
+              let readings = sensors[index].readings.slice(
+                1,
+                sensors[index].length
+              );
+              let device_id = sensors[index].device_id;
+              return (
+                <Sensor
+                  key={index}
+                  sensorName={sensorName}
+                  latestReadings={latestReadings}
+                  readings={readings}
+                  _id={index}
+                  device_id={device_id}
+                />
+              );
+            })
+          ) : (
+            <></>
+          )}
+
           {this.props.areaName != "" ? (
             Object.keys(devices).map((index) => {
               let deviceName = devices[index].name;
               let deviceHistory = devices[index].history;
-              let _id = devices[index]._id;
+              let device_id = devices[index].device_id;
               return (
                 <Device
                   key={index}
                   deviceName={deviceName}
                   deviceHistory={deviceHistory}
-                  _id={_id}
+                  device_id={device_id}
+                  _id={index}
                 />
               );
             })

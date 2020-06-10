@@ -4,16 +4,15 @@ import { getDevice } from "../actions/device";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-var update;
 class DeviceView extends Component {
   componentDidMount() {
     this.props.getDevice(this.props.match.params.id);
-    update = setTimeout(() => {
+    this.update = setInterval(() => {
       this.props.getDevice(this.props.match.params.id);
     }, 60000);
   }
   componentWillUnmount() {
-    clearTimeout(update);
+    clearInterval(this.update);
   }
   state = {
     history: [],
@@ -34,6 +33,7 @@ class DeviceView extends Component {
               name={this.props.name}
               deviceHistory={this.props.deviceHistory}
               _id={this.props._id}
+              device_id={this.props.device_id}
             />
           ) : (
             <></>

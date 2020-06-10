@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getDevice, setDevice } from "../../actions/device";
 
 class Device extends Component {
   update = null;
   toggleDevice = (e) => {
     // Trigger message
+    this.props.setDevice(this.props.device_id);
     this.setState({
       deviceStatus: e.target.checked,
     });
@@ -15,10 +20,10 @@ class Device extends Component {
     };
   }
   componentWillUnmount() {
-    clearTimeout(this.update);
+    clearInterval(this.update);
   }
   componentDidMount() {
-    this.update = setTimeout(() => {
+    this.update = setInterval(() => {
       this.props.getDevice(this.props._id);
     }, 60000);
     let history = this.props.deviceHistory;
@@ -37,7 +42,9 @@ class Device extends Component {
           <div className="device-status-container">
             <span className="device-status-title"> status</span>
             <br></br>
-            <span className="device-status">OFF</span>
+            <span className="device-status">
+              {!this.state.deviceStatus ? "OFF" : "ON"}
+            </span>
           </div>
           <div className="device-toggle">
             <label className="switch">
@@ -52,12 +59,18 @@ class Device extends Component {
           <span className="device-history-title">HISTORIES</span>
           <div className="device-history-content">
             <ul>
-              <li className="device-history-item">
-                9AM - 21/05/2020:<br></br>Turned on - Manual<br></br>
-              </li>
-              <li className="device-history-item">
-                12AM - 21/05/2020:<br></br> Turned off - Automated<br></br>
-              </li>
+              {Object.keys(this.props.deviceHistory).map((index) => {
+                let device = this.props.deviceHistory[index];
+                let date = new Date(device.date);
+                return (
+                  <li className="device-history-item">
+                    {`${date.getHours()}:${date.getMinutes()} - ${date.getUTCDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                    <br></br>
+                    {device.value == 2 ? "Turned On" : "Turned OFF"}
+                    <br></br>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <button className="add-device-schedule">New Schedule</button>
@@ -67,4 +80,8 @@ class Device extends Component {
   }
 }
 
-export default Device;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getDevice, setDevice }, dispatch);
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Device));

@@ -8,24 +8,55 @@ import SensorPanel from "./SensorView/SensorPanel";
 class SensorView extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
+  }
+  componentDidMount() {
     this.props.getSensor(this.props.match.params.id);
+    this.update = setInterval(() => {
+      this.props.getSensor(this.props.match.params.id);
+    }, 60000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.update);
   }
   state = {
     latestReadings: "",
     history: [],
-    triggerConditions : []
-  }
+    triggerConditions: [],
+  };
   render() {
+    let { readings } = this.props;
+    let length = Object.keys(readings).length;
+    let latestIndex = Object.keys(readings)[length - 1];
+    let latestReadings = readings[latestIndex];
     return (
-      <div className="sensor-view">
-        <div className="sensor-view-content">
-          <div className="row1">
-            <div className="bedroom-light">BEDROOM LIGHT 1</div>
-            <a href="#" className="edit">EDIT</a>  
+      <>
+        {this.props.name ? (
+          <div className="sensor-view">
+            <div className="sensor-view-content">
+              <div className="row1">
+                <div className="bedroom-light">{this.props.name}</div>
+                <a href="#" className="edit">
+                  EDIT
+                </a>
+              </div>
+              {this.props.name ? (
+                <SensorPanel
+                  latestReadings={latestReadings}
+                  _id={this.props._id}
+                  name={this.props.name}
+                  device_id={this.props.device_id}
+                  readings={this.props.readings}
+                />
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
-          <SensorPanel/>
-        </div>
-      </div>
+        ) : (
+          <></>
+        )}
+      </>
     );
   }
 }

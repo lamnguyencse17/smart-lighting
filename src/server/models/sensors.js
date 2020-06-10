@@ -16,7 +16,10 @@ export const sensorSchema = new Sensors({
 });
 
 sensorSchema.statics.readSensorById = async function (id) {
-  let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  let result = await this.findOne(
+    { _id: mongoose.Types.ObjectId(id) },
+    { readings: { $slice: 5 } }
+  ).lean();
   delete result.__v;
   return result;
 };

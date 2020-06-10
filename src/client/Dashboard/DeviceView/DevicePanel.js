@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-var update;
+
 class DevicePanel extends Component {
   constructor(props) {
     super(props);
@@ -7,13 +7,7 @@ class DevicePanel extends Component {
       deviceStatus: false,
     };
   }
-  componentWillUnmount() {
-    clearTimeout(update);
-  }
   componentDidMount() {
-    update = setTimeout(() => {
-      this.props.getDevice(this.props._id);
-    }, 60000);
     let history = this.props.deviceHistory;
     if (history[Object.keys(history)[0]].value == 2) {
       this.setState({ deviceStatus: true });
@@ -50,17 +44,18 @@ class DevicePanel extends Component {
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
           <ul>
-            <li>
-              <span className="device-history-time">9AM - 21/05/2020:</span>
-              <span className="device-history-status">Turned on - Manual</span>
-            </li>
-            <li>
-              <span className="device-history-time">12AM - 21/05/2020:</span>
-              <span className="device-history-status">
-                {" "}
-                Turned off - Automated
-              </span>
-            </li>
+            {Object.keys(this.props.deviceHistory).map((index) => {
+              let device = this.props.deviceHistory[index];
+              let date = new Date(device.date);
+              return (
+                <li className="device-history-item">
+                  {`${date.getHours()}:${date.getMinutes()} - ${date.getUTCDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                  <br></br>
+                  {device.value == 2 ? "Turned On" : "Turned OFF"}
+                  <br></br>
+                </li>
+              );
+            })}
           </ul>
         </div>
         <button className="add-device-schedule">New Schedule</button>

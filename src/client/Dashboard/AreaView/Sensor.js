@@ -1,6 +1,19 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getSensor } from "../../actions/sensor";
 
 class Sensor extends Component {
+  componentDidMount() {
+    this.props.getSensor(this.props._id);
+    this.update = setInterval(() => {
+      this.props.getSensor(this.props._id);
+    }, 60000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.update);
+  }
   render() {
     let { index, sensorName, latestReadings, readings } = this.props;
     return (
@@ -9,7 +22,7 @@ class Sensor extends Component {
         <div className="newest">
           Newest Reading<br></br>
           <h2>
-            {`${latestReadings.date.getHours()}-${latestReadings.date.getMinutes()}: ${
+            {`${latestReadings.date.getHours()}:${latestReadings.date.getMinutes()} - ${
               latestReadings.value
             }`}
           </h2>
@@ -19,7 +32,7 @@ class Sensor extends Component {
             let newDate = new Date(reading.date);
             return (
               <div key={reading._id}>
-                {`${newDate.getHours()}-${newDate.getMinutes()}`}:{" "}
+                {`${newDate.getHours()}:${newDate.getMinutes()}`} -{" "}
                 {reading.value}
               </div>
             );
@@ -30,4 +43,8 @@ class Sensor extends Component {
   }
 }
 
-export default Sensor;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getSensor }, dispatch);
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(Sensor));
