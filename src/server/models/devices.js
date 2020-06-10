@@ -19,13 +19,12 @@ deviceSchema.statics.readDeviceById = async function (id) {
   return result;
 };
 
-deviceSchema.statics.updateToDeviceId = async function (device_id, value) {
-  let result = await this.updateOne(
+deviceSchema.statics.updateToDeviceId = function (device_id, value) {
+  let result = this.findOneAndUpdate(
     { device_id },
     { $push: { history: { date: Date.now(), value } } },
     { new: true }
   );
-  delete result.__v;
   return result;
 };
 

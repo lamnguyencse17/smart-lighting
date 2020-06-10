@@ -15,6 +15,7 @@ const data_uri =
 mongoose.connect(data_uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const client = setClient("mqtt://23.97.56.49");
