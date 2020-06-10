@@ -12,7 +12,7 @@ class Device extends Component {
     this.setState({
       deviceStatus: e.target.checked,
     });
-  };
+  };  
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +64,7 @@ class Device extends Component {
                 let date = new Date(device.date);
                 return (
                   <li className="device-history-item">
-                    {`${date.getHours()}:${date.getMinutes()} - ${date.getUTCDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                    {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`}
                     <br></br>
                     {device.value == 2 ? "Turned On" : "Turned OFF"}
                     <br></br>

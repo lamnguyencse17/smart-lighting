@@ -19,7 +19,7 @@ class SensorPanel extends Component {
                 {latestReadings.value}
               </span>
               <br></br>
-              <span className="newest-readings-date">{`last updated: ${latestDate.getHours()}:${latestDate.getMinutes()}`}</span>
+              <span className="newest-readings-date">{`last updated: ${latestDate.getUTCHours()}:${latestDate.getUTCMinutes()}`}</span>
             </div>
             <span className="sensor-hi  story-title">HISTORIES</span>
             <div className="sensor-history-content">
@@ -29,7 +29,7 @@ class SensorPanel extends Component {
                   let value = readings[index].value;
                   return (
                     <li key={index}>
-                      <span className="sensor-history-item-date">{`At ${date.getHours()}:${date.getMinutes()}`}</span>
+                      <span className="sensor-history-item-date">{`At ${date.getUTCHours()}:${date.getUTCMinutes()}`}</span>
                       <br></br>
                       <span className="sensor-history-item-reading">
                         {value}

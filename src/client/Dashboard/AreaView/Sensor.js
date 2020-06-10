@@ -22,7 +22,7 @@ class Sensor extends Component {
         <div className="newest">
           Newest Reading<br></br>
           <h2>
-            {`${latestReadings.date.getHours()}:${latestReadings.date.getMinutes()} - ${
+            {`${latestReadings.date.getUTCHours()}:${latestReadings.date.getUTCMinutes()} - ${
               latestReadings.value
             }`}
           </h2>
@@ -33,7 +33,7 @@ class Sensor extends Component {
             let newDate = new Date(reading.date);
             return (
               <div key={reading._id}>
-                {`${newDate.getHours()}:${newDate.getMinutes()}`} -{" "}
+                {`${newDate.getUTCHours()}:${newDate.getUTCMinutes()}`} -{" "}
                 {reading.value}
               </div>
             );
