@@ -9,4 +9,12 @@ router.use(
   require("./models")
 );
 
+router.use(
+  "/actions",
+  (req, res, next) => {
+    next();
+  },
+  require("./actions/actions")
+);
+
 module.exports = router;

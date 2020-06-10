@@ -19,6 +19,17 @@ deviceSchema.statics.readDeviceById = async function (id) {
   return result;
 };
 
+deviceSchema.statics.updateToDeviceId = async function (device_id, value) {
+  let result = await this.updateOne(
+    { device_id },
+    { $push: { history: { date: Date.now(), value } } },
+    { new: true }
+  );
+  result = result.toObject();
+  delete result.__v;
+  return result;
+};
+
 deviceSchema.statics.createDevice = async function (deviceDetails) {
   let { name, device_id } = deviceDetails;
   //TODO
