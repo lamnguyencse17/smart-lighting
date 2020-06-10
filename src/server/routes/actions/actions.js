@@ -1,12 +1,15 @@
 import express from "express";
+import deviceModel from "../../models/devices";
+import {publishTo} from "../../helpers/mqtt";
 
 const router = express.Router();
 
-router.post("/sendCommand", (req, res) => {
-  //TODO
-  // req.body: device_id, value
-  // import mqtt.js -> publishTo
-  //  import deviceModel -> updateToDeviceId(device_id, value) -> res.status(200).json(returnedValue)
+router.post("/sendCommand", async (req, res) => {
+  publishTo(req.body)
+  deviceModel.updateToDeviceId(req.body.device_id, req.body.value)
+  let { device_id, value } = req.body;
+  let returnedValue = await deviceModel.updateToDeviceId(device_id,value);
+  res.status(200).json(returnedValue);
 });
 
 module.exports = router;
