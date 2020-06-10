@@ -25,7 +25,6 @@ deviceSchema.statics.updateToDeviceId = async function (device_id, value) {
     { $push: { history: { date: Date.now(), value } } },
     { new: true }
   );
-  result = result.toObject();
   delete result.__v;
   return result;
 };
