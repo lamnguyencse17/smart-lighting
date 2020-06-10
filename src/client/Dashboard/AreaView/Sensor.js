@@ -27,6 +27,7 @@ class Sensor extends Component {
             }`}
           </h2>
         </div>
+        <span className="sensor-history-title">HISTORIES</span>
         <div className="history">
           {readings.map((reading) => {
             let newDate = new Date(reading.date);
