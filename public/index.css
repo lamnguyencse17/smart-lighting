@@ -353,6 +353,7 @@ input:checked + .slider:before {
   width: 90%;
   height:400px;
   font-size: x-large;
+  overflow: auto;
 }
 
 .device-history-content > ul {
@@ -486,6 +487,7 @@ input:checked + .slider:before {
   background-color: white;
   border: 1px solid black;
   flex-grow: 1;
+  overflow: auto;
 }
 
 .sensor-history-content > ul {
@@ -528,6 +530,7 @@ input:checked + .slider:before {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  overflow: auto;
 }
 
 .sensor-trigger-content > ul {
@@ -616,9 +619,13 @@ input:checked + .slider:before {
   padding-bottom: 1rem;
   margin-left: 1rem;
   margin-right: 1rem;
+  margin-top:40px;
+  height: 250px;
+  overflow: auto;
 }
 
 .dashboard .areaview .device-box .title {
+  text-align: center;
   font-size: 2.5rem;
   color: #373737;
   padding-top: 2rem;
