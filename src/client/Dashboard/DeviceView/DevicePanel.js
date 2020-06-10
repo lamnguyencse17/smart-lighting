@@ -47,9 +47,10 @@ class DevicePanel extends Component {
             {Object.keys(this.props.deviceHistory).map((index) => {
               let device = this.props.deviceHistory[index];
               let date = new Date(device.date);
+              console.log(device.date)
               return (
                 <li className="device-history-item">
-                  {`${date.getHours()}:${date.getMinutes()} - ${date.getUTCDate()}/${date.getMonth()}/${date.getFullYear()}`}
+                  {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`}
                   <br></br>
                   {device.value == 2 ? "Turned On" : "Turned OFF"}
                   <br></br>

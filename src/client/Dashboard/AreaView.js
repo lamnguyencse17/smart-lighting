@@ -26,7 +26,7 @@ class AreaView extends Component {
           {this.props.areaName != "" ? (
             Object.keys(sensors).map((index) => {
               let sensorName = sensors[index].name;
-              let latestReadings = sensors[index].readings[0];
+              let latestReadings = sensors[index].readings[sensors[index].readings.length-1];
               latestReadings.date = new Date(latestReadings.date);
               let readings = sensors[index].readings.slice(
                 1,
