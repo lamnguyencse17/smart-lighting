@@ -34,12 +34,15 @@ sensorSchema.statics.createSensor = async function (sensorDetails) {
 
 sensorSchema.statics.updateSensor = function (sensorDetails) {
   let { device_id, value } = sensorDetails;
+  let now1 = new Date();
+  let now = now1.toLocaleString('th-TH');
+  console.log(now)
   let result = this.findOneAndUpdate(
     { device_id },
     {
       $push: {
         readings: {
-          date: Date.now().toString(),
+          date: now,
           value: value,
         },
       },
