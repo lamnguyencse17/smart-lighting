@@ -9,10 +9,26 @@ class DevicePanel extends Component {
   }
   componentDidMount() {
     let history = this.props.deviceHistory;
-    if (history[Object.keys(history)[0]].value == 2) {
+    if (
+      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+    ) {
       this.setState({ deviceStatus: true });
     } else {
       this.setState({ deviceStatus: false });
+    }
+  }
+  componentDidUpdate() {
+    let history = this.props.deviceHistory;
+    if (
+      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+    ) {
+      if (this.state.deviceStatus == false) {
+        this.setState({ deviceStatus: true });
+      }
+    } else {
+      if (this.state.deviceStatus == true) {
+        this.setState({ deviceStatus: false });
+      }
     }
   }
   toggleDevice = (e) => {
@@ -47,10 +63,12 @@ class DevicePanel extends Component {
             {Object.keys(this.props.deviceHistory).map((index) => {
               let device = this.props.deviceHistory[index];
               let date = new Date(device.date);
-              console.log(device.date)
+              console.log(device.date);
               return (
                 <li className="device-history-item">
-                  {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`}
+                  {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
+                    date.getUTCMonth() + 1
+                  }/${date.getFullYear()}`}
                   <br></br>
                   {device.value == 2 ? "Turned On" : "Turned OFF"}
                   <br></br>

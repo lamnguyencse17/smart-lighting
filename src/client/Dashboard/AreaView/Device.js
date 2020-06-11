@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { getDevice, setDevice } from "../../actions/device";
 
 class Device extends Component {
-  update = null;
   toggleDevice = (e) => {
     // Trigger message
     this.props.setDevice(this.props.device_id);
