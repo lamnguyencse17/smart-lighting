@@ -1,5 +1,14 @@
-import { GET_DEVICE } from "./types";
+import { GET_DEVICE, SET_DEVICE } from "./types";
 import axios from "axios";
+
+const arrayToObject = (arr) => {
+  let result = {};
+  arr.forEach((element) => {
+    let { _id, ...newItem } = element;
+    result[element._id] = newItem;
+  });
+  return result;
+};
 
 export const getDevice = (deviceId) => (dispatch) => {
   axios
@@ -15,17 +24,19 @@ export const getDevice = (deviceId) => (dispatch) => {
 
 export const setDevice = (device_id, value) => (dispatch) => {
   axios
-    .post(`http://localhost:3000/api/actions`, {
-      body: {
-        device_id,
-        value,
-      },
+    .post("http://localhost:3000/api/actions/sendCommand", {
+      device_id,
+      value,
     })
     .then((result, err) => {
       if (err) {
         console.log(err);
       } else {
-        dispatch({ type: SET_DEVICE, payload: result.data });
+        let data = {
+          ...result.data,
+          history: arrayToObject(result.data.history),
+        };
+        dispatch({ type: SET_DEVICE, payload: data });
       }
     });
 };

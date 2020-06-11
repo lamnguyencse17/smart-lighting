@@ -39,22 +39,13 @@ sensorSchema.statics.updateSensor = function (sensorDetails) {
     {
       $push: {
         readings: {
-          date: Date.now(),
+          date: Date.now().toString(),
           value: value,
         },
       },
     },
     { new: true }
-  )
-    .exec()
-    .then((err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        return doc;
-      }
-    });
-  console.log(result);
+  ).exec();
 };
 
 sensorSchema.statics.deleteSensor = async function (id) {

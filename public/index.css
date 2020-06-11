@@ -244,8 +244,8 @@ ul li a {
   text-decoration: none;
 }
 
-.device-panel-container{
-  width:100%;
+.device-panel-container {
+  width: 100%;
 }
 
 .device-content {
@@ -352,7 +352,7 @@ input:checked + .slider:before {
   margin-top: 10px;
   background-color: white;
   width: 90%;
-  height:400px;
+  height: 400px;
   font-size: x-large;
   overflow: auto;
 }
@@ -580,7 +580,7 @@ input:checked + .slider:before {
 
 .dashboard .areaview .sensor-box {
   display: inline-block;
-  vertical-align:top;
+  vertical-align: top;
   margin-right: 1.5rem;
   width: 18rem;
   height: 90%;
@@ -590,7 +590,7 @@ input:checked + .slider:before {
 
 .dashboard .areaview .device-box {
   display: inline-block;
-  vertical-align:top;
+  vertical-align: top;
   margin-right: 1.5rem;
   width: 18rem;
   height: 90%;
@@ -628,11 +628,11 @@ input:checked + .slider:before {
   margin-right: 1rem;
   margin-top: 10px;
   height: 250px;
-  overflow: auto;
+  overflow-y: auto;
 }
 
-.dashboard .areaview .sensor-box .history >div{
-  margin-top:10px;
+.dashboard .areaview .sensor-box .history > div {
+  margin-top: 10px;
 }
 
 .dashboard .areaview .device-box .title {
@@ -643,12 +643,17 @@ input:checked + .slider:before {
   padding-bottom: 1rem;
 }
 
-.dashboard .areaview .device-box .device-content .device-history-content{
+.dashboard .areaview .device-box .device-content .device-history-content {
   height: 50%;
-  width:100%;
+  width: 100%;
 }
 
-.dashboard .areaview .device-box .device-content .device-history-content .device-history-item{
+.dashboard
+  .areaview
+  .device-box
+  .device-content
+  .device-history-content
+  .device-history-item {
   width: 100%;
-  display:block;
+  display: block;
 }

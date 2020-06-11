@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post("/sendCommand", async (req, res) => {
   publishTo(req.body);
-  deviceModel.updateToDeviceId(req.body.device_id, req.body.value);
   let { device_id, value } = req.body;
   let returnedValue = await deviceModel.updateToDeviceId(device_id, value);
   res.status(200).json(returnedValue);

@@ -14,6 +14,9 @@ class AreaView extends Component {
       this.props.getArea(this.props.match.params.id);
     }, 15000);
   }
+  updateArea = () => {
+    this.props.getArea(this.props.match.params.id);
+  };
   componentWillUnmount() {
     clearInterval(this.update);
   }
@@ -61,6 +64,7 @@ class AreaView extends Component {
                   deviceHistory={deviceHistory}
                   device_id={device_id}
                   _id={index}
+                  updateArea={this.updateArea}
                 />
               );
             })

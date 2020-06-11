@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getDevice, setDevice } from "../../actions/device";
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -19,9 +23,8 @@ class DevicePanel extends Component {
   }
   componentDidUpdate() {
     let history = this.props.deviceHistory;
-    if (
-      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
-    ) {
+    let length = Object.keys(history).length;
+    if (history[Object.keys(history)[length - 1]].value == 2) {
       if (this.state.deviceStatus == false) {
         this.setState({ deviceStatus: true });
       }
@@ -32,12 +35,13 @@ class DevicePanel extends Component {
     }
   }
   toggleDevice = (e) => {
-    // Trigger message
+    this.props.setDevice(this.props.device_id, e.target.checked ? 2 : 0);
     this.setState({
       deviceStatus: e.target.checked,
     });
   };
   render() {
+    let { deviceHistory } = this.props;
     return (
       <div className="device-content">
         <div className="device-status-container">
@@ -60,10 +64,9 @@ class DevicePanel extends Component {
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
           <ul>
-            {Object.keys(this.props.deviceHistory).map((index) => {
-              let device = this.props.deviceHistory[index];
+            {Object.keys(deviceHistory).map((index) => {
+              let device = deviceHistory[index];
               let date = new Date(device.date);
-              console.log(device.date);
               return (
                 <li className="device-history-item">
                   {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
@@ -83,4 +86,8 @@ class DevicePanel extends Component {
   }
 }
 
-export default DevicePanel;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getDevice, setDevice }, dispatch);
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(DevicePanel));

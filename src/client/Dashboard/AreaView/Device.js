@@ -7,7 +7,8 @@ import { getDevice, setDevice } from "../../actions/device";
 class Device extends Component {
   toggleDevice = (e) => {
     // Trigger message
-    this.props.setDevice(this.props.device_id);
+    this.props.setDevice(this.props.device_id, e.target.checked ? 2 : 0);
+    this.props.updateArea();
     this.setState({
       deviceStatus: e.target.checked,
     });
@@ -36,7 +37,6 @@ class Device extends Component {
   }
   componentDidUpdate() {
     let history = this.props.deviceHistory;
-    console.log(history);
     if (
       history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
     ) {
