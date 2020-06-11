@@ -9,7 +9,7 @@ class DeviceView extends Component {
     this.props.getDevice(this.props.match.params.id);
     this.update = setInterval(() => {
       this.props.getDevice(this.props.match.params.id);
-    }, 60000);
+    }, 15000);
   }
   componentWillUnmount() {
     clearInterval(this.update);

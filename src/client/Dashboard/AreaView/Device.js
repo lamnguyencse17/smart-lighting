@@ -12,7 +12,7 @@ class Device extends Component {
     this.setState({
       deviceStatus: e.target.checked,
     });
-  };  
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -25,16 +25,33 @@ class Device extends Component {
   componentDidMount() {
     this.update = setInterval(() => {
       this.props.getDevice(this.props._id);
-    }, 60000);
+    }, 15000);
     let history = this.props.deviceHistory;
-    if (history[Object.keys(history)[0]].value == 2) {
+    if (
+      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+    ) {
       this.setState({ deviceStatus: true });
     } else {
       this.setState({ deviceStatus: false });
     }
   }
+  componentDidUpdate() {
+    let history = this.props.deviceHistory;
+    console.log(history);
+    if (
+      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+    ) {
+      if (this.state.deviceStatus == false) {
+        this.setState({ deviceStatus: true });
+      }
+    } else {
+      if (this.state.deviceStatus == true) {
+        this.setState({ deviceStatus: false });
+      }
+    }
+  }
   render() {
-    let { index, deviceName, history, deviceStatus } = this.props;
+    let { index, deviceName, deviceHistory } = this.props;
     return (
       <div className="device-box" key={index}>
         <div className="title">{deviceName}</div>
@@ -59,14 +76,16 @@ class Device extends Component {
           <span className="device-history-title">HISTORIES</span>
           <div className="device-history-content">
             <ul>
-              {Object.keys(this.props.deviceHistory).map((index) => {
-                let device = this.props.deviceHistory[index];
+              {Object.keys(deviceHistory).map((index) => {
+                let device = deviceHistory[index];
                 let date = new Date(device.date);
                 return (
-                  <li className="device-history-item">
-                    {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getFullYear()}`}
+                  <li key={index} className="device-history-item">
+                    {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
+                      date.getUTCMonth() + 1
+                    }/${date.getFullYear()}`}
                     <br></br>
-                    {device.value == 2 ? "Turned On" : "Turned OFF"}
+                    {device.value == 2 ? "Turned ON" : "Turned OFF"}
                     <br></br>
                   </li>
                 );

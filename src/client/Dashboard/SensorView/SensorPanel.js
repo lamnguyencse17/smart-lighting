@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class SensorPanel extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
   render() {
     let { readings, latestReadings } = this.props;

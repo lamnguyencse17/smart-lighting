@@ -14,7 +14,7 @@ class SensorView extends Component {
     this.props.getSensor(this.props.match.params.id);
     this.update = setInterval(() => {
       this.props.getSensor(this.props.match.params.id);
-    }, 60000);
+    }, 15000);
   }
   componentWillUnmount() {
     clearInterval(this.update);

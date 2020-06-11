@@ -9,7 +9,7 @@ class Sensor extends Component {
     this.props.getSensor(this.props._id);
     this.update = setInterval(() => {
       this.props.getSensor(this.props._id);
-    }, 60000);
+    }, 15000);
   }
   componentWillUnmount() {
     clearInterval(this.update);
