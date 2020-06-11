@@ -565,7 +565,8 @@ input:checked + .slider:before {
 .dashboard .areaview {
   padding-top: 1rem;
   padding-left: 2rem;
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   height: 90%;
 }
