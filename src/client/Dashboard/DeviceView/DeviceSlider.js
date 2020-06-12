@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import { debounce } from "lodash";
 
 class DeviceSlider extends Component {
   constructor(props) {
@@ -10,9 +11,11 @@ class DeviceSlider extends Component {
     };
   }
 
+  handleSliderDebounce = debounce((value) => console.log(value), 5000);
+
   handleChange = (e, newValue) => {
     this.setState({ deviceIntensity: newValue });
-    //TODO: debounce 5s console.log
+    this.handleSliderDebounce(newValue);
   };
 
   PrettoSlider = withStyles({
