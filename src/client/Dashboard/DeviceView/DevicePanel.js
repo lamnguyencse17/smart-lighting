@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getDevice, toggleDevice } from "../../actions/device";
+import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
 
 class DevicePanel extends Component {
@@ -35,8 +35,8 @@ class DevicePanel extends Component {
       }
     }
   }
-  toggleDevice = (e) => {
-    this.props.toggleDevice(this.props.device_id, e.target.checked ? 2 : 0);
+  adjustDevice = (e) => {
+    this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.setState({
       deviceStatus: e.target.checked,
     });
@@ -56,14 +56,14 @@ class DevicePanel extends Component {
           <label className="switch">
             <input
               type="checkbox"
-              onChange={this.toggleDevice}
+              onChange={this.adjustDevice}
               checked={this.state.deviceStatus}
             ></input>
             <span className="slider round"></span>
           </label>
         </div>
         <div className="device-toggle">
-          <DeviceSlider />
+          <DeviceSlider device_id={this.props.device_id} />
         </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
@@ -72,7 +72,7 @@ class DevicePanel extends Component {
               let device = deviceHistory[index];
               let date = new Date(device.date);
               return (
-                <li className="device-history-item">
+                <li className="device-history-item" key={index}>
                   {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
                     date.getUTCMonth() + 1
                   }/${date.getFullYear()}`}
@@ -91,7 +91,7 @@ class DevicePanel extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDevice, toggleDevice }, dispatch);
+  return bindActionCreators({ getDevice, adjustDevice }, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(DevicePanel));
