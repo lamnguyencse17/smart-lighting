@@ -1,4 +1,4 @@
-import { GET_DEVICE, SET_DEVICE } from "./types";
+import { GET_DEVICE, TOGGLE_DEVICE } from "./types";
 import axios from "axios";
 
 const arrayToObject = (arr) => {
@@ -22,7 +22,7 @@ export const getDevice = (deviceId) => (dispatch) => {
     });
 };
 
-export const setDevice = (device_id, value) => (dispatch) => {
+export const toggleDevice = (device_id, value) => (dispatch) => {
   axios
     .post("http://localhost:3000/api/actions/sendCommand", {
       device_id,
@@ -36,7 +36,7 @@ export const setDevice = (device_id, value) => (dispatch) => {
           ...result.data,
           history: arrayToObject(result.data.history),
         };
-        dispatch({ type: SET_DEVICE, payload: data });
+        dispatch({ type: TOGGLE_DEVICE, payload: data });
       }
     });
 };

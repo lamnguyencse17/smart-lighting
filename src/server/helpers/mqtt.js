@@ -3,7 +3,7 @@ import mqtt from "mqtt";
 let client;
 
 export const setClient = (host) => {
-  client = mqtt.connect("mqtt://23.97.56.49");
+  client = mqtt.connect("mqtt://23.97.56.49"); // update later
   client.on("connect", () => {
     console.log("Connected to MQTT Broker");
   });
@@ -20,5 +20,5 @@ export const subscribeTo = (topic) => {
 
 export const publishTo = (data) => {
   data = JSON.stringify(data);
-  client.publish("T8", data);
+  client.publish("Topic/LightD", data);
 };

@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getDevice, setDevice } from "../../actions/device";
+import { getDevice, toggleDevice } from "../../actions/device";
 import moment from "moment";
 
 class Device extends Component {
   toggleDevice = (e) => {
     // Trigger message
-    this.props.setDevice(this.props.device_id, e.target.checked ? 2 : 0);
+    this.props.toggleDevice(this.props.device_id, e.target.checked ? 2 : 0);
     this.props.updateArea();
     this.setState({
       deviceStatus: e.target.checked,
@@ -72,6 +72,7 @@ class Device extends Component {
               ></input>
               <span className="slider round"></span>
             </label>
+            {/* Slider goes here*/}
           </div>
           <span className="device-history-title">HISTORIES</span>
           <div className="device-history-content">
@@ -105,7 +106,7 @@ class Device extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDevice, setDevice }, dispatch);
+  return bindActionCreators({ getDevice, toggleDevice }, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(Device));

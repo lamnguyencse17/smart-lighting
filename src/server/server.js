@@ -22,7 +22,7 @@ mongoose.connect(data_uri, {
 });
 
 const client = setClient("mqtt://23.97.56.49");
-subscribeTo("T7");
+subscribeTo("Topic/Light");
 
 client.on("message", (topic, message) => {
   // message is Buffer

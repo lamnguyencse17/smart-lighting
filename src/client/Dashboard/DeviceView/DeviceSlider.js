@@ -3,13 +3,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 
 class DeviceSlider extends Component {
-  state = {
-    deviceIntensity: 0,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      deviceIntensity: 0,
+    };
+  }
 
   handleChange = (e, newValue) => {
     this.setState({ deviceIntensity: newValue });
-    console.log(newValue);
+    //TODO: debounce 5s console.log
   };
 
   PrettoSlider = withStyles({
