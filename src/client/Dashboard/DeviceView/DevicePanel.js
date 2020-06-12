@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, setDevice } from "../../actions/device";
+import DeviceSlider from "./DeviceSlider";
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -60,6 +61,9 @@ class DevicePanel extends Component {
             ></input>
             <span className="slider round"></span>
           </label>
+        </div>
+        <div className="device-toggle">
+          <DeviceSlider />
         </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
