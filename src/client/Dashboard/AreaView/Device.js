@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, setDevice } from "../../actions/device";
+import moment from "moment";
 
 class Device extends Component {
   toggleDevice = (e) => {
@@ -77,12 +78,17 @@ class Device extends Component {
             <ul>
               {Object.keys(deviceHistory).map((index) => {
                 let device = deviceHistory[index];
-                let date = new Date(device.date);
+                let date = moment(new Date(device.date));
+                let split = date.toString().split(" ", 5);
+                let dates = {
+                  time: split[4],
+                  day: split[2],
+                  month: split[1],
+                  year: split[3],
+                };
                 return (
                   <li key={index} className="device-history-item">
-                    {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
-                      date.getUTCMonth() + 1
-                    }/${date.getFullYear()}`}
+                    {`${dates.time} - ${dates.day}/${dates.month}/${dates.year}`}
                     <br></br>
                     {device.value == 2 ? "Turned ON" : "Turned OFF"}
                     <br></br>
