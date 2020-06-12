@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getDevice, setDevice } from "../../actions/device";
+import { getDevice, toggleDevice } from "../../actions/device";
+import DeviceSlider from "./DeviceSlider";
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class DevicePanel extends Component {
     }
   }
   toggleDevice = (e) => {
-    this.props.setDevice(this.props.device_id, e.target.checked ? 2 : 0);
+    this.props.toggleDevice(this.props.device_id, e.target.checked ? 2 : 0);
     this.setState({
       deviceStatus: e.target.checked,
     });
@@ -60,6 +61,9 @@ class DevicePanel extends Component {
             ></input>
             <span className="slider round"></span>
           </label>
+        </div>
+        <div className="device-toggle">
+          <DeviceSlider />
         </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
@@ -87,7 +91,7 @@ class DevicePanel extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getDevice, setDevice }, dispatch);
+  return bindActionCreators({ getDevice, toggleDevice }, dispatch);
 }
 
 export default withRouter(connect(null, mapDispatchToProps)(DevicePanel));

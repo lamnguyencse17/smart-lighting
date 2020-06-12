@@ -9,6 +9,7 @@ export const deviceSchema = new Devices({
     {
       date: { type: Date, required: true },
       value: { type: Number, required: true },
+      // TODO: fix to isOn - bool and value - number
     },
   ],
 });
@@ -30,7 +31,6 @@ deviceSchema.statics.updateToDeviceId = function (device_id, value) {
 
 deviceSchema.statics.createDevice = async function (deviceDetails) {
   let { name, device_id } = deviceDetails;
-  //TODO
   let result = await this.create({ name, device_id });
   result = result.toObject();
   delete result.__v;
@@ -38,12 +38,13 @@ deviceSchema.statics.createDevice = async function (deviceDetails) {
 };
 
 deviceSchema.statics.updateDevice = async function (deviceDetails) {
-  let { device_id, value } = deviceDetails;
+  let { device_id, value } = deviceDetails; // destructured it out here too
   let result = this.findOneAndUpdate(
     { device_id },
     {
       $push: {
         history: {
+          // TODO: and update here to
           date: Date.now(),
           value: value,
         },
