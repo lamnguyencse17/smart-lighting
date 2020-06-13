@@ -15,7 +15,7 @@ class DevicePanel extends Component {
   componentDidMount() {
     let history = this.props.deviceHistory;
     if (
-      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+      history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
       this.setState({ deviceStatus: true });
     } else {
@@ -25,7 +25,7 @@ class DevicePanel extends Component {
   componentDidUpdate() {
     let history = this.props.deviceHistory;
     let length = Object.keys(history).length;
-    if (history[Object.keys(history)[length - 1]].value == 2) {
+    if (history[Object.keys(history)[length - 1]].value > 0) {
       if (this.state.deviceStatus == false) {
         this.setState({ deviceStatus: true });
       }
