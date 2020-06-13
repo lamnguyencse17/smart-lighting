@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import moment from "moment";
 
 const Sensors = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -34,12 +35,13 @@ sensorSchema.statics.createSensor = async function (sensorDetails) {
 
 sensorSchema.statics.updateSensor = function (sensorDetails) {
   let { device_id, value } = sensorDetails;
+  let now = moment().toString(); // get local time
   let result = this.findOneAndUpdate(
     { device_id },
     {
       $push: {
         readings: {
-          date: Date.now().toString(),
+          date: now,
           value: value,
         },
       },

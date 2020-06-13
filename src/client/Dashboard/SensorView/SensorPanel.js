@@ -6,7 +6,9 @@ class SensorPanel extends Component {
   }
   render() {
     let { readings, latestReadings } = this.props;
+    console.log(latestReadings)
     let latestDate = new Date(latestReadings.date);
+    console.log(latestDate)
     return (
       <div className="sensor-content">
         <div className="sensor-row">
