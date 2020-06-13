@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
+import DeviceModal from "./DeviceModal"
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -64,6 +65,9 @@ class DevicePanel extends Component {
         </div>
         <div className="device-toggle">
           <DeviceSlider device_id={this.props.device_id} />
+        </div>
+        <div className="device-schedule">
+          <DeviceModal/>
         </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
