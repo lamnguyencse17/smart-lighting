@@ -8,7 +8,7 @@ import moment from "moment";
 class Device extends Component {
   adjustDevice = (e) => {
     // Trigger message
-    this.props.adjustDevice(this.props.device_id, e.target.checked ? 2 : 0);
+    this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.props.updateArea();
     this.setState({
       deviceStatus: e.target.checked,
@@ -29,7 +29,7 @@ class Device extends Component {
     }, 15000);
     let history = this.props.deviceHistory;
     if (
-      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+      history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
       this.setState({ deviceStatus: true });
     } else {
@@ -39,7 +39,7 @@ class Device extends Component {
   componentDidUpdate() {
     let history = this.props.deviceHistory;
     if (
-      history[Object.keys(history)[Object.keys(history).length - 1]].value == 2
+      history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
       if (this.state.deviceStatus == false) {
         this.setState({ deviceStatus: true });
