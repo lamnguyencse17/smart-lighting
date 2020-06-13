@@ -7,11 +7,10 @@ import Schedule from "./ModalComponents/Schedule";
 import Toggler from "./ModalComponents/Toggler"
 
 class DeviceModal extends Component {
-      active : this.props.Active,
   constructor(props) {
     super(props);
     this.state = {
-      active : this.props.Active,
+      active : this.props.active,
       schedule: '',
       isOn: false,
       value: 0,
