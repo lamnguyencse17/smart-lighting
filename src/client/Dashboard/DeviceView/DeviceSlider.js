@@ -19,7 +19,7 @@ class DeviceSlider extends Component {
     (value) => this.props.adjustDevice(this.props.device_id, value),
     3000
   );
-
+    
   handleChange = (e, newValue) => {
     this.setState({ deviceIntensity: newValue });
     this.handleSliderDebounce(newValue);
