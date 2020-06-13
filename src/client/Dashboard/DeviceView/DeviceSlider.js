@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
+import { debounce } from "lodash";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { adjustDevice } from "../../actions/device";
 
 class DeviceSlider extends Component {
   constructor(props) {
@@ -10,9 +15,14 @@ class DeviceSlider extends Component {
     };
   }
 
+  handleSliderDebounce = debounce(
+    (value) => this.props.adjustDevice(this.props.device_id, value),
+    3000
+  );
+
   handleChange = (e, newValue) => {
     this.setState({ deviceIntensity: newValue });
-    //TODO: debounce 5s console.log
+    this.handleSliderDebounce(newValue);
   };
 
   PrettoSlider = withStyles({
@@ -59,4 +69,8 @@ class DeviceSlider extends Component {
   }
 }
 
-export default DeviceSlider;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ adjustDevice }, dispatch);
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(DeviceSlider));

@@ -7,6 +7,7 @@ const initialState = JSON.parse(localStorage.getItem("user")) || {
   sensors: {},
   name: "",
   email: "",
+  token: "",
 };
 
 export default function (state = initialState, action) {

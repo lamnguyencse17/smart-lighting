@@ -1,4 +1,4 @@
-import { GET_DEVICE, TOGGLE_DEVICE } from "./types";
+import { GET_DEVICE, ADJUST_DEVICE } from "./types";
 import axios from "axios";
 
 const arrayToObject = (arr) => {
@@ -22,11 +22,16 @@ export const getDevice = (deviceId) => (dispatch) => {
     });
 };
 
-export const toggleDevice = (device_id, value) => (dispatch) => {
+export const adjustDevice = (device_id, value) => (dispatch) => {
+  let isOn = 0;
+  if (value > 0) {
+    isOn = 1;
+  }
   axios
     .post("http://localhost:3000/api/actions/sendCommand", {
       device_id,
       value,
+      isOn,
     })
     .then((result, err) => {
       if (err) {
@@ -36,7 +41,7 @@ export const toggleDevice = (device_id, value) => (dispatch) => {
           ...result.data,
           history: arrayToObject(result.data.history),
         };
-        dispatch({ type: TOGGLE_DEVICE, payload: data });
+        dispatch({ type: ADJUST_DEVICE, payload: data });
       }
     });
 };
