@@ -4,13 +4,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
+import DeviceModal from "./DeviceModal"
 
 class DevicePanel extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
       deviceStatus: false,
+      modalActive: false,
     };
+    this.showModal = this.showModal.bind(this);
+    this.modalCloseHandler = this.modalCloseHandler.bind(this);
   }
   componentDidMount() {
     let history = this.props.deviceHistory;
@@ -34,6 +39,13 @@ class DevicePanel extends Component {
         this.setState({ deviceStatus: false });
       }
     }
+  }
+  showModal(){
+    this.setState({ modalActive: true });
+    
+  }
+  modalCloseHandler(){
+    this.setState({ modalActive: false });
   }
   adjustDevice = (e) => {
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
@@ -65,6 +77,9 @@ class DevicePanel extends Component {
         <div className="device-toggle">
           <DeviceSlider device_id={this.props.device_id} />
         </div>
+        <div className="device-schedule">
+          <DeviceModal active={this.state.modalActive} action={this.modalCloseHandler} Schedule/>
+        </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
           <ul>
@@ -84,7 +99,7 @@ class DevicePanel extends Component {
             })}
           </ul>
         </div>
-        <button className="add-device-schedule">New Schedule</button>
+        <button className="add-device-schedule" onClick={this.showModal} >New Schedule</button>
       </div>
     );
   }
