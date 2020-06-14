@@ -665,7 +665,6 @@ input:checked + .slider:before {
   text-align: center;
   background-color: #5f8a88;
 }
-
 .about-video{
   height:100%;
   width:100%;
