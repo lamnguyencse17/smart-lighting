@@ -1,6 +1,5 @@
 import express from "express";
 import scheduleModel from "../../models/schedules";
-import moment from "moment";
 
 const router = express.Router();
 
@@ -18,7 +17,7 @@ router.post("/", async (req, res) => {
     value,
     device_id,
   });
-  res.status(200).json({});
+  res.status(200).json(result);
 });
 
 router.delete("/", async (req, res) => {
