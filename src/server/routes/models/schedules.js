@@ -1,5 +1,6 @@
 import express from "express";
 import scheduleModel from "../../models/schedules";
+import moment from "moment";
 
 const router = express.Router();
 
@@ -10,9 +11,14 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let { date, on, target_devices } = req.body;
-  let result = await scheduleModel.createSchedule({ date, on, target_devices });
-  res.status(200).json(result);
+  let { schedule, isOn, value, device_id } = req.body;
+  let result = await scheduleModel.createSchedule({
+    schedule,
+    isOn,
+    value,
+    device_id,
+  });
+  res.status(200).json({});
 });
 
 router.delete("/", async (req, res) => {

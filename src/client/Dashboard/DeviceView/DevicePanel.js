@@ -4,18 +4,15 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
-import DeviceModal from "./DeviceModal"
+import DeviceModal from "./DeviceModal";
 
 class DevicePanel extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       deviceStatus: false,
       modalActive: false,
     };
-    this.showModal = this.showModal.bind(this);
-    this.modalCloseHandler = this.modalCloseHandler.bind(this);
   }
   componentDidMount() {
     let history = this.props.deviceHistory;
@@ -40,14 +37,13 @@ class DevicePanel extends Component {
       }
     }
   }
-  showModal(){
+  showModal = () => {
     this.setState({ modalActive: true });
-    
-  }
-  modalCloseHandler(){
+  };
+  closeModal = () => {
     this.setState({ modalActive: false });
-  }
-  adjustDevice = (e) => {
+  };
+  handleAdjust = (e) => {
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.setState({
       deviceStatus: e.target.checked,
@@ -68,7 +64,7 @@ class DevicePanel extends Component {
           <label className="switch">
             <input
               type="checkbox"
-              onChange={this.adjustDevice}
+              onChange={this.handleAdjust}
               checked={this.state.deviceStatus}
             ></input>
             <span className="slider round"></span>
@@ -78,7 +74,13 @@ class DevicePanel extends Component {
           <DeviceSlider device_id={this.props.device_id} />
         </div>
         <div className="device-schedule">
-          <DeviceModal active={this.state.modalActive} action={this.modalCloseHandler} Schedule/>
+          <DeviceModal
+            device_id={this.props.device_id}
+            active={this.state.modalActive}
+            closeModal={() => {
+              this.setState({ modalActive: false });
+            }}
+          />
         </div>
         <span className="device-history-title">HISTORIES</span>
         <div className="device-history-content">
@@ -99,7 +101,9 @@ class DevicePanel extends Component {
             })}
           </ul>
         </div>
-        <button className="add-device-schedule" onClick={this.showModal} >New Schedule</button>
+        <button className="add-device-schedule" onClick={this.showModal}>
+          New Schedule
+        </button>
       </div>
     );
   }

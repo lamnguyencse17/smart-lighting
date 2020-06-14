@@ -658,10 +658,10 @@ input:checked + .slider:before {
   display: block;
 }
 
-.schedule-popup{
-  width:400px;
-  margin:auto;
-  margin-top:40%;
+.schedule-popup {
+  width: 400px;
+  margin: auto;
+  margin-top: 20%;
   text-align: center;
   background-color: #5f8a88;
 }
