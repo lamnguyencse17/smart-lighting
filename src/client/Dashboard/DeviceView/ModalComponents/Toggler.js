@@ -15,8 +15,6 @@ class Toggler extends Component {
         this.props.action(this.state.isOn);
     };
 
-    
-
     render() {
         return (
             <div className="device-toggle">
