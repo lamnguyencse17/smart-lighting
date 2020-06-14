@@ -4,10 +4,11 @@ const Schedules = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 export const scheduleSchema = new Schedules({
-  date: { type: Date, required: true },
+  schedule: { type: Date, required: true },
   isOn: { type: Boolean, required: true },
-  done: { type: Boolean, required: true, default: false },
-  target_devices: [{ type: ObjectId, ref: "Devices" }],
+  value: { type: Number, requires: true },
+  done: { type: Boolean, default: false },
+  device_id: { type: String },
 });
 
 scheduleSchema.statics.readScheduleById = async function (id) {
@@ -17,8 +18,8 @@ scheduleSchema.statics.readScheduleById = async function (id) {
 };
 
 scheduleSchema.statics.createSchedule = async function (scheduleDetails) {
-  let { date, isOn, target_devices } = sensorDetails;
-  let result = await this.create({ date, isOn, target_devices });
+  let { schedule, isOn, value, device_id } = scheduleDetails;
+  let result = await this.create({ schedule, isOn, device_id, value });
   result = result.toObject();
   delete result.__v;
   return result;
