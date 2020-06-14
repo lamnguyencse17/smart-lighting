@@ -1,14 +1,25 @@
 import React, { Component } from "react";
+import SensorModal from "./SensorModal";
 
 class SensorPanel extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      modalActive: false,
+    };
   }
+
+  showModal = () => {
+    this.setState({ modalActive: true });
+  };
+  closeModal = () => {
+    this.setState({ modalActive: false });
+  };
   render() {
     let { readings, latestReadings } = this.props;
-    console.log(latestReadings)
+    console.log(latestReadings);
     let latestDate = new Date(latestReadings.date);
-    console.log(latestDate)
+    console.log(latestDate);
     return (
       <div className="sensor-content">
         <div className="sensor-row">
@@ -44,6 +55,14 @@ class SensorPanel extends Component {
           <div className="sensor-column sensor-column-2">
             <div className="sensor-graph"></div>
           </div>
+          <div className="device-schedule">
+            <SensorModal
+              active={this.state.modalActive}
+              closeModal={() => {
+                this.setState({ modalActive: false });
+              }}
+            />
+          </div>
           <div className="sensor-column sensor-column-3">
             <span className="sensor-trigger-title">TRIGGER CONDITIONS</span>
             <div className="sensor-trigger-content">
@@ -63,7 +82,9 @@ class SensorPanel extends Component {
                   <span>Garage Light 1</span>
                 </li>
               </ul>
-              <button className="add-sensor-trigger">New Trigger</button>
+              <button className="add-sensor-trigger" onClick={this.showModal}>
+                New Trigger
+              </button>
             </div>
           </div>
         </div>
