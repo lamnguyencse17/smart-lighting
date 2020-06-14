@@ -23,9 +23,9 @@ export const getDevice = (deviceId) => (dispatch) => {
 };
 
 export const adjustDevice = (device_id, value) => (dispatch) => {
-  let isOn = 0;
+  let isOn = false;
   if (value > 0) {
-    isOn = 1;
+    isOn = true;
   }
   axios
     .post("http://localhost:3000/api/actions/sendCommand", {

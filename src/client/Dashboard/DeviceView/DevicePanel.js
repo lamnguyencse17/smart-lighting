@@ -51,8 +51,40 @@ class DevicePanel extends Component {
   handleAdjust = (e) => {
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.setState({
+      ...this.state,
       deviceStatus: e.target.checked,
     });
+  };
+  setSliderValue = (value) => {
+    if (this.state.deviceStatus) {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    } else {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    }
   };
   render() {
     let { deviceHistory } = this.props;
@@ -76,7 +108,11 @@ class DevicePanel extends Component {
           </label>
         </div>
         <div className="device-toggle">
-          <DeviceSlider device_id={this.props.device_id} />
+          <DeviceSlider
+            device_id={this.props.device_id}
+            deviceIntensity={this.state.sliderValue}
+            setSliderValue={this.setSliderValue}
+          />
         </div>
         <div className="device-schedule">
           <DeviceModal

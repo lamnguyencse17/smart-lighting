@@ -9,7 +9,7 @@ export const deviceSchema = new Devices({
     {
       date: { type: Date, required: true },
       value: { type: Number, required: true },
-      isOn:{type: Boolean, required:true},
+      isOn: { type: Boolean, required: true },
     },
   ],
 });
@@ -20,10 +20,18 @@ deviceSchema.statics.readDeviceById = async function (id) {
   return result;
 };
 
-deviceSchema.statics.updateToDeviceId = function (device_id, value) {
+deviceSchema.statics.updateToDeviceId = function (device_id, value, isOn) {
   let result = this.findOneAndUpdate(
     { device_id },
-    { $push: { history: { date: Date.now(), value } } },
+    {
+      $push: {
+        history: {
+          date: Date.now(),
+          value: value,
+          isOn: isOn,
+        },
+      },
+    },
     { new: true }
   );
   return result;
@@ -35,34 +43,6 @@ deviceSchema.statics.createDevice = async function (deviceDetails) {
   result = result.toObject();
   delete result.__v;
   return result;
-};
-
-deviceSchema.statics.updateDevice = async function (deviceDetails) {
-  let { device_id, value, isOn } = deviceDetails;
-  let result = this.findOneAndUpdate(
-    { device_id },
-    {
-      $push: {
-        history: {
-          // TODO: and update here to
-          date: Date.now(),
-          value: value,
-          isOn: isOn,
-        },
-      },
-    },
-    { new: true }
-  )
-    .exec()
-    .then((err, doc) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(doc);
-        return doc;
-      }
-    });
-  console.log(result);
 };
 
 deviceSchema.statics.deleteDevice = async function (id) {

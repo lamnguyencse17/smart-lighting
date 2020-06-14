@@ -4,20 +4,20 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import moment from "moment";
+import AreaViewSlider from "./AreaViewSlider";
 
 class Device extends Component {
   adjustDevice = (e) => {
     // Trigger message
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.props.updateArea();
-    this.setState({
-      deviceStatus: e.target.checked,
-    });
+    this.setState({ ...this.state, deviceStatus: e.target.checked });
   };
   constructor(props) {
     super(props);
     this.state = {
       deviceStatus: false,
+      sliderValue: 0,
     };
   }
   componentWillUnmount() {
@@ -31,9 +31,9 @@ class Device extends Component {
     if (
       history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
-      this.setState({ deviceStatus: true });
+      this.setState({ ...this.state, deviceStatus: true });
     } else {
-      this.setState({ deviceStatus: false });
+      this.setState({ ...this.state, deviceStatus: false });
     }
   }
   componentDidUpdate() {
@@ -42,14 +42,52 @@ class Device extends Component {
       history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
       if (this.state.deviceStatus == false) {
-        this.setState({ deviceStatus: true });
+        this.setState({ ...this.state, deviceStatus: true });
       }
     } else {
       if (this.state.deviceStatus == true) {
-        this.setState({ deviceStatus: false });
+        this.setState({ ...this.state, deviceStatus: false });
       }
     }
   }
+  handleAdjust = (e) => {
+    this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
+    this.setState({
+      ...this.state,
+      deviceStatus: e.target.checked,
+    });
+  };
+  setSliderValue = (value) => {
+    if (this.state.deviceStatus) {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    } else {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    }
+  };
   render() {
     let { index, deviceName, deviceHistory } = this.props;
     return (
@@ -72,7 +110,13 @@ class Device extends Component {
               ></input>
               <span className="slider round"></span>
             </label>
-            {/* Slider goes here*/}
+            <div className="device-toggle">
+              <AreaViewSlider
+                device_id={this.props.device_id}
+                deviceIntensity={this.state.sliderValue}
+                setSliderValue={this.setSliderValue}
+              />
+            </div>
           </div>
           <span className="device-history-title">HISTORIES</span>
           <div className="device-history-content">

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post("/sendCommand", async (req, res) => {
   let { device_id, value, isOn } = req.body;
-  let values = [isOn, value];
+  let values = [isOn ? "1" : "0", `${value}`];
   publishTo({
     device_id,
     values,
