@@ -12,16 +12,21 @@ class DevicePanel extends Component {
     this.state = {
       deviceStatus: false,
       modalActive: false,
+      sliderValue: 0,
     };
   }
   componentDidMount() {
     let history = this.props.deviceHistory;
-    if (
-      history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
-    ) {
-      this.setState({ deviceStatus: true });
+    let latestIndex = Object.keys(history).length - 1;
+    let latestKey = Object.keys(history)[latestIndex];
+    if (history[latestKey].value > 0) {
+      this.setState({
+        ...this.state,
+        deviceStatus: true,
+        sliderValue: history[latestKey].value,
+      });
     } else {
-      this.setState({ deviceStatus: false });
+      this.setState({ ...this.state, deviceStatus: false, sliderValue: 0 });
     }
   }
   componentDidUpdate() {
@@ -29,19 +34,19 @@ class DevicePanel extends Component {
     let length = Object.keys(history).length;
     if (history[Object.keys(history)[length - 1]].value > 0) {
       if (this.state.deviceStatus == false) {
-        this.setState({ deviceStatus: true });
+        this.setState({ ...this.state, deviceStatus: true });
       }
     } else {
       if (this.state.deviceStatus == true) {
-        this.setState({ deviceStatus: false });
+        this.setState({ ...this.state, deviceStatus: false });
       }
     }
   }
   showModal = () => {
-    this.setState({ modalActive: true });
+    this.setState({ ...this.state, modalActive: true });
   };
   closeModal = () => {
-    this.setState({ modalActive: false });
+    this.setState({ ...this.state, modalActive: false });
   };
   handleAdjust = (e) => {
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
