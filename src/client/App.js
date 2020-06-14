@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Dashboard from "./Dashboard/Dashboard";
 import Navbar from "./Common/Navbar";
+import About from "./About"
 
 export default class App extends Component {
   constructor() {

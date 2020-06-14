@@ -658,10 +658,28 @@ input:checked + .slider:before {
   display: block;
 }
 
-.schedule-popup{
-  width:400px;
-  margin:auto;
-  margin-top:40%;
+.schedule-popup {
+  width: 400px;
+  margin: auto;
+  margin-top: 20%;
   text-align: center;
   background-color: #5f8a88;
+}
+
+.about-video{
+  height:100%;
+  width:100%;
+  position: absolute;
+}
+
+.about-animation{
+  font-size: 400%;
+  text-align: center;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+  transform: translate(0%, 100%);
+  padding: 0.25vh 0;
+  margin: auto;
+  height: 30vh;
+  top: 30vh;
 }
