@@ -9,7 +9,6 @@ export const deviceSchema = new Devices({
     {
       date: { type: Date, required: true },
       value: { type: Number, required: true },
-      // TODO: fix to isOn - bool and value - number
       isOn:{type: Boolean, required:true},
     },
   ],
@@ -39,7 +38,7 @@ deviceSchema.statics.createDevice = async function (deviceDetails) {
 };
 
 deviceSchema.statics.updateDevice = async function (deviceDetails) {
-  let { device_id, value, isOn } = deviceDetails; // destructured it out here too
+  let { device_id, value, isOn } = deviceDetails;
   let result = this.findOneAndUpdate(
     { device_id },
     {
