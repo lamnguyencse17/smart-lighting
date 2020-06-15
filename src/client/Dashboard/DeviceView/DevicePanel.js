@@ -5,6 +5,8 @@ import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
 import DeviceModal from "./DeviceModal";
+import DeviceHistory from "./DeviceHistory"
+import DeviceSchedule from "./DeviceSchedule"
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -50,7 +52,9 @@ class DevicePanel extends Component {
     });
   };
   render() {
-    let { deviceHistory } = this.props;
+    let {deviceSchedule,deviceHistory} = this.props;
+    //REMOVE WHEN SCHEDULE IS IMPLEMENTED, FOR TESTING PURPOSES
+    deviceSchedule = this.props.deviceHistory;
     return (
       <div className="device-content">
         <div className="device-status-container">
@@ -82,28 +86,8 @@ class DevicePanel extends Component {
             }}
           />
         </div>
-        <span className="device-history-title">HISTORIES</span>
-        <div className="device-history-content">
-          <ul>
-            {Object.keys(deviceHistory).map((index) => {
-              let device = deviceHistory[index];
-              let date = new Date(device.date);
-              return (
-                <li className="device-history-item" key={index}>
-                  {`${date.getUTCHours()}:${date.getUTCMinutes()} - ${date.getUTCDate()}/${
-                    date.getUTCMonth() + 1
-                  }/${date.getFullYear()}`}
-                  <br></br>
-                  {device.value == 2 ? "Turned On" : "Turned OFF"}
-                  <br></br>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <button className="add-device-schedule" onClick={this.showModal}>
-          New Schedule
-        </button>
+        <DeviceHistory history={deviceHistory}/>
+        <DeviceSchedule schedule={deviceSchedule} onAddSchedule={this.showModal}/>
       </div>
     );
   }
