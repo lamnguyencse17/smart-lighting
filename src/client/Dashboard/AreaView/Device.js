@@ -4,20 +4,26 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import moment from "moment";
+import AreaViewSlider from "./AreaViewSlider";
 
 class Device extends Component {
-  adjustDevice = (e) => {
+  handleAdjust = (e) => {
     // Trigger message
     this.props.adjustDevice(this.props.device_id, e.target.checked ? 255 : 0);
     this.props.updateArea();
     this.setState({
+      ...this.state,
       deviceStatus: e.target.checked,
+      sliderValue: e.target.checked ? 255 : 0,
     });
   };
   constructor(props) {
     super(props);
+    let initialValue =
+      props.deviceHistory[props.deviceHistory.length - 1].value;
     this.state = {
-      deviceStatus: false,
+      deviceStatus: initialValue > 0 ? true : false,
+      sliderValue: 0,
     };
   }
   componentWillUnmount() {
@@ -31,9 +37,19 @@ class Device extends Component {
     if (
       history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
-      this.setState({ deviceStatus: true });
+      this.setState({
+        ...this.state,
+        deviceStatus: true,
+        sliderValue:
+          history[Object.keys(history)[Object.keys(history).length - 1]].value,
+      });
     } else {
-      this.setState({ deviceStatus: false });
+      this.setState({
+        ...this.state,
+        deviceStatus: false,
+        sliderValue:
+          history[Object.keys(history)[Object.keys(history).length - 1]].value,
+      });
     }
   }
   componentDidUpdate() {
@@ -42,14 +58,45 @@ class Device extends Component {
       history[Object.keys(history)[Object.keys(history).length - 1]].value > 0
     ) {
       if (this.state.deviceStatus == false) {
-        this.setState({ deviceStatus: true });
+        this.setState({ ...this.state, deviceStatus: true });
       }
     } else {
       if (this.state.deviceStatus == true) {
-        this.setState({ deviceStatus: false });
+        this.setState({ ...this.state, deviceStatus: false });
       }
     }
   }
+  setSliderValue = (value) => {
+    if (this.state.deviceStatus) {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    } else {
+      if (value > 0) {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: true,
+        });
+      } else {
+        this.setState({
+          ...this.state,
+          sliderValue: value,
+          deviceStatus: false,
+        });
+      }
+    }
+  };
   render() {
     let { index, deviceName, deviceHistory } = this.props;
     return (
@@ -67,12 +114,18 @@ class Device extends Component {
             <label className="switch">
               <input
                 type="checkbox"
-                onChange={this.adjustDevice}
+                onChange={this.handleAdjust}
                 checked={this.state.deviceStatus}
               ></input>
               <span className="slider round"></span>
             </label>
-            {/* Slider goes here*/}
+            <div className="device-toggle">
+              <AreaViewSlider
+                device_id={this.props.device_id}
+                deviceIntensity={this.state.sliderValue}
+                setSliderValue={this.setSliderValue}
+              />
+            </div>
           </div>
           <span className="device-history-title">HISTORIES</span>
           <div className="device-history-content">
@@ -91,7 +144,7 @@ class Device extends Component {
                   <li key={index} className="device-history-item">
                     {`${dates.time} - ${dates.day}/${dates.month}/${dates.year}`}
                     <br></br>
-                    {device.value == 2 ? "Turned ON" : "Turned OFF"}
+                    {device.value > 0 ? "Turned ON" : "Turned OFF"}
                     <br></br>
                   </li>
                 );

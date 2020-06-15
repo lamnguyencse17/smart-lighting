@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { adjustDevice } from "../../actions/device";
 
-class DeviceSlider extends Component {
+class AreaViewSlider extends Component {
   constructor(props) {
     super(props);
   }
@@ -21,6 +21,11 @@ class DeviceSlider extends Component {
     this.props.setSliderValue(newValue);
     this.handleSliderDebounce(newValue);
   };
+
+  componentWillUpdate(nextProps) {
+    console.log(nextProps);
+    return true;
+  }
 
   PrettoSlider = withStyles({
     root: {
@@ -70,4 +75,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ adjustDevice }, dispatch);
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(DeviceSlider));
+export default withRouter(connect(null, mapDispatchToProps)(AreaViewSlider));

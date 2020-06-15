@@ -37,23 +37,20 @@ class AreaView extends Component {
                 sensors[index].readings.length - 1
               );
               let device_id = sensors[index].device_id;
-              if (latestReadings.date != "Invalid Date") {
-                return (
-                  <Sensor
-                    key={index}
-                    sensorName={sensorName}
-                    latestReadings={latestReadings}
-                    readings={readings}
-                    _id={index}
-                    device_id={device_id}
-                  />
-                );
-              }
+              return (
+                <Sensor
+                  key={index}
+                  sensorName={sensorName}
+                  latestReadings={latestReadings}
+                  readings={readings}
+                  _id={index}
+                  device_id={device_id}
+                />
+              );
             })
           ) : (
             <></>
           )}
-
           {this.props.areaName != "" ? (
             Object.keys(devices).map((index) => {
               let deviceName = devices[index].name;
