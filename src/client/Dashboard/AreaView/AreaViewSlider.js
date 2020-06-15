@@ -10,7 +10,6 @@ import { adjustDevice } from "../../actions/device";
 class AreaViewSlider extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   handleSliderDebounce = debounce(
@@ -22,6 +21,11 @@ class AreaViewSlider extends Component {
     this.props.setSliderValue(newValue);
     this.handleSliderDebounce(newValue);
   };
+
+  componentWillUpdate(nextProps) {
+    console.log(nextProps);
+    return true;
+  }
 
   PrettoSlider = withStyles({
     root: {
