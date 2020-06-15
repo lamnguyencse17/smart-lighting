@@ -682,3 +682,12 @@ input:checked + .slider:before {
   height: 30vh;
   top: 30vh;
 }
+
+.trigger-popup {
+  width: 500px;
+  margin: auto;
+  margin-top: 20%;
+  padding: 20px;
+  text-align: center;
+  background-color: #f3bb72;
+}
