@@ -1,15 +1,14 @@
 import sensorSchema from "../models/sensors";
-import deviceSchema from "../models/devices";
 
 const messageHandler = (message) => {
   message = JSON.parse(message);
-  let { device_id, value, isOn} = message;
-  // TODO: Update this to normal format
-  if (device_id == "LIGHT") {
+  message = message[0];
+  let { device_id, values } = message;
+  let value = parseInt(values[0]);
+  if (device_id == "Light") {
     sensorSchema.updateSensor({ device_id, value });
-  } else {
-    deviceSchema.updateDevice({ device_id, value, isOn});
   }
+  // update value later
 };
 
 export default messageHandler;
