@@ -5,8 +5,8 @@ import { bindActionCreators } from "redux";
 import { getDevice, adjustDevice } from "../../actions/device";
 import DeviceSlider from "./DeviceSlider";
 import DeviceModal from "./DeviceModal";
-import DeviceHistory from "./DeviceHistory"
-import DeviceSchedule from "./DeviceSchedule"
+import DeviceHistory from "./DeviceHistory";
+import DeviceSchedule from "./DeviceSchedule";
 
 class DevicePanel extends Component {
   constructor(props) {
@@ -55,6 +55,7 @@ class DevicePanel extends Component {
     this.setState({
       ...this.state,
       deviceStatus: e.target.checked,
+      sliderValue: e.target.checked ? 255 : 0,
     });
   };
   setSliderValue = (value) => {
@@ -89,7 +90,7 @@ class DevicePanel extends Component {
     }
   };
   render() {
-    let {deviceSchedule,deviceHistory} = this.props;
+    let { deviceSchedule, deviceHistory } = this.props;
     //REMOVE WHEN SCHEDULE IS IMPLEMENTED, FOR TESTING PURPOSES
     deviceSchedule = this.props.deviceHistory;
     return (
@@ -127,8 +128,11 @@ class DevicePanel extends Component {
             }}
           />
         </div>
-        <DeviceHistory history={deviceHistory}/>
-        <DeviceSchedule schedule={deviceSchedule} onAddSchedule={this.showModal}/>
+        <DeviceHistory history={deviceHistory} />
+        <DeviceSchedule
+          schedule={deviceSchedule}
+          onAddSchedule={this.showModal}
+        />
       </div>
     );
   }

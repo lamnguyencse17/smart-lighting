@@ -9,9 +9,6 @@ import moment from "moment";
 // import path from "path";
 // import dotenv from "dotenv";
 
-let test = moment().toString(); // get local time
-let testb = new Date(test); // convert to Date object
-
 const data_uri =
   "mongodb+srv://tri:team2447@cluster0-wrndr.azure.mongodb.net/smart-lighting?retryWrites=true&w=majority";
 // dotenv.config({ path: path.resolve(process.cwd(), ".env") });
