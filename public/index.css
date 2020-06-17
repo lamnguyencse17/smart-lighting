@@ -343,17 +343,20 @@ input:checked + .slider:before {
   background-color: #ff85a7;
 }
 
-.device-history-container, .device-schedule-container{
+.device-history-container,
+.device-schedule-container {
   width: 50%;
   float: left;
 }
 
-.device-history-title, .device-schedule-title {
+.device-history-title,
+.device-schedule-title {
   font-size: x-large;
   font-weight: bold;
 }
 
-.device-history-content, .device-schedule-content {
+.device-history-content,
+.device-schedule-content {
   margin: auto;
   margin-top: 10px;
   background-color: white;
@@ -363,11 +366,13 @@ input:checked + .slider:before {
   overflow: auto;
 }
 
-.device-history-content > ul, .device-schedule-content > ul{
+.device-history-content > ul,
+.device-schedule-content > ul {
   padding: 0;
 }
 
-.device-history-content > ul > li,  .device-schedule-content > ul > li{
+.device-history-content > ul > li,
+.device-schedule-content > ul > li {
   width: 100%;
   padding: 0;
   margin-top: 20px;
@@ -572,9 +577,9 @@ input:checked + .slider:before {
   padding-top: 1rem;
   padding-left: 2rem;
   overflow-x: auto;
-  overflow-y: scroll;
+  overflow-y: hidden;
   white-space: nowrap;
-  height: 90%;
+  height: 95%;
 }
 
 .dashboard .areaview .title {
@@ -590,7 +595,7 @@ input:checked + .slider:before {
   vertical-align: top;
   margin-right: 1.5rem;
   width: 18rem;
-  height: 40rem;
+  height: 45rem;
   background-color: #f3bb72;
   text-align: center;
 }
@@ -669,8 +674,7 @@ input:checked + .slider:before {
   .device-box
   .device-content
   .device-schedule-content
-  .device-schedule-item
-{
+  .device-schedule-item {
   width: 100%;
   display: block;
 }
@@ -682,13 +686,13 @@ input:checked + .slider:before {
   text-align: center;
   background-color: #5f8a88;
 }
-.about-video{
-  height:100%;
-  width:100%;
+.about-video {
+  height: 100%;
+  width: 100%;
   position: absolute;
 }
 
-.about-animation{
+.about-animation {
   font-size: 400%;
   text-align: center;
   font-weight: bold;
