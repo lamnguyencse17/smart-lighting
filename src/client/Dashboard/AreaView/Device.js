@@ -104,7 +104,7 @@ class Device extends Component {
         <div className="title">{deviceName}</div>
         <div className="device-content">
           <div className="device-status-container">
-            <span className="device-status-title"> status</span>
+            <span className="device-status-title"> Status</span>
             <br></br>
             <span className="device-status">
               {!this.state.deviceStatus ? "OFF" : "ON"}
@@ -142,7 +142,7 @@ class Device extends Component {
                 };
                 return (
                   <li key={index} className="device-history-item">
-                    {`${dates.time} - ${dates.day}/${dates.month}/${dates.year}`}
+                    {`${dates.day}/${dates.month}/${dates.year} - ${dates.time}`}
                     <br></br>
                     {device.value > 0 ? "Turned ON" : "Turned OFF"}
                     <br></br>

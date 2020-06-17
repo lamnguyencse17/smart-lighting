@@ -35,6 +35,7 @@ sensorSchema.statics.createSensor = async function (sensorDetails) {
 
 sensorSchema.statics.updateSensor = function (sensorDetails) {
   let { device_id, value } = sensorDetails;
+  console.log({ device_id, value });
   let now = moment().toString(); // get local time
   let result = this.findOneAndUpdate(
     { device_id },
@@ -46,7 +47,7 @@ sensorSchema.statics.updateSensor = function (sensorDetails) {
         },
       },
     },
-    { new: true }
+    { new: true, upsert: true }
   ).exec();
 };
 

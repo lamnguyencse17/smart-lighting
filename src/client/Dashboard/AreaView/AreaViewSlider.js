@@ -29,7 +29,7 @@ class AreaViewSlider extends Component {
 
   PrettoSlider = withStyles({
     root: {
-      width: 300,
+      width: 200,
       color: "#ccc",
       height: 8,
     },
