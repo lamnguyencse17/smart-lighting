@@ -29,8 +29,10 @@ class Sensor extends Component {
       <div className="sensor-box" key={index}>
         <div className="title">{sensorName}</div>
         <div className="newest">
-          Newest Reading<br></br>
-          <h2>{`${latestReadings.date.time} - ${latestReadings.value}`}</h2>
+          Latest Reading<br></br>
+          <h2>{`Date: ${latestReadings.date.day}/${latestReadings.date.month}/${latestReadings.date.year}`}</h2>
+          <h2>{`Time: ${latestReadings.date.time}`}</h2>
+          <h2>{`Value: ${latestReadings.value}`}</h2>
         </div>
         <span className="sensor-history-title">HISTORIES</span>
         <div className="history">
@@ -45,10 +47,10 @@ class Sensor extends Component {
             };
             return (
               <div key={reading._id}>
-                {`${newDate.time}`} <br></br>
-                {`${newDate.day}/${newDate.month}/${newDate.year}`}
+                {`Date: ${newDate.day}/${newDate.month}/${newDate.year}`}<br></br>
+                {`Time: ${newDate.time}`}
                 <br></br>
-                {reading.value}
+                {`Value: ${reading.value}`}
               </div>
             );
           })}
