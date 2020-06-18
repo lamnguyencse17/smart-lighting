@@ -10,10 +10,10 @@ class SensorPanel extends Component {
   }
 
   showModal = () => {
-    this.setState({ modalActive: true });
+    this.setState({ ...this.state,modalActive: true });
   };
   closeModal = () => {
-    this.setState({ modalActive: false });
+    this.setState({ ...this.state,modalActive: false });
   };
   render() {
     let { readings, latestReadings } = this.props;
@@ -59,7 +59,7 @@ class SensorPanel extends Component {
             <SensorModal
               active={this.state.modalActive}
               closeModal={() => {
-                this.setState({ modalActive: false });
+                this.setState({ ...this.state,modalActive: false });
               }}
             />
           </div>

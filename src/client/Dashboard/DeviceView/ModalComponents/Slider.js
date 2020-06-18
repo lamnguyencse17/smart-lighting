@@ -13,7 +13,7 @@ class IntensitySlider extends Component {
       }
     
   handleChange = (e, newValue) => {
-    this.setState({ value: newValue });
+    this.setState({ ...this.state,value: newValue });
     this.props.action(newValue);
   };
 

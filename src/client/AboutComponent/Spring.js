@@ -10,7 +10,7 @@ export default class SpringComponent extends Component {
   }
 
   handleAnimationEnd = () =>{
-    this.setState({reverseAni: !this.state.reverseAni})
+    this.setState({...this.state,reverseAni: !this.state.reverseAni})
   }
   componentDidMount() {
     this.startInterval();
@@ -21,7 +21,7 @@ export default class SpringComponent extends Component {
   }
   render() {
     return (
-      <>
+      <>  
           <Spring
             from={{ opacity:  0 }}
             to={{ opacity: 1}}

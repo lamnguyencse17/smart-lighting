@@ -11,9 +11,9 @@ class About extends Component {
   }
 
   handleVideoEnd = () => {
-    this.setState({videPlaying: false});
+    this.setState({...this.state,videPlaying: false});
     setTimeout(function() {
-      this.setState({videPlaying: true});
+      this.setState({...this.state,videPlaying: true});
       this.refs.aboutVid.play();
     }.bind(this), 9000)
   }

@@ -11,7 +11,7 @@ class Toggler extends Component {
       }
     
     handleChange = (e) => {
-        this.setState({isOn: !this.state.isOn});
+        this.setState({...this.state,isOn: !this.state.isOn});
         this.props.action(this.state.isOn);
     };
 
