@@ -16,12 +16,12 @@ export default class ConditionSelecter extends Component {
   }
 
   handleConditionChange = (e) => {
-    this.setState({ condition: e.target.value });
+    this.setState({ ...this.state, condition: e.target.value });
     this.props.conditionAction(e.target.value);
   };
 
   handleValueChange = (e) => {
-    this.setState({ value: e.target.value });
+    this.setState({ ...this.state, value: e.target.value });
     this.props.valueAction(e.target.value);
   };
 

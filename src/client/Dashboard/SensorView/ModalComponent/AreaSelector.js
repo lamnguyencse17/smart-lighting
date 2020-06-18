@@ -14,8 +14,8 @@ export default class AreaSelecter extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ area: e.target.value });
-    this.props.action(e.target.value);
+    this.setState({ ...this.state, area: e.target.value });
+    this.props.changeArea(e.target.value);
   };
 
   useStyles = makeStyles((theme) => ({
@@ -45,9 +45,11 @@ export default class AreaSelecter extends Component {
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          <MenuItem value={1}>Area 1</MenuItem>
-          <MenuItem value={2}>Area 2</MenuItem>
-          <MenuItem value={3}>Area 3</MenuItem>
+          {Object.keys(this.props.areas).map((id, index) => {
+            <MenuItem value={index} key={id}>
+              {this.props.areas[id].name}
+            </MenuItem>;
+          })}
         </Select>
       </FormControl>
     );

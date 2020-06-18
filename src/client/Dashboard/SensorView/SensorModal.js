@@ -5,6 +5,9 @@ import Modal from "@material-ui/core/Modal";
 import ConditionSelector from "./ModalComponent/ConditionSelecter";
 import AreaSelector from "./ModalComponent/AreaSelector";
 import DeviceSelector from "./ModalComponent/DeviceSelector";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import axios from "axios";
 
 class SensorModal extends Component {
   constructor(props) {
@@ -27,26 +30,35 @@ class SensorModal extends Component {
   })(Button);
 
   handleValueChange = (e) => {
-    this.setState({ value: e });
+    this.setState({ ...this.state, value: e });
   };
 
   handleAreaChange = (e) => {
-    this.setState({ area: e });
+    this.setState({ ...this.state, area: e });
   };
 
   handleDeviceChange = (e) => {
-    this.setState({ device: e });
+    this.setState({ ...this.state, device: e });
   };
 
   handleConditionChange = (e) => {
-    this.setState({ condition: e });
+    this.setState({ ...this.state, condition: e });
   };
 
   handleDeviceStatusChange = (e) => {
-    this.setState({ deviceStatus: !this.deviceStatus });
+    this.setState({ ...this.state, deviceStatus: !this.deviceStatus });
   };
   setTriggerCondition = () => {
-    console.log(this.state);
+    let { condition, device, area, value, deviceStatus };
+    axios.post("http://localhost:3000/api/models/schedules", {
+      condition,
+      value,
+      isOn,
+      device,
+      area,
+      isOn: deviceStatus,
+    });
+    // Callback later
     this.props.closeModal();
   };
 
@@ -62,10 +74,14 @@ class SensorModal extends Component {
       >
         <div className="trigger-popup">
           <div className="device-toggle">
-            <AreaSelector action={this.handleAreaChange} />
+            <AreaSelector
+              changeArea={this.handleAreaChange}
+              areas={this.props.areas}
+            />
             <DeviceSelector
               deviceAction={this.handleDeviceChange}
               deviceStatusAction={this.handleDeviceStatusChange}
+              devices={this.props.devices}
             />
           </div>
           <ConditionSelector
@@ -83,4 +99,12 @@ class SensorModal extends Component {
   }
 }
 
-export default SensorModal;
+function mapStateToProps(state) {
+  return {
+    areas: state.user.areas,
+    devices: state.user.devices,
+    sensors: state.user.sensors,
+  };
+}
+
+export default withRouter(connect(mapStateToProps, null)(SensorModal));

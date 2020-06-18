@@ -15,12 +15,12 @@ export default class DeviceSelecter extends Component {
   }
 
   handleDeviceChange = (e) => {
-    this.setState({ device: e.target.value });
+    this.setState({ ...this.state, device: e.target.value });
     this.props.deviceAction(e.target.value);
   };
 
   handleStatusChange = (e) => {
-    this.setState({ deviceStatus: e.target.value });
+    this.setState({ ...this.state, deviceStatus: e.target.value });
     this.props.deviceStatusAction(e.target.value);
   };
 
@@ -52,9 +52,11 @@ export default class DeviceSelecter extends Component {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value={1}>Device 1</MenuItem>
-            <MenuItem value={2}>Device 2</MenuItem>
-            <MenuItem value={3}>Device 3</MenuItem>
+            {Object.keys(this.props.devices).map((id, index) => {
+              <MenuItem value={index} key={id}>
+                {this.props.devices[id].name}
+              </MenuItem>;
+            })}
           </Select>
         </FormControl>
         <FormControl className={this.classes.margin} style={{ minWidth: 20 }}>
