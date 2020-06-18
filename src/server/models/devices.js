@@ -22,7 +22,7 @@ deviceSchema.statics.readDeviceById = async function (id) {
 };
 
 deviceSchema.statics.getDeviceByDeviceId = async function (id) {
-  let result = await this.findOne({ device_id: mongoose.Types.ObjectId(id) })
+  let result = await this.findOne({ device_id: id })
   .populate({
     path: "conditions",
     select: "comparision isOn area device sensor _id",
