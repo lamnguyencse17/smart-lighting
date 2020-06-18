@@ -49,7 +49,7 @@ class SensorModal extends Component {
     this.setState({ ...this.state, deviceStatus: !this.deviceStatus });
   };
   setTriggerCondition = () => {
-    let { condition, device, area, value, deviceStatus };
+    let { condition, device, area, value, deviceStatus } = this.state;
     axios.post("http://localhost:3000/api/models/schedules", {
       condition,
       value,

@@ -62,5 +62,16 @@ deviceSchema.statics.deleteDevice = async function (id) {
   return result;
 };
 
+deviceSchema.statics.addConditions = async function (deviceId, conditionId) {
+  await this.updateOne(
+    { _id: mongoose.Types.ObjectId(deviceId) },
+    {
+      $push: {
+        conditions: conditionId,
+      },
+    }
+  );
+};
+
 const deviceModel = mongoose.model("Devices", deviceSchema);
 export default deviceModel;

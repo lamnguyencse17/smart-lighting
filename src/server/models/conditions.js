@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import deviceModel from "./devices";
 
 const Conditions = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -8,7 +9,7 @@ export const conditionSchema = new Conditions({
   isOn: { type: Boolean, required: true },
   area: { type: ObjectId, ref: "Areas" },
   device: { type: ObjectId, ref: "Devices" },
-  sensor: { type: ObjectId, ref: "Devices" },
+  sensor: { type: ObjectId, ref: "Sensors" },
 });
 
 conditionSchema.statics.readConditionById = async function (id) {
@@ -21,6 +22,7 @@ conditionSchema.statics.createCondition = async function (conditionDetails) {
   let { comparison, isOn, area, device } = conditionDetails;
   let result = await this.create({ comparison, isOn, area, device, sensor });
   result = result.toObject();
+  deviceModel.addCondition(device, result._id);
   delete result.__v;
   return result;
 };

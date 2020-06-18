@@ -7,10 +7,12 @@ const router = express.Router();
 router.post("/sendCommand", async (req, res) => {
   let { device_id, value, isOn } = req.body;
   let values = [isOn ? "1" : "0", `${value}`];
-  publishTo({
-    device_id,
-    values,
-  });
+  publishTo([
+    {
+      device_id,
+      values,
+    },
+  ]);
   let returnedValue = await deviceModel.updateToDeviceId(
     device_id,
     value,

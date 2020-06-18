@@ -52,8 +52,8 @@ export default class DeviceSelecter extends Component {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            {Object.keys(this.props.devices).map((id, index) => {
-              <MenuItem value={index} key={id}>
+            {Object.keys(this.props.devices).map((id) => {
+              <MenuItem value={this.props.devices[id]._id} key={id}>
                 {this.props.devices[id].name}
               </MenuItem>;
             })}
