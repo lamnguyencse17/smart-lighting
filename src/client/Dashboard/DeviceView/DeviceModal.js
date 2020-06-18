@@ -25,31 +25,31 @@ class DeviceModal extends Component {
   })(Button);
 
   handleChangeSchedule = (e) => {
-    this.setState({ schedule: e });
+    this.setState({ ...this.state, schedule: e });
   };
 
   handleChangeSlider = (e) => {
-    this.setState({ value: e });
+    this.setState({ ...this.state, value: e, isOn: e > 0 ? true : false });
   };
 
   handleChangeButton = (e) => {
-    this.setState({ isOn: !this.state.isOn });
+    this.setState({
+      ...this.state,
+      isOn: !this.state.isOn,
+      value: !this.state.isOn ? 255 : 0,
+    });
   };
 
   setSchedule = () => {
     if (this.state.schedule != "") {
       let { schedule, value, isOn } = this.state;
-      if (value == 0) {
-        isOn = false;
-      } else {
-        isOn = true;
-      }
       axios.post("http://localhost:3000/api/models/schedules", {
         schedule,
         value,
         isOn,
         device_id: this.props.device_id,
       });
+      // callback later
       this.props.closeModal();
     }
   };

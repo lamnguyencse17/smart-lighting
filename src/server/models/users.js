@@ -26,17 +26,17 @@ userSchema.statics.readUserByEmail = async function (email = "test@gmail.com") {
   let result = await this.findOne({ email })
     .populate({
       path: "areas",
-      select: "name",
+      select: "name _id",
       option: { lean: true },
     })
     .populate({
       path: "devices",
-      select: "name",
+      select: "name _id",
       option: { lean: true },
     })
     .populate({
       path: "sensors",
-      select: "name",
+      select: "name _id",
       option: { lean: true },
     })
     .lean();
