@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const Devices = mongoose.Schema;
-
+const ObjectId = mongoose.Schema.Types.ObjectId;
 export const deviceSchema = new Devices({
   name: { type: String, required: true },
   device_id: { type: String, required: true },
@@ -12,10 +12,21 @@ export const deviceSchema = new Devices({
       isOn: { type: Boolean, required: true },
     },
   ],
+  conditions: { type: ObjectId, ref: "Conditions" }
 });
 
 deviceSchema.statics.readDeviceById = async function (id) {
   let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
+  delete result.__v;
+  return result;
+};
+
+deviceSchema.statics.getDeviceByDeviceId = async function (device_id) {
+  let result = await this.findOne({ _id: mongoose.Types.ObjectId(device_id) })
+  .populate({
+    path: "conditions",
+    select: "comparision isOn area device sensor _id",
+  });
   delete result.__v;
   return result;
 };
