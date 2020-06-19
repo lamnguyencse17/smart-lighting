@@ -60,10 +60,10 @@ export default class ConditionSelecter extends Component {
   classes = this.useStyles;
   render() {
     return (
-      <div className="device-toggle">
+      <>
         <FormControl
           className={this.classes.margin}
-          style={{ minWidth: 200, minHeight: 8, marginRight: 5 }}
+          style={{ minWidth: 180, minHeight: 8, marginRight: 5 }}
         >
           <InputLabel shrink id="demo-simple-select-placeholder-label-label">
             Condition:
@@ -86,7 +86,7 @@ export default class ConditionSelecter extends Component {
             <MenuItem value={"<"}>Less Than</MenuItem>
           </Select>
         </FormControl>
-        <FormControl style={{ minWidth: 60, maxHeight: 9 }}>
+        <FormControl style={{ maxWidth: 50, maxHeight: 9 }}>
           <InputLabel shrink id="demo-simple-select-placeholder-label-label">
             Value:
           </InputLabel>
@@ -96,7 +96,7 @@ export default class ConditionSelecter extends Component {
             onChange={this.handleValueChange}
           />
         </FormControl>
-      </div>
+      </>
     );
   }
 }
