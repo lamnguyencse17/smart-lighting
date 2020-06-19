@@ -5,6 +5,7 @@ import Modal from "@material-ui/core/Modal";
 import ConditionSelector from "./ModalComponent/ConditionSelecter";
 import AreaSelector from "./ModalComponent/AreaSelector";
 import DeviceSelector from "./ModalComponent/DeviceSelector";
+import SensorSelector from "./ModalComponent/SensorSelector";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -16,6 +17,7 @@ class SensorModal extends Component {
       active: this.props.active,
       area: "",
       device: "",
+      sensor: "",
       value: 0,
       condition: "",
       deviceStatus: false,
@@ -43,6 +45,10 @@ class SensorModal extends Component {
 
   handleConditionChange = (e) => {
     this.setState({ ...this.state, condition: e });
+  };
+
+  handleSensorChange = (e) => {
+    this.setState({ ...this.state, sensor: e });
   };
 
   handleDeviceStatusChange = (e) => {
@@ -84,10 +90,16 @@ class SensorModal extends Component {
               devices={this.props.devices}
             />
           </div>
-          <ConditionSelector
-            conditionAction={this.handleConditionChange}
-            valueAction={this.handleValueChange}
-          />
+          <div className="device-toggle">
+            <SensorSelector
+              changeSensor={this.handleSensorChange}
+              sensors={this.props.sensors}
+            />
+            <ConditionSelector
+              conditionAction={this.handleConditionChange}
+              valueAction={this.handleValueChange}
+            />
+          </div>
           <div>
             <this.ButtonStyle onClick={this.setTriggerCondition}>
               Set
