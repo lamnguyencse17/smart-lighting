@@ -12,21 +12,11 @@ export const deviceSchema = new Devices({
       isOn: { type: Boolean, required: true },
     },
   ],
-  conditions: { type: ObjectId, ref: "Conditions" }
+  conditions: { type: ObjectId, ref: "Conditions" },
 });
 
 deviceSchema.statics.readDeviceById = async function (id) {
   let result = await this.findOne({ _id: mongoose.Types.ObjectId(id) }).lean();
-  delete result.__v;
-  return result;
-};
-
-deviceSchema.statics.getDeviceByDeviceId = async function (id) {
-  let result = await this.findOne({ device_id: id })
-  .populate({
-    path: "conditions",
-    select: "comparision isOn area device sensor _id",
-  });
   delete result.__v;
   return result;
 };
@@ -62,7 +52,7 @@ deviceSchema.statics.deleteDevice = async function (id) {
   return result;
 };
 
-deviceSchema.statics.addConditions = async function (deviceId, conditionId) {
+deviceSchema.statics.addCondition = async function (deviceId, conditionId) {
   await this.updateOne(
     { _id: mongoose.Types.ObjectId(deviceId) },
     {

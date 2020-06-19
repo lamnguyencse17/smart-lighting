@@ -25,6 +25,21 @@ sensorSchema.statics.readSensorById = async function (id) {
   return result;
 };
 
+sensorSchema.statics.getConditionsByDeviceId = async function (id) {
+  let result = await this.findOne({ device_id: id })
+    .populate({
+      path: "conditions",
+      select: "comparison isOn value sensorValue area device",
+    })
+    .populate({
+      path: "device",
+      select: "device_id",
+    })
+    .select("conditions");
+  delete result.__v;
+  return result;
+};
+
 sensorSchema.statics.createSensor = async function (sensorDetails) {
   let { name, device_id } = sensorDetails;
   let result = await this.create({ name, device_id });
@@ -49,6 +64,17 @@ sensorSchema.statics.updateSensor = function (sensorDetails) {
     },
     { new: true, upsert: true }
   ).exec();
+};
+
+sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
+  await this.updateOne(
+    { _id: mongoose.Types.ObjectId(deviceId) },
+    {
+      $push: {
+        conditions: conditionId,
+      },
+    }
+  );
 };
 
 sensorSchema.statics.deleteSensor = async function (id) {

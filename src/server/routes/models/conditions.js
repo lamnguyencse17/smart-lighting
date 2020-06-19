@@ -13,7 +13,9 @@ router.post("/", async (req, res) => {
   let { comparison, isOn, area, device, sensor } = req.body;
   let result = await conditionModel.createCondition({
     comparison,
+    sensorValue,
     isOn,
+    value,
     area,
     device,
     sensor,

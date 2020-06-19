@@ -1,12 +1,14 @@
 import mongoose from "mongoose";
-import deviceModel from "./devices";
+import deviceModel, { deviceSchema } from "./devices";
 
 const Conditions = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 export const conditionSchema = new Conditions({
-  comparison: { type: Number, required: true },
+  comparison: { type: Number, required: true }, // 0: equal 1: greater 2: smaller
   isOn: { type: Boolean, required: true },
+  value: { type: Number, required: true },
+  sensorValue: { type: Number, required: true },
   area: { type: ObjectId, ref: "Areas" },
   device: { type: ObjectId, ref: "Devices" },
   sensor: { type: ObjectId, ref: "Sensors" },
@@ -19,8 +21,24 @@ conditionSchema.statics.readConditionById = async function (id) {
 };
 
 conditionSchema.statics.createCondition = async function (conditionDetails) {
-  let { comparison, isOn, area, device } = conditionDetails;
-  let result = await this.create({ comparison, isOn, area, device, sensor });
+  let {
+    comparison,
+    isOn,
+    area,
+    device,
+    value,
+    sensor,
+    sensorValue,
+  } = conditionDetails;
+  let result = await this.create({
+    comparison,
+    sensorValue,
+    isOn,
+    value,
+    area: area ? area : null,
+    device: device ? device : null,
+    sensor: sensor ? sensor : null,
+  });
   result = result.toObject();
   deviceModel.addCondition(device, result._id);
   delete result.__v;
