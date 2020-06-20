@@ -19,7 +19,7 @@ class Sensor extends Component {
     let { index, sensorName, latestReadings, readings } = this.props;
     let strSplit = latestReadings.date.toString().split(" ", 5);
     let localReadings = [...readings];
-    let localLatestReadings = JSON.parse(JSON.stringify(latestReadings));
+    let localLatestReadings = {...latestReadings};
     localLatestReadings.date = {
       time: strSplit[4],
       day: strSplit[2],
