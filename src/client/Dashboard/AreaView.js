@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { getArea } from "../actions/area";
 import Sensor from "./AreaView/Sensor";
 import Device from "./AreaView/Device";
+import ErrorModal from "../ErrorModal"
 
 class AreaView extends Component {
   update = null;
@@ -23,7 +24,8 @@ class AreaView extends Component {
   render() {
     let { areaName, devices, sensors } = this.props;
     return (
-      <div className="dashboard">
+        <div className="dashboard">
+        <ErrorModal message={"Test Error in src/client/Dashboard/AreaView"} show={true} />
         <div className="areaview">
           <div className="title">{areaName}</div>
           {this.props.areaName != "" ? (
