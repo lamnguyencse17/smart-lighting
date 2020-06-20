@@ -18,25 +18,26 @@ class Sensor extends Component {
   render() {
     let { index, sensorName, latestReadings, readings } = this.props;
     let strSplit = latestReadings.date.toString().split(" ", 5);
-    latestReadings.date = {
+    let localReadings = [...readings];
+    let localLatestReadings = {...latestReadings};
+    localLatestReadings.date = {
       time: strSplit[4],
       day: strSplit[2],
       month: strSplit[1],
       year: strSplit[3],
     };
-
     return (
       <div className="sensor-box" key={index}>
         <div className="title">{sensorName}</div>
         <div className="newest">
           Latest Reading<br></br>
-          <h2>{`Date: ${latestReadings.date.day}/${latestReadings.date.month}/${latestReadings.date.year}`}</h2>
-          <h2>{`Time: ${latestReadings.date.time}`}</h2>
-          <h2>{`Value: ${latestReadings.value}`}</h2>
+          <h2>{`Date: ${localLatestReadings.date.day}/${localLatestReadings.date.month}/${localLatestReadings.date.year}`}</h2>
+          <h2>{`Time: ${localLatestReadings.date.time}`}</h2>
+          <h2>{`Value: ${localLatestReadings.value}`}</h2>
         </div>
         <span className="sensor-history-title">HISTORIES</span>
         <div className="history">
-          {readings.map((reading) => {
+          {localReadings.map((reading) => {
             let newDate = moment(new Date(reading.date));
             let split = newDate.toString().split(" ", 5);
             newDate = {
