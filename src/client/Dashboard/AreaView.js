@@ -6,6 +6,7 @@ import { getArea } from "../actions/area";
 import Sensor from "./AreaView/Sensor";
 import Device from "./AreaView/Device";
 
+
 class AreaView extends Component {
   update = null;
   componentDidMount() {

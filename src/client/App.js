@@ -4,7 +4,7 @@ import Home from "./Home";
 import Dashboard from "./Dashboard/Dashboard";
 import Navbar from "./Common/Navbar";
 import About from "./About";
-import ErrorModal from "./ErrorModal";
+import AlertModal from "./AlertModal";
 
 export default class App extends Component {
   constructor() {
@@ -15,7 +15,7 @@ export default class App extends Component {
     return (
       <>
         <Navbar />
-        <ErrorModal />
+        <AlertModal/>
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />

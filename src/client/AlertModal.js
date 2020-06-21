@@ -3,18 +3,18 @@ import Alert from "@material-ui/lab/Alert";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { closeError } from "./actions/error";
+import { closeAlert } from "./actions/alert";
 
-class ErrorModal extends Component {
+class AlertModal extends Component {
   render() {
-    let { message, show } = this.props;
+    let { message, show, status } = this.props;
     return (
       <>
         {show && (
           <Alert
-            onClose={this.props.closeError}
+            onClose={this.props.closeAlert}
             variant="filled"
-            severity="error"
+            severity={status==1 ? "success" : "error"}
           >
             {message}
           </Alert>
@@ -26,15 +26,16 @@ class ErrorModal extends Component {
 
 function mapStateToProps(state) {
   return {
-    message: state.error.msg,
-    show: state.error.show,
+    message: state.alert.msg,
+    show: state.alert.show,
+    status: state.alert.status
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ closeError }, dispatch);
+  return bindActionCreators({ closeAlert }, dispatch);
 }
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(ErrorModal)
+  connect(mapStateToProps, mapDispatchToProps)(AlertModal)
 );
