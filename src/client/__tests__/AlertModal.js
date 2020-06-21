@@ -9,7 +9,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe("Homepage Render", () => {
+describe("AlertModal Render", () => {
   let store, wrapper;
 
   beforeEach(() => {
