@@ -1,18 +1,20 @@
-import { SET_ERROR, CLOSE_ERROR } from "../actions/types";
+import { SET_ALERT, CLOSE_ALERT } from "../actions/types";
 
 const initialState = {
   show: false,
   msg: "",
+  status: 0,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case SET_ERROR:
+    case SET_ALERT:
       return {
         show: true,
-        msg: action.payload,
+        msg: action.payload.msg,
+        status: action.payload.status
       };
-    case CLOSE_ERROR:
+    case CLOSE_ALERT:
       return {
         ...initialState,
       };
