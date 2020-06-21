@@ -25,8 +25,6 @@ client.on("message", (topic, message) => {
   messageHandler(message);
 });
 
-sensorModel.getConditionsByDeviceId("Light");
-
 const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
