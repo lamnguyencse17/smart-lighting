@@ -5,7 +5,8 @@
   "main": ".eslintrc.js",
   "scripts": {
     "be": "nodemon --exec babel-node src/server/server.js --ignore 'src/client/*'",
-    "fe": "webpack-dev-server --mode development"
+    "fe": "webpack-dev-server --mode development",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -53,15 +54,21 @@
     "@babel/polyfill": "^7.10.1",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-react": "^7.10.1",
+    "@testing-library/react": "^10.3.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-plugin-react": "^7.19.0",
+    "jest": "^26.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.3",
     "prettier": "^2.0.4",
+    "react-test-renderer": "^16.13.1",
     "redux-devtools": "^3.5.0",
     "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
@@ -80,6 +87,11 @@
           "alias": {}
         }
       ]
+    ]
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./src/setupTests.js"
     ]
   }
 }

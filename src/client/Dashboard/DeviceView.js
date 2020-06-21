@@ -3,6 +3,7 @@ import DevicePanel from "./DeviceView/DevicePanel";
 import { getDevice } from "../actions/device";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 
 class DeviceView extends Component {
   componentDidMount() {
@@ -57,4 +58,6 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getDevice }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeviceView);
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(DeviceView)
+);

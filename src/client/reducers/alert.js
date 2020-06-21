@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
       return {
         show: true,
         msg: action.payload.msg,
-        status: action.payload.status
+        status: action.payload.status,
       };
     case CLOSE_ALERT:
       return {
