@@ -46,9 +46,11 @@ export default class SensorSelecter extends Component {
             <em>None</em>
           </MenuItem>
           {Object.keys(this.props.sensors).map((id) => {
-            <MenuItem value={this.props.sensors[id]._id} key={id}>
-              {this.props.sensors[id].name}
-            </MenuItem>;
+            return (
+              <MenuItem value={id} key={id}>
+                <em>{this.props.sensors[id]}</em>
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>

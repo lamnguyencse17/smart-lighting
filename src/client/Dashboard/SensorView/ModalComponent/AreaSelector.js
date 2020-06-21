@@ -46,9 +46,11 @@ export default class AreaSelecter extends Component {
             <em>None</em>
           </MenuItem>
           {Object.keys(this.props.areas).map((id) => {
-            <MenuItem value={this.props.areas[id]._id} key={id}>
-              {this.props.areas[id].name}
-            </MenuItem>;
+            return (
+              <MenuItem value={id} key={id}>
+                <em>{this.props.areas[id]}</em>
+              </MenuItem>
+            );
           })}
         </Select>
       </FormControl>

@@ -22,7 +22,7 @@ export default class ConditionSelecter extends Component {
 
   handleValueChange = (e) => {
     this.setState({ ...this.state, value: e.target.value });
-    this.props.valueAction(e.target.value);
+    this.props.sensorValueAction(e.target.value);
   };
 
   BootstrapInput = withStyles((theme) => ({
@@ -79,16 +79,14 @@ export default class ConditionSelecter extends Component {
             <MenuItem value="">
               <em>None</em>
             </MenuItem>
-            <MenuItem value={">"}>Greater Than</MenuItem>
-            <MenuItem value={">="}>Greater Than or Equal</MenuItem>
-            <MenuItem value={"="}>Equal</MenuItem>
-            <MenuItem value={"<="}>Less Than or Equal</MenuItem>
-            <MenuItem value={"<"}>Less Than</MenuItem>
+            <MenuItem value={1}>Greater Than</MenuItem>
+            <MenuItem value={0}>Equal</MenuItem>
+            <MenuItem value={2}>Less Than</MenuItem>
           </Select>
         </FormControl>
-        <FormControl style={{ maxWidth: 50, maxHeight: 9 }}>
+        <FormControl style={{ maxWidth: 120, maxHeight: 9 }}>
           <InputLabel shrink id="demo-simple-select-placeholder-label-label">
-            Value:
+            Sensor Value:
           </InputLabel>
           <this.BootstrapInput
             id="textbox"

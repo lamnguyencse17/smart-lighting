@@ -10,17 +10,16 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
-
 class SensorModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      active: this.props.active,
       area: "",
       device: "",
       sensor: "",
+      sensorValue: 0,
       value: 0,
-      condition: "",
+      condition: 0,
       deviceStatus: false,
     };
   }
@@ -35,7 +34,9 @@ class SensorModal extends Component {
   handleValueChange = (e) => {
     this.setState({ ...this.state, value: e });
   };
-
+  handleSensorValueChange = (e) => {
+    this.setState({ ...this.state, sensorValue: e });
+  };
   handleAreaChange = (e) => {
     this.setState({ ...this.state, area: e });
   };
@@ -56,11 +57,20 @@ class SensorModal extends Component {
     this.setState({ ...this.state, deviceStatus: !this.deviceStatus });
   };
   setTriggerCondition = () => {
-    let { condition, device, area, value, deviceStatus } = this.state;
-    axios.post("http://localhost:3000/api/models/schedules", {
+    let {
+      condition,
+      device,
+      area,
+      value,
+      deviceStatus,
+      sensorValue,
+      sensor,
+    } = this.state;
+    axios.post("http://localhost:3000/api/models/conditions", {
       condition,
       value,
-      isOn,
+      sensor,
+      sensorValue,
       device,
       area,
       isOn: deviceStatus,
@@ -89,6 +99,7 @@ class SensorModal extends Component {
               deviceAction={this.handleDeviceChange}
               deviceStatusAction={this.handleDeviceStatusChange}
               devices={this.props.devices}
+              valueAction={this.handleValueChange}
             />
           </div>
           <div className="device-toggle">
@@ -98,7 +109,7 @@ class SensorModal extends Component {
             />
             <ConditionSelector
               conditionAction={this.handleConditionChange}
-              valueAction={this.handleValueChange}
+              sensorValueAction={this.handleSensorValueChange}
             />
           </div>
           <div>

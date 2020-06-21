@@ -10,15 +10,15 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  let { comparison, isOn, area, device, sensor } = req.body;
+  let { condition, value, sensor, sensorValue, device, area, isOn } = req.body;
   let result = await conditionModel.createCondition({
-    comparison,
-    sensorValue,
-    isOn,
+    comparison: condition,
     value,
-    area,
-    device,
     sensor,
+    sensorValue,
+    device,
+    area,
+    isOn,
   });
   res.status(200).json(result);
 });

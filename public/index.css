@@ -346,7 +346,7 @@ input:checked + .slider:before {
 
 .device-history-container,
 .device-schedule-container {
-  width: 50%;
+  width: 60%;
   float: left;
 }
 
@@ -706,7 +706,7 @@ input:checked + .slider:before {
 }
 
 .trigger-popup {
-  width: 500px;
+  width: 600px;
   margin: auto;
   margin-top: 20%;
   padding: 20px;
