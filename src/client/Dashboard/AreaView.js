@@ -5,7 +5,6 @@ import { bindActionCreators } from "redux";
 import { getArea } from "../actions/area";
 import Sensor from "./AreaView/Sensor";
 import Device from "./AreaView/Device";
-import ErrorModal from "../ErrorModal"
 
 class AreaView extends Component {
   update = null;
@@ -24,14 +23,15 @@ class AreaView extends Component {
   render() {
     let { areaName, devices, sensors } = this.props;
     return (
-        <div className="dashboard">
-        <ErrorModal message={"Test Error in src/client/Dashboard/AreaView"} show={true} />
+      <div className="dashboard">
         <div className="areaview">
           <div className="title">{areaName}</div>
           {this.props.areaName != "" ? (
             Object.keys(sensors).map((index) => {
               let sensorName = sensors[index].name;
-              let latestReadings = {...sensors[index].readings[sensors[index].readings.length - 1]};
+              let latestReadings = {
+                ...sensors[index].readings[sensors[index].readings.length - 1],
+              };
               latestReadings.date = new Date(latestReadings.date);
               let readings = sensors[index].readings.slice(
                 0,
