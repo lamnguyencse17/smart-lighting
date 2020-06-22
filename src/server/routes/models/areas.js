@@ -3,11 +3,26 @@ import areaModel from "../../models/areas";
 
 const router = express.Router();
 
-const arrayToObject = (arr) => {
+const deviceArrayToObject = (arr, numLimit = 5) => {
   let result = {};
   arr.forEach((element) => {
     let { _id, ...newItem } = element;
-    result[element._id] = newItem;
+    result[element._id] = {
+      ...newItem,
+      history: newItem.history.slice(-numLimit),
+    };
+  });
+  return result;
+};
+
+const sensorArrayToObject = (arr, numLimit = 5) => {
+  let result = {};
+  arr.forEach((element) => {
+    let { _id, ...newItem } = element;
+    result[element._id] = {
+      ...newItem,
+      readings: newItem.readings.slice(-numLimit),
+    };
   });
   return result;
 };
@@ -17,8 +32,8 @@ router.get("/:id", async (req, res) => {
   let result = await areaModel.readAreaById(id);
   result = {
     ...result,
-    devices: arrayToObject(result.devices),
-    sensors: arrayToObject(result.sensors),
+    devices: deviceArrayToObject(result.devices),
+    sensors: sensorArrayToObject(result.sensors),
   };
   res.status(200).json(result);
 });
