@@ -3,9 +3,9 @@ import sensorModel from "../../models/sensors";
 
 const router = express.Router();
 
-const arrayToObject = (arr) => {
+const arrayToObject = (arr, numLimit = 5) => {
   let result = {};
-  arr.forEach((element) => {
+  arr.slice(-numLimit).forEach((element) => {
     let { _id, ...newItem } = element;
     result[element._id] = newItem;
   });
