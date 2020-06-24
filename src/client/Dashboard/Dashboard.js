@@ -15,16 +15,14 @@ class Dashboard extends Component {
   }
   render() {
     let { areas, devices, sensors } = this.props;
-    areas = (typeof areas === 'undefined') ? {} : areas;
-    devices = (typeof devices === 'undefined') ? {} : devices;
-    sensors = (typeof sensors === 'undefined') ? {} : sensors;
     return (
       <>
         <Route exact path={`${this.props.match.path}/`}>
           <div className="dashboard">
             <div className="dashboard-area">
               <div className="title">YOUR AREAS</div>
-              {Object.keys(areas).map((index) => {
+              { (typeof areas !== 'undefined') &&
+              Object.keys(areas).map((index) => {
                 return (
                   <Link key={index} to={`/dashboard/area/${index}`}>
                     <button>{areas[index]}</button>
@@ -34,7 +32,8 @@ class Dashboard extends Component {
             </div>
             <div className="dashboard-device">
               <div className="title">YOUR DEVICES</div>
-              {Object.keys(devices).map((index) => {
+              { (typeof devices !== 'undefined') &&
+              Object.keys(devices).map((index) => {
                 return (
                   <Link key={index} to={`/dashboard/device/${index}`}>
                     <button>{devices[index]}</button>
@@ -44,7 +43,8 @@ class Dashboard extends Component {
             </div>
             <div className="dashboard-sensor">
               <div className="title">YOUR SENSORS</div>
-              {Object.keys(sensors).map((index) => {
+              { (typeof sensors !== 'undefined') &&
+              Object.keys(sensors).map((index) => {
                 return (
                   <Link key={index} to={`/dashboard/sensor/${index}`}>
                     <button>{sensors[index]}</button>
