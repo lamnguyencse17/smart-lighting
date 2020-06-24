@@ -60,15 +60,38 @@ describe("Homepage Render", () => {
 
   it("Checks Dashboard Route", () => {
     let initialState = {
+      user: {
+        _id: "",
+        areas: {},
+        devices: {},
+        sensors: {},
+        name: "",
+        email: "",
+        token: "",
+      },
+      area: {
+        _id: "",
+        devices: {},
+        sensors: {},
+        name: "",
+      },
+      device: {
+        _id: "",
+        device_id: "",
+        name: "",
+        history: {},
+      },
+      sensor: {
+        _id: "",
+        device_id: "",
+        name: "",
+        conditions: {},
+        readings: {},
+      },
       alert: {
         show: false,
-        msg: "Test Display Alert",
+        msg: "",
         status: 0,
-      },
-      user: {
-        areas: {},
-        device: {},
-        sensors: {},
       },
     };
     store = mockStore(initialState);
@@ -84,9 +107,28 @@ describe("Homepage Render", () => {
 
   it("Checks Home Route", () => {
     let initialState = {
+      area: {
+        _id: "",
+        devices: {},
+        sensors: {},
+        name: "",
+      },
+      device: {
+        _id: "",
+        device_id: "",
+        name: "",
+        history: {},
+      },
+      sensor: {
+        _id: "",
+        device_id: "",
+        name: "",
+        conditions: {},
+        readings: {},
+      },
       alert: {
         show: false,
-        msg: "Test Display Alert",
+        msg: "",
         status: 0,
       },
     };
