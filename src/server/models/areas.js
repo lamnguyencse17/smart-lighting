@@ -7,7 +7,7 @@ export const areaSchema = new Areas({
   name: { type: String, required: true },
   sensors: [{ type: ObjectId, ref: "Sensors" }],
   devices: [{ type: ObjectId, ref: "Devices" }],
-  conditions:[{type: ObjectId, ref: "Conditions"}],
+  conditions: [{ type: ObjectId, ref: "Conditions" }],
 });
 
 areaSchema.statics.readAreaById = async function (id) {
@@ -23,9 +23,9 @@ areaSchema.statics.readAreaById = async function (id) {
       option: { lean: true },
     })
     .populate({
-      path:"conditions",
-      select:"comparison sensorValue isOn value",
-      option:{ lean: true },
+      path: "conditions",
+      select: "comparison isOn area device value sensor sensorValue",
+      option: { lean: true },
     })
     .lean();
   delete result.__v;

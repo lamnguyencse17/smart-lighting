@@ -47,6 +47,7 @@ conditionSchema.statics.createCondition = async function (conditionDetails) {
 
 conditionSchema.statics.deleteCondition = async function (id) {
   let result = await this.findByIdAndDelete(id);
+  //TODO: cascading delete
   delete result.__v;
   return result;
 };
