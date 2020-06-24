@@ -15,6 +15,9 @@ class Dashboard extends Component {
   }
   render() {
     let { areas, devices, sensors } = this.props;
+    areas = (typeof areas === 'undefined') ? {} : areas;
+    devices = (typeof devices === 'undefined') ? {} : devices;
+    sensors = (typeof sensors === 'undefined') ? {} : sensors;
     return (
       <>
         <Route exact path={`${this.props.match.path}/`}>
