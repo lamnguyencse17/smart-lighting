@@ -8,7 +8,7 @@ import messageHandler from "./helpers/messageHandler";
 import conditionModel from "./models/conditions";
 import deviceModel from "./models/devices";
 import areaModel from "./models/areas";
-import { startBullMQ } from "./helpers/bull";
+import { startAgenda, stopAgenda, setAgenda } from "./helpers/scheduler";
 
 const data_uri =
   "mongodb+srv://tri:team2447@cluster0-wrndr.azure.mongodb.net/smart-lighting?retryWrites=true&w=majority";
@@ -19,7 +19,7 @@ mongoose.connect(data_uri, {
   useFindAndModify: false,
 });
 
-startBullMQ();
+startAgenda();
 
 const client = setClient("mqtt://23.97.56.49");
 subscribeTo("Topic/Light");
@@ -41,3 +41,6 @@ app.get("/", (req, res) => {
 app.use("/api/", require("./routes/routes"));
 
 app.listen(3000, () => console.info(`Running on 3000`));
+
+process.on("SIGTERM", stopAgenda);
+process.on("SIGINT", stopAgenda);
