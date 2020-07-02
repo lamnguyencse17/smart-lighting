@@ -8,6 +8,14 @@ export const getUser = (email) => (dispatch) => {
       .then((result, err) => {
         if (err) {
           console.log(err);
+          dispatch({
+            type: SET_ALERT,
+            payload: {
+              status: 0,
+              msg:
+                "Your username/password is incorrect. Please try again later",
+            },
+          });
         } else {
           dispatch({ type: GET_USER, payload: result.data });
         }

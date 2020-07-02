@@ -1,4 +1,4 @@
-import { GET_SENSOR } from "./types";
+import { GET_SENSOR, SET_ALERT } from "./types";
 import axios from "axios";
 
 export const getSensor = (sensorId) => (dispatch) => {
@@ -7,6 +7,14 @@ export const getSensor = (sensorId) => (dispatch) => {
     .then((result, err) => {
       if (err) {
         console.log(err);
+        dispatch({
+          type: SET_ALERT,
+          payload: {
+            status: 0,
+            msg:
+              "Cannot find the sensor you are looking for. Please try again later",
+          },
+        });
       } else {
         dispatch({ type: GET_SENSOR, payload: result.data });
       }
