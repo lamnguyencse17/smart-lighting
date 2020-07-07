@@ -30,10 +30,7 @@ sensorSchema.statics.getConditionsByDeviceId = async function (id) {
     .populate({
       path: "conditions",
       select: "comparison isOn value sensorValue area device",
-    })
-    .populate({
-      path: "device",
-      select: "device_id",
+      populate: { path: "device", select: "device_id -_id" },
     })
     .select("conditions");
   delete result.__v;
