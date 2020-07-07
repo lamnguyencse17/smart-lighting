@@ -9,6 +9,7 @@ import conditionModel from "./models/conditions";
 import deviceModel from "./models/devices";
 import areaModel from "./models/areas";
 import { startAgenda, stopAgenda, setAgenda } from "./helpers/scheduler";
+import sensorModel from "./models/sensors";
 
 const data_uri =
   "mongodb+srv://tri:team2447@cluster0-wrndr.azure.mongodb.net/smart-lighting?retryWrites=true&w=majority";
