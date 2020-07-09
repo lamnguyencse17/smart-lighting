@@ -74,6 +74,17 @@ sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
   );
 };
 
+sensorSchema.statics.removeCondition = async function(sensorId, conditionId){
+  let result = await this.findOneAndUpdate(
+    {_id: mongoose.Types.ObjectId(sensorId)},
+    {
+      $pull:{'conditions': mongoose.Types.ObjectId(conditionId)}
+    }
+  ); 
+  delete result.__v;
+  return result;
+}
+
 sensorSchema.statics.deleteSensor = async function (id) {
   let result = await this.findByIdAndDelete(id);
   delete result.__v;

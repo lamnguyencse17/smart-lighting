@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import deviceModel, { deviceSchema } from "./devices";
+import areaModel, { areaSchema } from "./areas";
+import sensorModel, { sensorSchema } from "./sensors";
+
 
 const Conditions = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
@@ -46,8 +49,11 @@ conditionSchema.statics.createCondition = async function (conditionDetails) {
 };
 
 conditionSchema.statics.deleteCondition = async function (id) {
-  let result = await this.findByIdAndDelete(id);
-  //TODO: cascading delete
+  let result = await this.findByIdAndDelete(mongoose.Types.ObjectId(id));
+  let {area,device,sensor} = result;
+  device && deviceModel.removeCondition(device, id);
+  sensor && sensorModel.removeCondition(sensor, id);
+  area && areaModel.removeCondition(area, id);
   delete result.__v;
   return result;
 };

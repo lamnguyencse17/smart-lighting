@@ -63,5 +63,16 @@ deviceSchema.statics.addCondition = async function (deviceId, conditionId) {
   );
 };
 
+deviceSchema.statics.removeCondition = async function(deviceId, conditionId){
+  let result = await this.findOneAndUpdate(
+    {_id: mongoose.Types.ObjectId(deviceId)},
+    {
+      $pull:{'conditions': mongoose.Types.ObjectId(conditionId)}
+    }
+  );
+  delete result.__v;
+  return result;
+}
+
 const deviceModel = mongoose.model("Devices", deviceSchema);
 export default deviceModel;
