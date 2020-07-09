@@ -10,18 +10,20 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
+const inititalState = {
+  area: "",
+  device: "",
+  sensor: "",
+  sensorValue: 0,
+  value: 0,
+  condition: 0,
+  deviceStatus: false,
+}
+
 class SensorModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      area: "",
-      device: "",
-      sensor: "",
-      sensorValue: 0,
-      value: 0,
-      condition: 0,
-      deviceStatus: false,
-    };
+    this.state = inititalState;
   }
 
   ButtonStyle = withStyles({
@@ -66,6 +68,8 @@ class SensorModal extends Component {
       sensorValue,
       sensor,
     } = this.state;
+    this.setState({...inititalState});
+    console.log(this.state);
     axios.post("http://localhost:3000/api/models/conditions", {
       condition,
       value,
