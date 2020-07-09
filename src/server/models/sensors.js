@@ -63,9 +63,9 @@ sensorSchema.statics.updateSensor = function (sensorDetails) {
   ).exec();
 };
 
-sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
+sensorSchema.statics.addCondition = async function (sensorId, conditionId) {
   await this.updateOne(
-    { _id: mongoose.Types.ObjectId(deviceId) },
+    { _id: mongoose.Types.ObjectId(sensorId) },
     {
       $push: {
         conditions: conditionId,

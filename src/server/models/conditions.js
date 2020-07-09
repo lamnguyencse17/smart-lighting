@@ -44,6 +44,8 @@ conditionSchema.statics.createCondition = async function (conditionDetails) {
   });
   result = result.toObject();
   deviceModel.addCondition(device, result._id);
+  sensorModel.addCondition(sensor, result._id);
+  areaModel.addCondition(area, result._id);
   delete result.__v;
   return result;
 };
