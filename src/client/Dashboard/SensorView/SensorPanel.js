@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SensorModal from "./SensorModal";
+import ChartPanel from "./ChartPanel"
 
 class SensorPanel extends Component {
   constructor(props) {
@@ -51,7 +52,9 @@ class SensorPanel extends Component {
             </div>
           </div>
           <div className="sensor-column sensor-column-2">
-            <div className="sensor-graph"></div>
+            <div className="sensor-graph">
+                <ChartPanel readings ={readings}/>
+            </div>
           </div>
           <div className="device-schedule">
             <SensorModal
