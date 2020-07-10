@@ -11,6 +11,9 @@ import areaModel from "./models/areas";
 import { startAgenda, stopAgenda, setAgenda } from "./helpers/scheduler";
 import sensorModel from "./models/sensors";
 
+
+//console.log(timeConverter("2020-08-02T05:19:27.538+00:00"));
+
 const data_uri =
   "mongodb+srv://tri:team2447@cluster0-wrndr.azure.mongodb.net/smart-lighting?retryWrites=true&w=majority";
 
@@ -28,6 +31,12 @@ subscribeTo("Topic/Light");
 client.on("message", (topic, message) => {
   messageHandler(message);
 });
+
+
+
+
+
+
 
 const app = express();
 app.use(morgan("tiny"));

@@ -33,6 +33,7 @@ sensorSchema.statics.getConditionsByDeviceId = async function (id) {
       populate: { path: "device", select: "device_id -_id" },
     })
     .select("conditions");
+    
   delete result.__v;
   return result;
 };
