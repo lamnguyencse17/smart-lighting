@@ -69,7 +69,6 @@ class SensorModal extends Component {
       sensor,
     } = this.state;
     this.setState({...inititalState});
-    console.log(this.state);
     axios.post("http://localhost:3000/api/models/conditions", {
       condition,
       value,
