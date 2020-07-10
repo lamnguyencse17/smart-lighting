@@ -74,6 +74,25 @@ sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
   );
 };
 
+sensorSchema.statics.getReadingsByDuration = async function (id, duration) {
+  let result = await this.findOne({ 
+    _id: mongoose.Types.ObjectId(id),
+  })
+  let returnArray = result.readings.filter( (reading)=>{
+    let d = new Date(reading.date);
+    let time = parseInt((Date.now() - d.getTime())/1000);
+    switch(duration){
+      case 0:
+        return time <= 86400;
+      case 1:
+        return 86400 < time && time <= 259200;
+      case 2:
+        return 172800 < time && time <= 432000;
+    }
+  })
+  return returnArray;
+};
+
 sensorSchema.statics.deleteSensor = async function (id) {
   let result = await this.findByIdAndDelete(id);
   delete result.__v;

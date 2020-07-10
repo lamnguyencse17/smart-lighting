@@ -12,6 +12,13 @@ const arrayToObject = (arr, numLimit = 5) => {
   return result;
 };
 
+router.get("/statistics", async (req, res) => {
+  let {_id , duration} = req.body;
+  let result = await sensorModel.getReadingsByDuration(_id, duration);
+  res.status(200).json(result);
+});
+
+
 router.get("/:id", async (req, res) => {
   let id = req.params.id;
   let result = await sensorModel.readSensorById(id);
