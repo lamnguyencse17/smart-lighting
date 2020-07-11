@@ -18,7 +18,7 @@ const inititalState = {
   value: 0,
   condition: 0,
   deviceStatus: false,
-}
+};
 
 class SensorModal extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class SensorModal extends Component {
       sensorValue,
       sensor,
     } = this.state;
-    this.setState({...inititalState});
+    this.setState({ ...inititalState });
     axios.post("http://localhost:3000/api/models/conditions", {
       condition,
       value,
