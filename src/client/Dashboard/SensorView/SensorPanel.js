@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import SensorModal from "./SensorModal";
+import ChartPanel from "./ChartPanel";
+import ConditionView from "./__tests__/ConditionView";
 
 class SensorPanel extends Component {
   constructor(props) {
@@ -51,7 +53,9 @@ class SensorPanel extends Component {
             </div>
           </div>
           <div className="sensor-column sensor-column-2">
-            <div className="sensor-graph"></div>
+            <div className="sensor-graph">
+              <ChartPanel readings={readings} />
+            </div>
           </div>
           <div className="device-schedule">
             <SensorModal
@@ -62,6 +66,7 @@ class SensorPanel extends Component {
           <div className="sensor-column sensor-column-3">
             <span className="sensor-trigger-title">TRIGGER CONDITIONS</span>
             <div className="sensor-trigger-content">
+              <ConditionView conditions={this.props.conditions} />
               <ul>
                 <li className="sensor-trigger-item">
                   <span>Reading: &lt;20 </span>

@@ -19,8 +19,19 @@ export const sensorSchema = new Sensors({
 sensorSchema.statics.readSensorById = async function (id) {
   let result = await this.findOne(
     { _id: mongoose.Types.ObjectId(id) },
-    { readings: { $slice: 5 } }
-  ).lean();
+    { readings: { $slice: -5 } }
+  )
+    .populate({
+      path: "conditions",
+      select: "comparison isOn value sensorValue area device",
+      populate: {
+        path: "device",
+        select: "device_id -_id",
+        option: { lean: true },
+      },
+      option: { lean: true },
+    })
+    .lean();
   delete result.__v;
   return result;
 };
@@ -30,7 +41,12 @@ sensorSchema.statics.getConditionsByDeviceId = async function (id) {
     .populate({
       path: "conditions",
       select: "comparison isOn value sensorValue area device",
-      populate: { path: "device", select: "device_id -_id" },
+      populate: {
+        path: "device",
+        select: "device_id -_id",
+        option: { lean: true },
+      },
+      option: { lean: true },
     })
     .select("conditions");
     
@@ -76,13 +92,13 @@ sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
 };
 
 sensorSchema.statics.getReadingsByDuration = async function (id, duration) {
-  let result = await this.findOne({ 
+  let result = await this.findOne({
     _id: mongoose.Types.ObjectId(id),
-  })
-  let returnArray = result.readings.filter( (reading)=>{
+  });
+  let returnArray = result.readings.filter((reading) => {
     let d = new Date(reading.date);
-    let time = parseInt((Date.now() - d.getTime())/1000);
-    switch(duration){
+    let time = parseInt((Date.now() - d.getTime()) / 1000);
+    switch (duration) {
       case 0:
         return time <= 86400;
       case 1:
@@ -90,7 +106,7 @@ sensorSchema.statics.getReadingsByDuration = async function (id, duration) {
       case 2:
         return 172800 < time && time <= 432000;
     }
-  })
+  });
   return returnArray;
 };
 
