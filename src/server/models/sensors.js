@@ -80,9 +80,9 @@ sensorSchema.statics.updateSensor = function (sensorDetails) {
   ).exec();
 };
 
-sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
+sensorSchema.statics.addCondition = async function (sensorId, conditionId) {
   await this.updateOne(
-    { _id: mongoose.Types.ObjectId(deviceId) },
+    { _id: mongoose.Types.ObjectId(sensorId) },
     {
       $push: {
         conditions: conditionId,
@@ -90,6 +90,17 @@ sensorSchema.statics.addCondition = async function (deviceId, conditionId) {
     }
   );
 };
+
+sensorSchema.statics.removeCondition = async function(sensorId, conditionId){
+  let result = await this.findOneAndUpdate(
+    {_id: mongoose.Types.ObjectId(sensorId)},
+    {
+      $pull:{'conditions': mongoose.Types.ObjectId(conditionId)}
+    }
+  ); 
+  delete result.__v;
+  return result;
+}
 
 sensorSchema.statics.getReadingsByDuration = async function (id, duration) {
   let result = await this.findOne({
