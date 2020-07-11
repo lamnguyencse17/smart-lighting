@@ -47,6 +47,7 @@ class SensorView extends Component {
                   name={this.props.name}
                   device_id={this.props.device_id}
                   readings={this.props.readings}
+                  conditions={this.props.conditions}
                 />
               ) : (
                 <></>
@@ -67,6 +68,7 @@ function mapStateToProps(state) {
     name: state.sensor.name,
     device_id: state.sensor.device_id,
     readings: state.sensor.readings,
+    conditions: state.sensor.conditions,
   };
 }
 
