@@ -1,4 +1,4 @@
-import { GET_SENSOR } from "../actions/types";
+import { GET_SENSOR, REMOVE_CONDITION } from "../actions/types";
 
 const initialState = {
   _id: "",
@@ -13,6 +13,13 @@ export default function (state = initialState, action) {
     case GET_SENSOR:
       return {
         ...action.payload,
+      };
+    case REMOVE_CONDITION:
+      let newConditions = { ...state.conditions };
+      delete newConditions[action.payload];
+      return {
+        ...state,
+        conditions: newConditions,
       };
     default:
       return state;
