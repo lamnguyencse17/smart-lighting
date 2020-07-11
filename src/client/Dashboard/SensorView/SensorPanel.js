@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import SensorModal from "./SensorModal";
 import ChartPanel from "./ChartPanel";
-import ConditionView from "./__tests__/ConditionView";
+import ConditionView from "./ConditionView";
+
+
 
 class SensorPanel extends Component {
   constructor(props) {
@@ -10,6 +12,7 @@ class SensorPanel extends Component {
       modalActive: false,
     };
   }
+
 
   showModal = () => {
     this.setState({ ...this.state, modalActive: true });
@@ -67,22 +70,6 @@ class SensorPanel extends Component {
             <span className="sensor-trigger-title">TRIGGER CONDITIONS</span>
             <div className="sensor-trigger-content">
               <ConditionView   conditions={this.props.conditions} /> 
-              <ul>
-                <li className="sensor-trigger-item">
-                  <span>Reading: &lt;20 </span>
-                  <br></br>
-                  <span>Turn on device:</span>
-                  <br></br>
-                  <span>Garage Light 1</span>
-                </li>
-                <li className="sensor-trigger-item">
-                  <span>Reading: &gt;80 </span>
-                  <br></br>
-                  <span>Turn off device:</span>
-                  <br></br>
-                  <span>Garage Light 1</span>
-                </li>
-              </ul>
               <button className="add-sensor-trigger" onClick={this.showModal}>
                 New Trigger
               </button>
