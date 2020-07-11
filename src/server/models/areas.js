@@ -46,5 +46,27 @@ areaSchema.statics.deleteArea = async function (id) {
   return result;
 };
 
+areaSchema.statics.addCondition = async function (areaId, conditionId) {
+  await this.updateOne(
+    { _id: mongoose.Types.ObjectId(areaId) },
+    {
+      $push: {
+        conditions: conditionId,
+      },
+    }
+  );
+};
+
+areaSchema.statics.removeCondition = async function(areaId, conditionId){
+  let result = await this.findOneAndUpdate(
+    {_id: mongoose.Types.ObjectId(areaId)},
+    {
+      $pull:{'conditions': mongoose.Types.ObjectId(conditionId)}
+    }
+  );
+  delete result.__v;
+  return result;
+}
+
 const areaModel = mongoose.model("Areas", areaSchema);
 export default areaModel;
