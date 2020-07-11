@@ -26,7 +26,7 @@ sensorSchema.statics.readSensorById = async function (id) {
       select: "comparison isOn value sensorValue area device",
       populate: {
         path: "device",
-        select: "device_id -_id",
+        select: "device_id -_id name",
         option: { lean: true },
       },
       option: { lean: true },
@@ -49,7 +49,7 @@ sensorSchema.statics.getConditionsByDeviceId = async function (id) {
       option: { lean: true },
     })
     .select("conditions");
-  console.log(result);
+    
   delete result.__v;
   return result;
 };

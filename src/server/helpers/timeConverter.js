@@ -11,7 +11,7 @@ const timeConverter = (time) => {
   */
  let d= new Date(time);
 
-  return "in "+(d.getTime()-Date.now())+" seconds";
+  return "in "+(d.getTime()-Date.now())/1000+" seconds";
 };
 
 export default timeConverter;
