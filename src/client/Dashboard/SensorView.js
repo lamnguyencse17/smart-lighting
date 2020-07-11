@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { getSensor } from "../actions/sensor";
+import { getSensor, removeCondition } from "../actions/sensor";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -48,6 +48,7 @@ class SensorView extends Component {
                   device_id={this.props.device_id}
                   readings={this.props.readings}
                   conditions={this.props.conditions}
+                  removeCondition={this.props.removeCondition}
                 />
               ) : (
                 <></>
@@ -73,7 +74,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getSensor }, dispatch);
+  return bindActionCreators({ getSensor, removeCondition }, dispatch);
 }
 
 export default withRouter(

@@ -1,4 +1,4 @@
-import { GET_SENSOR, SET_ALERT } from "./types";
+import { GET_SENSOR, SET_ALERT, REMOVE_CONDITION } from "./types";
 import axios from "axios";
 
 export const getSensor = (sensorId) => (dispatch) => {
@@ -19,4 +19,7 @@ export const getSensor = (sensorId) => (dispatch) => {
         dispatch({ type: GET_SENSOR, payload: result.data });
       }
     });
+};
+export const removeCondition = (conditionId) => (dispatch) => {
+  dispatch({ type: REMOVE_CONDITION, payload: conditionId });
 };
