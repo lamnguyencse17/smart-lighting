@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ConditionDeleteButton from './ConditionDeleteButton';
 
 class ConditionView extends Component {
   constructor(props) {
@@ -6,8 +7,7 @@ class ConditionView extends Component {
   }
   render() {
     let {conditions} =this.props;
-    
-    return <>{/* TODO */
+    return <>{
         <ul>
           {Object.keys(conditions).map((index) => {
             let condition = conditions[index];
@@ -24,15 +24,17 @@ class ConditionView extends Component {
                 break;
             };
             return(
-              <li className ="Condition-item" keys ={index}>
-                <span>{"Reading "+compare+condition.sensorValue}</span>
-                <br></br>
-                <span>{condition.isOn? "Turn ON device:":"Turn OFF device:"}</span>
-                <br></br>
-                <span>{condition.device.name}</span>
-                <br></br>
-                <span>{"Value: "+condition.value }</span>
-
+              <li className ="sensor-trigger-item" keys ={index}>
+                <div className ="sensor-trigger-item-readings">
+                  <span>{"Reading: "+compare+condition.sensorValue}</span>
+                  <br></br>
+                  <span>{condition.isOn? "Turn ON device:":"Turn OFF device:"}</span>
+                  <br></br>
+                  <span>{ condition.device.name}</span>
+                  <br></br>
+                  <span>{"Value: "+condition.value }</span>
+                </div>
+                <ConditionDeleteButton conditionId={index}/>
               </li>
             );
           })}

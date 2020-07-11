@@ -557,7 +557,17 @@ input:checked + .slider:before {
   float: left;
   font-size: xx-large;
   padding: 0;
-  margin-top: 25px;
+  margin-bottom: 50px;
+}
+
+.sensor-trigger-item-readings{
+  float: left;
+}
+
+.sensor-trigger-delete-confirm{
+  float:left;
+  color:red;
+  margin-right: 1rem;
 }
 
 .add-sensor-trigger {
