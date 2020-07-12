@@ -124,7 +124,7 @@ class DevicePanel extends Component {
             device_id={this.props.device_id}
             active={this.state.modalActive}
             closeModal={() => {
-              this.setState({ ...this.state,modalActive: false });
+              this.setState({ ...this.state, modalActive: false });
             }}
           />
         </div>

@@ -124,5 +124,5 @@ export default class ChartPanel extends Component {
         </div>
       </>
     );
-  }
+  };
 }

@@ -11,7 +11,7 @@ class Schedule extends Component {
   }
 
   handleChange = (e) => {
-    this.setState({ ...this.state,schedule: e.target.value });
+    this.setState({ ...this.state, schedule: e.target.value });
     this.props.action(e.target.value);
   };
 

@@ -9,14 +9,8 @@ import SensorSelector from "./ModalComponent/SensorSelector";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
-import {setAlert} from "../../actions/alert"
+import { setAlert } from "../../actions/alert";
 import { bindActionCreators } from "redux";
-
-
-
-
-
-
 
 const inititalState = {
   area: "",
@@ -67,25 +61,10 @@ class SensorModal extends Component {
     this.setState({ ...this.state, deviceStatus: !this.deviceStatus });
   };
   setTriggerCondition = () => {
-    if((!this.state.device && !this.state.area)){
+    if (!this.state.device && !this.state.area) {
       this.props.closeModal();
-      console.log("damnit");
-      /*
-      return (
-      <Modal.Dialog>
-        <Modal.Body>
-          <p>Device and Area cannot both be None you FokcinCunt</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary">Close</Button>
-        </Modal.Footer>
-      </Modal.Dialog>)*/
-      this.props.setAlert("Device and Area cannot both be None",1);
-      //alert("Device and Area cannot both be None you FokcinCunt");
-      
-      }
-    else {
+      this.props.setAlert("Device and Area cannot both be None", 1);
+    } else {
       let {
         condition,
         device,
@@ -105,11 +84,8 @@ class SensorModal extends Component {
         area,
         isOn: deviceStatus,
       });
-      // Callback later
-      this.props.closeModal();     
+      this.props.closeModal();
     }
-    
-    
   };
 
   classes = this.useStyles;
@@ -163,11 +139,10 @@ function mapStateToProps(state) {
     sensors: state.user.sensors,
   };
 }
-function mapDispatchToProps(dispatch){
-  return bindActionCreators({setAlert}, dispatch);
-};
-/*export default withRouter(
-  connect(null,mapDispatchToProps)(SensorModal)
-);*/
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ setAlert }, dispatch);
+}
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SensorModal));
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(SensorModal)
+);

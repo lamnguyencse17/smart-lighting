@@ -14,7 +14,7 @@ class AlertModal extends Component {
           <Alert
             onClose={this.props.closeAlert}
             variant="filled"
-            severity={status==1 ? "success" : "error"}
+            severity={status == 1 ? "success" : "error"}
           >
             {message}
           </Alert>
@@ -28,7 +28,7 @@ function mapStateToProps(state) {
   return {
     message: state.alert.msg,
     show: state.alert.show,
-    status: state.alert.status
+    status: state.alert.status,
   };
 }
 

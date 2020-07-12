@@ -19,7 +19,7 @@ class Sensor extends Component {
     let { index, sensorName, latestReadings, readings } = this.props;
     let strSplit = latestReadings.date.toString().split(" ", 5);
     let localReadings = [...readings];
-    let localLatestReadings = {...latestReadings};
+    let localLatestReadings = { ...latestReadings };
     localLatestReadings.date = {
       time: strSplit[4],
       day: strSplit[2],
@@ -48,7 +48,8 @@ class Sensor extends Component {
             };
             return (
               <div key={reading._id}>
-                {`Date: ${newDate.day}/${newDate.month}/${newDate.year}`}<br></br>
+                {`Date: ${newDate.day}/${newDate.month}/${newDate.year}`}
+                <br></br>
                 {`Time: ${newDate.time}`}
                 <br></br>
                 {`Value: ${reading.value}`}

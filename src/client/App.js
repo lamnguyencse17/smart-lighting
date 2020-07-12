@@ -15,7 +15,7 @@ export default class App extends Component {
     return (
       <>
         <Navbar />
-        <AlertModal/>
+        <AlertModal />
         <Switch>
           <Route exact path="/" render={(props) => <Home {...props} />} />
           <Route path="/about" render={(props) => <About {...props} />} />

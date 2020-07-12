@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getUser } from "../actions/user";
 
-// Logged in home in Mockup
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getUser("test@gmail.com");

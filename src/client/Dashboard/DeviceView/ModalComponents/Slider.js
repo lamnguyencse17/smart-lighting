@@ -1,19 +1,19 @@
 import React, { Component } from "react";
-import {makeStyles} from "@material-ui/core";
-import { Button } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 
 class IntensitySlider extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          value: 0,
-        };
-      }
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 0,
+    };
+  }
+
   handleChange = (e, newValue) => {
-    this.setState({ ...this.state,value: newValue });
+    this.setState({ ...this.state, value: newValue });
     this.props.action(newValue);
   };
 
@@ -48,18 +48,17 @@ class IntensitySlider extends Component {
     },
   })(Slider);
 
-
   ButtonStyle = withStyles({
     root: {
       backgroundColor: "#7beced",
       margin: "20px",
     },
   })(Button);
-  
+
   useStyles = makeStyles((theme) => ({
     container: {
-      display: 'flex',
-      flexWrap: 'wrap',
+      display: "flex",
+      flexWrap: "wrap",
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -70,13 +69,13 @@ class IntensitySlider extends Component {
 
   render() {
     return (
-        <this.PrettoSlider
-          valueLabelDisplay="auto"
-          aria-label="pretto slider"
-          max={255}
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
+      <this.PrettoSlider
+        valueLabelDisplay="auto"
+        aria-label="pretto slider"
+        max={255}
+        value={this.state.value}
+        onChange={this.handleChange}
+      />
     );
   }
 }
