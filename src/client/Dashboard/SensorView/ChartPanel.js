@@ -49,12 +49,38 @@ export default class ChartPanel extends Component {
   retrieveData = (id, duration) => {
     let labels = [];
     let values = [];
-    Object.keys(this.props.readings).map((index) => {
-      let date = new Date(this.props.readings[index].date);
-      let value = this.props.readings[index].value;
-      labels.push(date);
-      values.push(value);
-    });
+    axios
+      .request({
+        method: "POST",
+        url: "http://localhost:3000/api/models/sensors/statistics",
+        data: {
+          _id: id,
+          duration: duration,
+        },
+      })
+      .then((result) => {
+        result.data.map((_id) => {
+          labels.push(new Date(_id.date));
+          values.push(_id.value);
+        });
+        this.setState({ ...this.state, label: labels, data: values });
+      });
+  };
+
+  render() {
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        "& > *": {
+          margin: theme.spacing(1),
+        },
+      },
+    }));
+
+    const classes = useStyles;
+
     const cur_state = {
       labels: this.state.label,
       datasets: [
@@ -81,6 +107,7 @@ export default class ChartPanel extends Component {
         },
       ],
     };
+
     return (
       <>
         <Line
