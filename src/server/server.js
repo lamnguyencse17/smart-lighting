@@ -10,7 +10,7 @@ import deviceModel from "./models/devices";
 import areaModel from "./models/areas";
 import { startAgenda, stopAgenda, setAgenda } from "./helpers/scheduler";
 import sensorModel from "./models/sensors";
-
+import compression from "compression";
 
 //console.log(timeConverter("2020-08-02T05:19:27.538+00:00"));
 
@@ -32,15 +32,10 @@ client.on("message", (topic, message) => {
   messageHandler(message);
 });
 
-
-
-
-
-
-
 const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
+app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
