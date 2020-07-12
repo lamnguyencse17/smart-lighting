@@ -9,6 +9,15 @@ import SensorSelector from "./ModalComponent/SensorSelector";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
+import setAlert from "../../actions/alert"
+import { isNull, bind } from "lodash";
+import { bindActionCreators } from "redux";
+
+
+
+
+
+
 
 const inititalState = {
   area: "",
@@ -59,27 +68,49 @@ class SensorModal extends Component {
     this.setState({ ...this.state, deviceStatus: !this.deviceStatus });
   };
   setTriggerCondition = () => {
-    let {
-      condition,
-      device,
-      area,
-      value,
-      deviceStatus,
-      sensorValue,
-      sensor,
-    } = this.state;
-    this.setState({ ...inititalState });
-    axios.post("http://localhost:3000/api/models/conditions", {
-      condition,
-      value,
-      sensor,
-      sensorValue,
-      device,
-      area,
-      isOn: deviceStatus,
-    });
-    // Callback later
-    this.props.closeModal();
+    if((!this.state.device && !this.state.area)){
+      this.props.closeModal();
+      console.log("damnit");
+      /*
+      return (
+      <Modal.Dialog>
+        <Modal.Body>
+          <p>Device and Area cannot both be None you FokcinCunt</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary">Close</Button>
+        </Modal.Footer>
+      </Modal.Dialog>)*/
+      this.props.setAlert("Device and Area cannot both be None you FokcinCunt",1);
+      //alert("Device and Area cannot both be None you FokcinCunt");
+      
+      }
+    else {
+      let {
+        condition,
+        device,
+        area,
+        value,
+        deviceStatus,
+        sensorValue,
+        sensor,
+      } = this.state;
+      this.setState({ ...inititalState });
+      axios.post("http://localhost:3000/api/models/conditions", {
+        condition,
+        value,
+        sensor,
+        sensorValue,
+        device,
+        area,
+        isOn: deviceStatus,
+      });
+      // Callback later
+      this.props.closeModal();     
+    }
+    
+    
   };
 
   classes = this.useStyles;
@@ -133,5 +164,11 @@ function mapStateToProps(state) {
     sensors: state.user.sensors,
   };
 }
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({setAlert}, dispatch);
+}
+/*export default withRouter(
+  connect(null,mapDispatchToProps)(SensorModal)
+);*/
 
-export default withRouter(connect(mapStateToProps, null)(SensorModal));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SensorModal));
