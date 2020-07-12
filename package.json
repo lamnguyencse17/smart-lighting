@@ -4,7 +4,7 @@
   "description": "smart-lighting",
   "main": ".eslintrc.js",
   "scripts": {
-    "start": "node ./dist/server.js",
+    "start": "npm run build && node ./dist/server.js",
     "build": "babel ./src/server/ -D --out-dir dist",
     "test": "jest"
   },
@@ -16,6 +16,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/lamnguyencse17/smart-lighting/issues"
+  },
+  "engines": {
+    "node": "14.x"
   },
   "homepage": "https://github.com/lamnguyencse17/smart-lighting#readme",
   "dependencies": {
@@ -31,9 +34,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.26.0",
     "mongoose": "^5.9.19",
-    "mqtt": "^4.1.0"
-  },
-  "devDependencies": {
+    "mqtt": "^4.1.0",
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/node": "^7.10.1",
