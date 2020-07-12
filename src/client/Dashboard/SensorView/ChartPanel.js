@@ -9,7 +9,8 @@ export default class ChartPanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chartValue: 0,
+      label: [],
+      data: [],
       btn24h: false,
       btn3days: false,
       btn5days: false,
@@ -18,34 +19,34 @@ export default class ChartPanel extends Component {
   handle24hClick = (e) => {
     this.setState({
       ...this.state,
-      chartValue: 0,
       btn24h: true,
       btn3days: false,
       btn5days: false,
     });
+    this.retrieveData(this.props.id, 0);
   };
 
   handle3daysClick = (e) => {
     this.setState({
       ...this.state,
-      chartValue: 1,
       btn24h: false,
       btn3days: true,
       btn5days: false,
     });
+    this.retrieveData(this.props.id, 1);
   };
 
   handle5daysClick = (e) => {
     this.setState({
       ...this.state,
-      chartValue: 2,
       btn24h: false,
       btn3days: false,
       btn5days: true,
     });
+    this.retrieveData(this.props.id, 2);
   };
 
-  render() {
+  retrieveData = (id, duration) => {
     let labels = [];
     let values = [];
     axios
@@ -53,8 +54,8 @@ export default class ChartPanel extends Component {
         method: "POST",
         url: "http://localhost:3000/api/models/sensors/statistics",
         data: {
-          _id: this.props.id,
-          duration: this.state.chartValue,
+          _id: id,
+          duration: duration,
         },
       })
       .then((result) => {
@@ -62,10 +63,26 @@ export default class ChartPanel extends Component {
           labels.push(new Date(_id.date));
           values.push(_id.value);
         });
+        this.setState({ ...this.state, label: labels, data: values });
       });
+  };
+
+  render() {
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        "& > *": {
+          margin: theme.spacing(1),
+        },
+      },
+    }));
+
+    const classes = useStyles;
 
     const cur_state = {
-      labels: labels,
+      labels: this.state.label,
       datasets: [
         {
           label: "Readings",
@@ -86,22 +103,10 @@ export default class ChartPanel extends Component {
           pointHoverBorderWidth: 2,
           pointRadius: 2,
           pointHitRadius: 10,
-          data: values,
+          data: this.state.data,
         },
       ],
     };
-    const useStyles = makeStyles((theme) => ({
-      root: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        "& > *": {
-          margin: theme.spacing(1),
-        },
-      },
-    }));
-
-    const classes = useStyles;
 
     return (
       <>
@@ -118,7 +123,7 @@ export default class ChartPanel extends Component {
                 {
                   type: "time",
                   time: {
-                    unit: "hour",
+                    unit: "minute",
                   },
                 },
               ],
