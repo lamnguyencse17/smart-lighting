@@ -24,11 +24,14 @@ export class DeleteButton extends Component {
   handleConfirm = () => {
     let { conditionId } = this.props;
     this.setState({ ...this.state, clicked: false });
-    axios.delete("http://localhost:3000/api/models/conditions", {
-      data: {
-        id: conditionId,
-      },
-    });
+    axios.delete(
+      "https://smart-lighting-backend.herokuapp.com/api/models/conditions",
+      {
+        data: {
+          id: conditionId,
+        },
+      }
+    );
     this.props.removeCondition();
   };
   handleDeny = () => {

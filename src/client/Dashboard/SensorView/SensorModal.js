@@ -75,15 +75,18 @@ class SensorModal extends Component {
         sensor,
       } = this.state;
       this.setState({ ...inititalState });
-      axios.post("http://localhost:3000/api/models/conditions", {
-        condition,
-        value,
-        sensor,
-        sensorValue,
-        device,
-        area,
-        isOn: deviceStatus,
-      });
+      axios.post(
+        "https://smart-lighting-backend.herokuapp.com/api/models/conditions",
+        {
+          condition,
+          value,
+          sensor,
+          sensorValue,
+          device,
+          area,
+          isOn: deviceStatus,
+        }
+      );
       this.props.closeModal();
     }
   };

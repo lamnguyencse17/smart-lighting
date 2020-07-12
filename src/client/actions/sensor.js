@@ -3,7 +3,9 @@ import axios from "axios";
 
 export const getSensor = (sensorId) => (dispatch) => {
   axios
-    .get(`http://localhost:3000/api/models/sensors/${sensorId}`)
+    .get(
+      `https://smart-lighting-backend.herokuapp.com/api/models/sensors/${sensorId}`
+    )
     .then((result, err) => {
       if (err) {
         console.log(err);

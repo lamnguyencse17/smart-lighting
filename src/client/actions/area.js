@@ -3,7 +3,9 @@ import axios from "axios";
 
 export const getArea = (areaId) => (dispatch) => {
   axios
-    .get(`http://localhost:3000/api/models/areas/${areaId}`)
+    .get(
+      `https://smart-lighting-backend.herokuapp.com/api/models/areas/${areaId}`
+    )
     .then((result, err) => {
       if (err) {
         console.log(err);

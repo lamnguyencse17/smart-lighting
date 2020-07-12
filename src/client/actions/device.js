@@ -12,7 +12,9 @@ const arrayToObject = (arr) => {
 
 export const getDevice = (deviceId) => (dispatch) => {
   axios
-    .get(`http://localhost:3000/api/models/devices/${deviceId}`)
+    .get(
+      `https://smart-lighting-backend.herokuapp.com/api/models/devices/${deviceId}`
+    )
     .then((result, err) => {
       if (err) {
         console.log(err);
@@ -36,11 +38,14 @@ export const adjustDevice = (device_id, value) => (dispatch) => {
     isOn = true;
   }
   axios
-    .post("http://localhost:3000/api/actions/sendCommand", {
-      device_id,
-      value,
-      isOn,
-    })
+    .post(
+      "https://smart-lighting-backend.herokuapp.com/api/actions/sendCommand",
+      {
+        device_id,
+        value,
+        isOn,
+      }
+    )
     .then((result, err) => {
       if (err) {
         console.log(err);

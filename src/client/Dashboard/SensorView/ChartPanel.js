@@ -52,7 +52,8 @@ export default class ChartPanel extends Component {
     axios
       .request({
         method: "POST",
-        url: "http://localhost:3000/api/models/sensors/statistics",
+        url:
+          "https://smart-lighting-backend.herokuapp.com/api/models/sensors/statistics",
         data: {
           _id: id,
           duration: duration,
@@ -151,5 +152,5 @@ export default class ChartPanel extends Component {
         </div>
       </>
     );
-  };
+  }
 }

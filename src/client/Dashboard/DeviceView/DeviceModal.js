@@ -43,12 +43,15 @@ class DeviceModal extends Component {
   setSchedule = () => {
     if (this.state.schedule != "") {
       let { schedule, value, isOn } = this.state;
-      axios.post("http://localhost:3000/api/models/schedules", {
-        schedule,
-        value,
-        isOn,
-        device_id: this.props.device_id,
-      });
+      axios.post(
+        "https://smart-lighting-backend.herokuapp.com/api/models/schedules",
+        {
+          schedule,
+          value,
+          isOn,
+          device_id: this.props.device_id,
+        }
+      );
       // callback later
       this.props.closeModal();
     }
