@@ -3,10 +3,18 @@ import scheduleModel from "../../models/schedules";
 
 const router = express.Router();
 
+router.get("/name/:device_id", async (req, res) => {
+  let { device_id } = req.params;
+  let result = await scheduleModel.readScheduleByDeviceId(device_id);
+  res.status(200).json(result);
+  return result;
+});
+
 router.get("/", async (req, res) => {
   let { id } = req.body;
   let result = await scheduleModel.readScheduleById(id);
-  res.status(200).json(result);
+  res.status(200).json(result)  ;
+  return result;
 });
 
 router.post("/", async (req, res) => {

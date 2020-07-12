@@ -90,9 +90,7 @@ class DevicePanel extends Component {
     }
   };
   render() {
-    let { deviceSchedule, deviceHistory } = this.props;
-    //REMOVE WHEN SCHEDULE IS IMPLEMENTED, FOR TESTING PURPOSES
-    deviceSchedule = this.props.deviceHistory;
+    let { deviceHistory } = this.props;
     return (
       <div className="device-content">
         <div className="device-status-container">
@@ -130,7 +128,8 @@ class DevicePanel extends Component {
         </div>
         <DeviceHistory history={deviceHistory} />
         <DeviceSchedule
-          schedule={deviceSchedule}
+          device_id={this.props.device_id}
+          name = {this.props.name}
           onAddSchedule={this.showModal}
         />
       </div>
