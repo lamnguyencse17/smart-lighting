@@ -33,11 +33,11 @@ class ConditionView extends Component {
                     <br></br>
                     
                     {condition.device ?
-                      <React.Fragment>
+                      <>
                       <span>{condition.isOn ? "Turn ON device:" : "Turn OFF device:"}</span>
                       <br></br>
                       <span>{condition.device.name}</span><br></br>
-                      </React.Fragment>:<null></null>
+                      </>:<null></null>
                       
                       /*(() => {
                         if(condition.device){
@@ -49,6 +49,7 @@ class ConditionView extends Component {
                         }
                       })()*/
                     }
+
                     <span>{"Value: " + condition.value}</span>
                   </div>
                   <ConditionDeleteButton conditionId={index} />

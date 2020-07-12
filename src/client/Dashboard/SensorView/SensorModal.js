@@ -9,8 +9,7 @@ import SensorSelector from "./ModalComponent/SensorSelector";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
-import setAlert from "../../actions/alert"
-import { isNull, bind } from "lodash";
+import {setAlert} from "../../actions/alert"
 import { bindActionCreators } from "redux";
 
 
@@ -82,7 +81,7 @@ class SensorModal extends Component {
           <Button variant="secondary">Close</Button>
         </Modal.Footer>
       </Modal.Dialog>)*/
-      this.props.setAlert("Device and Area cannot both be None you FokcinCunt",1);
+      this.props.setAlert("Device and Area cannot both be None",1);
       //alert("Device and Area cannot both be None you FokcinCunt");
       
       }
