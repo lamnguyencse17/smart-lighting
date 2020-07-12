@@ -99,11 +99,11 @@ sensorSchema.statics.getReadingsByDuration = async function (id, duration) {
     let d = new Date(reading.date);
     let time = parseInt((Date.now() - d.getTime()) / 1000);
     switch (duration) {
-      case 0:
+      case "0":
         return time <= 86400;
-      case 1:
+      case "1":
         return 86400 < time && time <= 259200;
-      case 2:
+      case "2":
         return 172800 < time && time <= 432000;
     }
   });

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Line } from "react-chartjs-2";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
@@ -47,35 +48,22 @@ export default class ChartPanel extends Component {
   render() {
     let labels = [];
     let values = [];
-    const oneDay = 60 * 60 * 24 * 1000;
-    Object.keys(this.props.readings).map((index) => {
-      switch (this.state.chartValue) {
-        case 0:
-          if (
-            new Date(this.props.readings[index].date) - Date.now() <
-            3 * oneDay
-          ) {
-            labels.push(new Date(this.props.readings[index].date));
-            values.push(this.props.readings[index].value);
-          }
-          break;
-        case 1:
-          if (
-            new Date(this.props.readings[index].date) - Date.now() <
-            5 * oneDay
-          ) {
-            labels.push(new Date(this.props.readings[index].date));
-            values.push(this.props.readings[index].value);
-          }
-          break;
-        default:
-          if (new Date(this.props.readings[index].date) - Date.now() < oneDay) {
-            labels.push(new Date(this.props.readings[index].date));
-            values.push(this.props.readings[index].value);
-          }
-          break;
-      }
-    });
+    axios
+      .request({
+        method: "GET",
+        url: "http://localhost:3000/api/models/sensors/statistics",
+        params: {
+          _id: this.props.id,
+          duration: this.state.chartValue,
+        },
+      })
+      .then((result) => {
+        result.data.map((_id) => {
+          labels.push(new Date(_id.date));
+          values.push(_id.value);
+        });
+      });
+
     const cur_state = {
       labels: labels,
       datasets: [
@@ -130,7 +118,7 @@ export default class ChartPanel extends Component {
                 {
                   type: "time",
                   time: {
-                    unit: "minute",
+                    unit: "hour",
                   },
                 },
               ],

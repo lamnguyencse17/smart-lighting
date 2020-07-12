@@ -19,6 +19,7 @@ class SensorPanel extends Component {
   };
   render() {
     let { readings, latestReadings } = this.props;
+    console.log(readings);
     let latestDate = new Date(latestReadings.date);
     return (
       <div className="sensor-content">
@@ -54,7 +55,7 @@ class SensorPanel extends Component {
           </div>
           <div className="sensor-column sensor-column-2">
             <div className="sensor-graph">
-              <ChartPanel readings={readings} />
+              <ChartPanel id={this.props._id} readings={readings} />
             </div>
           </div>
           <div className="device-schedule">
