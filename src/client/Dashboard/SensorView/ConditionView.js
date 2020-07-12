@@ -25,17 +25,31 @@ class ConditionView extends Component {
                   compare = "< ";
                   break;
               }
+              
               return (
                 <li className="sensor-trigger-item" key={index}>
                   <div className="sensor-trigger-item-readings">
                     <span>{"Reading: " + compare + condition.sensorValue}</span>
                     <br></br>
-                    <span>
-                      {condition.isOn ? "Turn ON device:" : "Turn OFF device:"}
-                    </span>
-                    <br></br>
-                    <span>{condition.device.name}</span>
-                    <br></br>
+                    
+                    {condition.device ?
+                      <>
+                      <span>{condition.isOn ? "Turn ON device:" : "Turn OFF device:"}</span>
+                      <br></br>
+                      <span>{condition.device.name}</span><br></br>
+                      </>:<null></null>
+                      
+                      /*(() => {
+                        if(condition.device){
+                          return <React.Fragment>
+                            <span>{condition.isOn ? "Turn ON device:" : "Turn OFF device:"}</span>
+                            <br></br>
+                            <span>{condition.device.name}</span><br></br>
+                            </React.Fragment>
+                        }
+                      })()*/
+                    }
+
                     <span>{"Value: " + condition.value}</span>
                   </div>
                   <ConditionDeleteButton conditionId={index} />
