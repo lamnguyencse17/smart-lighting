@@ -4,7 +4,7 @@
   "description": "smart-lighting",
   "main": ".eslintrc.js",
   "scripts": {
-    "start": "npm run build && node ./dist/server.js",
+    "start": "node ./dist/server.js",
     "build": "babel ./src/server/ -D --out-dir dist",
     "test": "jest"
   },
