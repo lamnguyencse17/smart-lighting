@@ -166,7 +166,7 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch){
   return bindActionCreators({setAlert}, dispatch);
-}
+};
 /*export default withRouter(
   connect(null,mapDispatchToProps)(SensorModal)
 );*/
