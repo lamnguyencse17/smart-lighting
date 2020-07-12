@@ -50,9 +50,9 @@ export default class ChartPanel extends Component {
     let values = [];
     axios
       .request({
-        method: "GET",
+        method: "POST",
         url: "http://localhost:3000/api/models/sensors/statistics",
-        params: {
+        data: {
           _id: this.props.id,
           duration: this.state.chartValue,
         },
