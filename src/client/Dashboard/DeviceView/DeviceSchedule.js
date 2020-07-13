@@ -2,39 +2,36 @@ import React, { Component } from "react";
 import axios from "axios";
 import ScheduleDeleteButton from "./ScheduleDeleteButton";
 
-
 class DeviceSchedule extends Component {
-
   constructor(props) {
     super(props);
-    this.state={
+    this.state = {
       schedule: [],
-    }
+    };
   }
   componentWillReceiveProps() {
-    let {device_id}= this.props;
+    let { device_id } = this.props;
     axios
-    .get(`http://localhost:3000/api/models/schedules/name/${device_id}`)
-    .then((result, err) => {
-      if (err) {
-        console.log(err);
-        dispatch({
-          type: SET_ALERT,
-          payload: {
-            status: 0,
-            msg:
-              "Cannot retrieve schedules right now.",
-          },
-        });
-      }else{
-        this.setState({...this.state, schedule: result.data});
-      }
-    });
+      .get(`http://localhost:3000/api/models/schedules/name/${device_id}`)
+      .then((result, err) => {
+        if (err) {
+          console.log(err);
+          dispatch({
+            type: SET_ALERT,
+            payload: {
+              status: 0,
+              msg: "Cannot retrieve schedules right now.",
+            },
+          });
+        } else {
+          this.setState({ ...this.state, schedule: result.data });
+        }
+      });
   }
 
-  
   render() {
     return (
+      <>
         <div className="device-schedule-container">
             <span className="device-schedule-title">SCHEDULE</span>
             <div className="device-schedule-content">

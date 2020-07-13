@@ -1,5 +1,6 @@
 import express from "express";
 import scheduleModel from "../../models/schedules";
+import { setAgenda } from "../../helpers/scheduler";
 
 const router = express.Router();
 
@@ -12,7 +13,7 @@ router.get("/name/:device_id", async (req, res) => {
 router.get("/", async (req, res) => {
   let { id } = req.body;
   let result = await scheduleModel.readScheduleById(id);
-  res.status(200).json(result)  ;
+  return res.status(200).json(result);
 });
 
 router.post("/", async (req, res) => {
@@ -23,13 +24,14 @@ router.post("/", async (req, res) => {
     value,
     device_id,
   });
-  res.status(200).json(result);
+  await setAgenda(String(result._id));
+  return res.status(200).json(result);
 });
 
 router.delete("/", async (req, res) => {
   let { id } = req.body;
   let result = await scheduleModel.deleteSchedule(id);
-  res.status(200).json(result);
+  return res.status(200).json(result);
 });
 
 module.exports = router;

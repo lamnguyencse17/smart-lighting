@@ -20,13 +20,13 @@ router.post("/", async (req, res) => {
     area,
     isOn,
   });
-  res.status(200).json(result);
+  return res.status(200).json(result);
 });
 
 router.delete("/", async (req, res) => {
   let { id } = req.body;
   let result = await conditionModel.deleteCondition(id);
-  res.status(200).json(result);
+  return res.status(200).json(result);
 });
 
 module.exports = router;
