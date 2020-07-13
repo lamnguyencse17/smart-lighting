@@ -29,7 +29,6 @@ export class DeleteButton extends Component {
         id: conditionId,
       },
     });
-    this.props.removeCondition();
   };
   handleDeny = () => {
     this.setState({ ...this.state, clicked: false });
