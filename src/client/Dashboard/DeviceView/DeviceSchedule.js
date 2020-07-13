@@ -52,7 +52,7 @@ class DeviceSchedule extends Component {
                       <br></br>
                       <span>Value: {this.state.schedule[index].value}</span>
                       <br></br>
-                      <ScheduleDeleteButton scheduleId={index} />
+                      <ScheduleDeleteButton scheduleId={this.state.schedule[index]._id} />
                     </li>
                   );
                 })}
@@ -60,13 +60,6 @@ class DeviceSchedule extends Component {
             </div>
             <button className="add-device-schedule" onClick={this.props.onAddSchedule}>New Schedule</button>
         </div>
-        <button
-          className="add-device-schedule"
-          onClick={this.props.onAddSchedule}
-        >
-          New Schedule
-        </button>
-      </div>
     );
   }
 }

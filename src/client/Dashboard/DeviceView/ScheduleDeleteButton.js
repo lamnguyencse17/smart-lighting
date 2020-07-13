@@ -43,7 +43,6 @@ export class ScheduleDeleteButton extends Component {
         id: scheduleId,
       },
     });
-    this.props.removeSchedule();
   };
   handleDeny = () => {
     this.setState({ ...this.state, clicked: false });
