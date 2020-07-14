@@ -17,6 +17,12 @@ scheduleSchema.statics.readScheduleById = async function (id) {
   return result;
 };
 
+scheduleSchema.statics.readScheduleByDeviceId = async function (name) {
+  let result = await this.find({ device_id: name }).lean();
+  delete result.__v;
+  return result;
+};
+
 scheduleSchema.statics.createSchedule = async function (scheduleDetails) {
   let { schedule, isOn, value, device_id } = scheduleDetails;
   let result = await this.create({ schedule, isOn, device_id, value });
@@ -26,7 +32,7 @@ scheduleSchema.statics.createSchedule = async function (scheduleDetails) {
 };
 
 scheduleSchema.statics.deleteSchedule = async function (id) {
-  let result = await this.findByIdAndDelete(id);
+  let result = await this.findByIdAndDelete(mongoose.Types.ObjectId(id));
   delete result.__v;
   return result;
 };
