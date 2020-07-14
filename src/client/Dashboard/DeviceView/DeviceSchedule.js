@@ -12,7 +12,7 @@ class DeviceSchedule extends Component {
   componentWillReceiveProps() {
     let { device_id } = this.props;
     axios
-      .get(`http://localhost:3000/api/models/schedules/name/${device_id}`)
+      .get(`https://smart-lighting-backend.herokuapp.com/api/models/schedules/name/${device_id}`)
       .then((result, err) => {
         if (err) {
           console.log(err);

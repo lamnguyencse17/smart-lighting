@@ -38,7 +38,7 @@ export class ScheduleDeleteButton extends Component {
   handleConfirm = () => {
     let { scheduleId } = this.props;
     this.setState({ ...this.state, clicked: false });
-    axios.delete("http://localhost:3000/api/models/schedules", {
+    axios.delete("https://smart-lighting-backend.herokuapp.com/api/models/schedules", {
       data: {
         id: scheduleId,
       },
