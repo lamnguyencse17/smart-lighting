@@ -3,6 +3,10 @@ orbs:
   node: circleci/node@1.1.6
 jobs:
   build-and-test:
+    branches:
+      ignore:
+        - Production-FE
+        - Production-BE
     executor:
       name: node/default
     steps:
@@ -15,6 +19,6 @@ jobs:
           path: coverage
 
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  build-and-test:
+    jobs:
+      - build-and-test
