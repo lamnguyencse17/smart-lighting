@@ -4,7 +4,7 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import axios from "axios";
 
-export class DeleteButton extends Component {
+export class ScheduleDeleteButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,20 +13,34 @@ export class DeleteButton extends Component {
   }
   ButtonStyle = withStyles({
     root: {
-      float: "right",
       backgroundColor: "#373737",
       color: "#fff",
+      width: "5rem",
+    },
+  })(Button);
+  ButtonSureStyle = withStyles({
+    root: {
+      backgroundColor: "#7beced",
+      color: "#373737",
+      width: "5rem",
+    },
+  })(Button);
+  ButtonUndoStyle = withStyles({
+    root: {
+      backgroundColor: "#ff85a7",
+      color: "#373737",
+      width: "5rem",
     },
   })(Button);
   handleDelete = () => {
     this.setState({ ...this.state, clicked: true });
   };
   handleConfirm = () => {
-    let { conditionId } = this.props;
+    let { scheduleId } = this.props;
     this.setState({ ...this.state, clicked: false });
-    axios.delete("https://smart-lighting-backend.herokuapp.com/api/models/conditions", {
+    axios.delete("http://localhost:3000/api/models/schedules", {
       data: {
-        id: conditionId,
+        id: scheduleId,
       },
     });
   };
@@ -37,16 +51,15 @@ export class DeleteButton extends Component {
     return (
       <>
         {!this.state.clicked && (
-          <this.ButtonStyle onClick={this.handleDelete}>X</this.ButtonStyle>
+          <this.ButtonStyle onClick={this.handleDelete}>Delete</this.ButtonStyle>
         )}
         {this.state.clicked && (
-          <div>
-            <div className="sensor-trigger-delete-confirm">Are you sure?</div>
+          <div className="schedule-delete-confirm-container">
             <ButtonGroup disableElevation variant="contained">
-              <this.ButtonStyle onClick={this.handleConfirm}>
-                Yes
-              </this.ButtonStyle>
-              <this.ButtonStyle onClick={this.handleDeny}>No</this.ButtonStyle>
+              <this.ButtonSureStyle onClick={this.handleConfirm}>
+                Sure
+              </this.ButtonSureStyle>
+              <this.ButtonUndoStyle onClick={this.handleDeny}>Undo</this.ButtonUndoStyle>
             </ButtonGroup>
           </div>
         )}
@@ -55,4 +68,4 @@ export class DeleteButton extends Component {
   }
 }
 
-export default DeleteButton;
+export default ScheduleDeleteButton;

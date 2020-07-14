@@ -63,7 +63,7 @@ class SensorModal extends Component {
   setTriggerCondition = () => {
     if (!this.state.device && !this.state.area) {
       this.props.closeModal();
-      this.props.setAlert("Device and Area cannot both be None", 1);
+      this.props.setAlert("Device and Area cannot both be None", 0);
     } else {
       let {
         condition,
