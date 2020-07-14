@@ -31,7 +31,6 @@ class DeviceSchedule extends Component {
 
   render() {
     return (
-      <>
         <div className="device-schedule-container">
             <span className="device-schedule-title">SCHEDULE</span>
             <div className="device-schedule-content">
