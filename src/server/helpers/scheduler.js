@@ -4,6 +4,7 @@ import { publishTo } from "./mqtt";
 import deviceModel from "../models/devices";
 import timeConverter from "./timeConverter";
 
+
 const data_uri =
   "mongodb+srv://tri:team2447@cluster0-wrndr.azure.mongodb.net/smart-lighting?retryWrites=true&w=majority";
 
@@ -34,6 +35,7 @@ export const startAgenda = async () => {
   agenda.on("complete", (job) => {
     //handle done here
     // job name = _id of schedule
+    scheduleModel.deleteSchedule(job.attrs.name);
     console.log(`Job ${job.attrs.name} finished`);
   });
 };
