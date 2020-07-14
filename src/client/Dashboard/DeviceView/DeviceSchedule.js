@@ -57,6 +57,7 @@ class DeviceSchedule extends Component {
             </div>
             <button className="add-device-schedule" onClick={this.props.onAddSchedule}>New Schedule</button>
         </div>
+</>
     );
   }
 }
